@@ -18,9 +18,8 @@ resource "aws_instance" "frontend" {
 
                 cd /var/www/html
                 echo "<h1>Deploying Frontend</h1>" > index.html
-              
-                #Clonar o repositório
 
+                cd /home/ubuntu
                 if [ ! -d "E_Commerce_App" ]; then
                 git clone https://github.com/InesMRibeiro/E_Commerce_App.git
                 fi
