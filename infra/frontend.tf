@@ -9,4 +9,22 @@ resource "aws_instance" "frontend" {
   tags = {
     Name = "FrontEnd-Instance"
   }
+
+  user_data = <<-EOF
+                sudo apt update -y
+                sudo apt install apache2 -y
+                sudo systemctl enable apache2
+                sudo systemctl start apache2
+
+                cd /var/www/html
+                echo "<h1>Deploying Frontend</h1>" > index.html
+              
+                #Clonar o repositório
+
+                if [ ! -d "E_Commerce_App" ]; then
+                git clone https://github.com/InesMRibeiro/E_Commerce_App.git
+                fi
+                sudo cp E_Commerce_App/FrontEnd/* /var/www/html/
+                EOF
+            
 }
