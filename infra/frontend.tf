@@ -23,7 +23,7 @@ resource "aws_instance" "frontend" {
                 if [ ! -d "E_Commerce_App" ]; then
                 git clone https://github.com/InesMRibeiro/E_Commerce_App.git
                 fi
-                sudo cp E_Commerce_App/FrontEnd/* /var/www/html/
+                sudo cp E_Commerce_App/frontend/* /var/www/html/
                 EOF
             
 }
