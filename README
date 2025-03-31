@@ -1,0 +1,19 @@
+# 🛍️ E-Commerce App: Projeto Integrador: Development of Service Cluster Using IAC🚀
+
+A sleek, minimal e-commerce app built to dive deep into the world of service clusters. Perfect for learning and experimentation!
+
+## ✨ Project Highlights
+
+* **Microservices Architecture:** Cleanly separated backend and frontend for scalability.
+* **Simple & Elegant Design:** Focus on functionality and clarity.
+* **Educational Purpose:** Ideal for understanding service interactions.
+
+## 🛠️ Tech Stack
+
+* **Backend:**
+    * 🐍 Python (Flask)
+    * 📦 Flask-SQLAlchemy
+    * 🐘 PostgreSQL
+    * 🌐 Flask-CORS
+* **Frontend:**
+    * 🎨 HTML & CSS (Simplicity is key!)
