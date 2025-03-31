@@ -1,0 +1,13 @@
+/* style.css */
+.add-to-cart {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin: 20px;
+}
+
+.add-to-cart:hover {
+    background-color: #45a049;
+}

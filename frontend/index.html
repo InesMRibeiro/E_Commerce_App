@@ -1,151 +1,59 @@
-
-<!-- Código relacionado com a interface da aplicação -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IN Store</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .product-grid {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 30px;
-        }
-
-        .product {
-            width: 200px;
-            text-align: center;
-        }
-
-        .product img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-        }
-
-        .price {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .add-to-cart {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
-
-        .stock {
-            color: green;
-        }
-
-        .cart-container {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .cart-button {
-            background-color: #008CBA;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
-        }
-
-    </style>
+    <title>E_Commerce_App</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="cart-container">
-        <button class="cart-button">Cart</button>
-    </div>
-
-    <div class="container">
-        <h1>IN Store</h1>
-
-        <div class="product-grid">
-            <div class="product">
-                <img src="https://thumbs.dreamstime.com/b/plush-monkey-stuffed-animal-close-up-photograph-showcasing-charm-character-huggable-toy-placed-pristine-white-303801328.jpg" alt="Product 1">
-                <p class="price">$19.99</p>
-                <button class="add-to-cart">Add to Cart</button>
-                <p class="stock">In Stock</p>
-            </div>
-
-            <div class="product">
-                <img src="https://www.ikea.com/pt/pt/images/products/kramig-peluche-branco-preto__0162448_pe317642_s5.jpg" alt="Product 2">
-                <p class="price">$29.99</p>
-                <button class="add-to-cart">Add to Cart</button>
-                <p class="stock">In Stock</p>
-            </div>
-
-            <div class="product">
-                <img src="https://m.media-amazon.com/images/I/91pgBng8zyL.jpg" alt="Product 3">
-                <p class="price">$39.99</p>
-                <button class="add-to-cart">Add to Cart</button>
-                <p class="stock">In Stock</p>
-            </div>
-        </div>
-    </div>
+    <button onclick="addToCart()">Add to Cart</button>
 
     <script>
-        // Função para lidar com o clique no botão "Add to Cart"
-        document.addEventListener("DOMContentLoaded", function () {
-            const buttons = document.querySelectorAll(".add-to-cart");
-    
-            buttons.forEach(button => {
-                button.addEventListener("click", function () {
-                    const product = this.parentElement;  // Pegando o elemento pai do botão
-                    const productName = product.querySelector("img").alt;  // Nome do produto (usando o alt da imagem)
-                    const price = product.querySelector(".price").textContent; // Pegando o preço
-    
-                    // Criando um objeto com os dados do produto
-                    const data = {
-                        product_name: productName,
-                        price: price
-                    };
-    
-                    // Enviando para o backend
-                    fetch("http://54.160.131.71/add_to_cart", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert(data.message);  // Exibir a resposta do backend
-                    })
-                    .catch(error => {
-                        console.error("Erro:", error);
-                        alert("Erro ao adicionar ao carrinho.");
-                    });
-                });
-            });
-        });
-    </script>
-    
 
+    const backendUrl = "http://54.160.131.71:5000";
+
+
+        function addToCart(){
+            
+            fetch(`${backendUrl}/addToCart`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error("Error in Add to Cart:", error));
+
+        }
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const button = document.querySelector(".add-to-cart");
+
+        //     button.addEventListener("click", function () {
+        //         const data = {
+        //             product_name: "Test Product",
+        //             price: "$99.99"
+        //         };
+
+        //         fetch("http://54.160.131.71:5000/add_to_cart", {
+        //             method: "POST",
+        //             headers: {
+        //                 "Content-Type": "application/json"
+        //             },
+        //             body: JSON.stringify(data)
+        //         })
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             alert(data.message);
+        //         })
+        //         .catch(error => {
+        //             console.error("Error:", error);
+        //             alert("Error adding to cart.");
+        //         });
+        //     });
+        // });
+    </script>
 </body>
 </html>

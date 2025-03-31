@@ -20,8 +20,8 @@ cart = []
 def get_products():
     return jsonify(products), 200
 
-@app.route('/add_to_cart', methods=['POST'])
-def add_to_cart():
+@app.route('/addToCart', methods=['POST'])
+def addToCart():
     return jsonify({"message": "Added to cart!"}), 200
 
 if __name__ == '__main__':
