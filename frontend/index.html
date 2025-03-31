@@ -107,5 +107,45 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Função para lidar com o clique no botão "Add to Cart"
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".add-to-cart");
+    
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const product = this.parentElement;  // Pegando o elemento pai do botão
+                    const productName = product.querySelector("img").alt;  // Nome do produto (usando o alt da imagem)
+                    const price = product.querySelector(".price").textContent; // Pegando o preço
+    
+                    // Criando um objeto com os dados do produto
+                    const data = {
+                        product_name: productName,
+                        price: price
+                    };
+    
+                    // Enviando para o backend
+                    fetch("http://44.211.240.240:5000/add_to_cart", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);  // Exibir a resposta do backend
+                    })
+                    .catch(error => {
+                        console.error("Erro:", error);
+                        alert("Erro ao adicionar ao carrinho.");
+                    });
+                });
+            });
+        });
+    </script>
+    
+
 </body>
 </html>
