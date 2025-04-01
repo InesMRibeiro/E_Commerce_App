@@ -7,15 +7,44 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <button onclick="addToCart()">Add to Cart</button>
+    <div class="cart-container">
+        <button class="cart-button">Cart</button>
+    </div>
+
+    <div class="container">
+        <h1>IN Store</h1>
+
+        <div class="product-grid">
+            <div class="product">
+                <img src="https://thumbs.dreamstime.com/b/plush-monkey-stuffed-animal-close-up-photograph-showcasing-charm-character-huggable-toy-placed-pristine-white-303801328.jpg" alt="Product 1">
+                <p class="price">$19.99</p>
+                <button class = "addToCart">Add to Cart</button>
+                <p class="stock">In Stock</p>
+            </div>
+
+            <div class="product">
+                <img src="https://www.ikea.com/pt/pt/images/products/kramig-peluche-branco-preto__0162448_pe317642_s5.jpg" alt="Product 2">
+                <p class="price">$29.99</p>
+                <button class = "addToCart">Add to Cart</button>
+                <p class="stock">In Stock</p>
+            </div>
+
+            <div class="product">
+                <img src="https://m.media-amazon.com/images/I/91pgBng8zyL.jpg" alt="Product 3">
+                <p class="price">$39.99</p>
+                <button class = "addToCart">Add to Cart</button>
+                <p class="stock">In Stock</p>
+            </div>
+        </div>
+    </div>
+
+
 
     <script>
+        const backendUrl = "http://54.160.131.71:5000";
 
-    const backendUrl = "http://54.160.131.71:5000";
 
-
-        function addToCart(){
-            
+        function addToCart(){  
             fetch(`${backendUrl}/addToCart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -28,32 +57,11 @@
 
         }
 
-        // document.addEventListener("DOMContentLoaded", function () {
-        //     const button = document.querySelector(".add-to-cart");
+        document.addEventListener("DOMContentLoaded", function() {
+            const button = document.querySelector(".addToCart");
+            button.addEventListener("click", addToCart);
+        });
 
-        //     button.addEventListener("click", function () {
-        //         const data = {
-        //             product_name: "Test Product",
-        //             price: "$99.99"
-        //         };
-
-        //         fetch("http://54.160.131.71:5000/add_to_cart", {
-        //             method: "POST",
-        //             headers: {
-        //                 "Content-Type": "application/json"
-        //             },
-        //             body: JSON.stringify(data)
-        //         })
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             alert(data.message);
-        //         })
-        //         .catch(error => {
-        //             console.error("Error:", error);
-        //             alert("Error adding to cart.");
-        //         });
-        //     });
-        // });
     </script>
 </body>
 </html>
