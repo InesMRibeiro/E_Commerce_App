@@ -58,8 +58,10 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const button = document.querySelector(".addToCart");
+            const buttons = document.querySelectorAll(".addToCart");
+            buttons.forEach(button => { // Loop through all buttons
             button.addEventListener("click", addToCart);
+            });
         });
 
     </script>
