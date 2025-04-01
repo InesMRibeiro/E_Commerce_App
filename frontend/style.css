@@ -1,50 +1,70 @@
-/* styles.css */
 body {
-    font-family: sans-serif;
+    font-family: 'Comic Sans MS', cursive, sans-serif; 
+    background-color: #f0f8ff; 
     margin: 0;
-    padding: 0;
+    padding: 20px;
 }
 
 .container {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
     text-align: center;
+    background-color: white; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 30px;
+    color: #008CBA; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .product-grid {
     display: flex;
     justify-content: space-around;
     margin-top: 30px;
+    flex-wrap: wrap; 
 }
 
 .product {
     width: 200px;
     text-align: center;
+    margin-bottom: 20px;
+    display: flex; 
+    flex-direction: column; 
 }
 
 .product img {
     max-width: 100%;
     height: auto;
     margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .price {
     font-weight: bold;
     margin-bottom: 10px;
+    color: #d32f2f; 
 }
 
 .add-to-cart {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ffc107; 
+    color: #333; 
     padding: 10px 15px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
     margin-bottom: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: auto; 
+}
+
+.add-to-cart:hover {
+    background-color: #ffeb3b; 
 }
 
 .stock {
@@ -62,5 +82,6 @@ h1 {
     color: white;
     padding: 10px 15px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
 }
