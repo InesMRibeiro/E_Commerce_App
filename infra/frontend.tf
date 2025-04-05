@@ -27,6 +27,13 @@ resource "aws_instance" "frontend" {
                 git clone https://github.com/InesMRibeiro/E_Commerce_App.git
                 fi
                 sudo cp  -r E_Commerce_App/frontend/* /var/www/html/
+
+                # Mark the directory as safe for Git operations
+                export HOME=/home/ubuntu
+                git config --global --add safe.directory /home/ubuntu/E_Commerce_App
+
+                sudo chown -R ubuntu:ubuntu /home/ubuntu/E_Commerce_App
+
                 EOF
             
 }

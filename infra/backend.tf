@@ -36,6 +36,12 @@ resource "aws_instance" "api_server" {
                      echo "requirements.txt not found!" >> /var/log/user-data.log
                 fi
                 echo "Backend server setup completed!"
+
+                # Mark the directory as safe for Git operations
+                export HOME=/home/ubuntu
+                git config --global --add safe.directory /home/ubuntu/E_Commerce_App
+
+                sudo chown -R ubuntu:ubuntu /home/ubuntu/E_Commerce_App
                 
                 EOF
 }
