@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={"/*": {"origins": "http://18.207.149.118"}})  # Allowing only your frontend
+CORS(app, resources={"/*": {"origins": "http://54.234.82.136"}}) # ADD IP WITHOUT PORT
 
 # Lista de produtos (simulando um banco de dados)
 products = [
