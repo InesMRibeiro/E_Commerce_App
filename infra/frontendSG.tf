@@ -1,7 +1,7 @@
-resource "aws_security_group" "frontendSG" {
-  name        = "frontendSG"
+resource "aws_security_group" "EC_frontend" {
+  name        = "EC_frontend"
   description = "Permitir HTTP e SSH"
-  vpc_id      = aws_vpc.app_vpc.id 
+
 
     #SSH
     ingress {

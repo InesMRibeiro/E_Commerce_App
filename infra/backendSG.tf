@@ -1,7 +1,6 @@
-resource "aws_security_group" "backendSG" {
-  name        = "backendSG"
-  description = "Permitir HTTP, SSH, ICMP"
-  vpc_id      =  aws_vpc.app_vpc.id 
+resource "aws_security_group" "ServerEC_Backend" {
+  name        = "ServerEC_Backend"
+  description = "Permitir HTTP, SSH, ICMP" 
 
     #SSH
     ingress {

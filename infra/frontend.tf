@@ -1,16 +1,19 @@
 resource "aws_instance" "frontend" {
   ami                     = var.ami_id
   instance_type           = var.instance_type
-  subnet_id               = aws_subnet.app_subnet.id
-  vpc_security_group_ids  = [aws_security_group.frontendSG.id]
-  key_name = var.key_name
-  associate_public_ip_address = true
+  security_groups         = [aws_security_group.EC_frontend.name] 
+  key_name                = var.key_name
 
   tags = {
-    Name = "FrontEnd-Instance"
+    Name = "E-Commerce - Frontend"
   }
 
   user_data = <<-EOF
+                #!/bin/bash
+                exec > /var/log/user-data.log 2>&1
+                set -x  # Enables debugging
+
+
                 sudo apt update -y
                 sudo apt install apache2 -y
                 sudo systemctl enable apache2
@@ -23,7 +26,7 @@ resource "aws_instance" "frontend" {
                 if [ ! -d "E_Commerce_App" ]; then
                 git clone https://github.com/InesMRibeiro/E_Commerce_App.git
                 fi
-                sudo cp E_Commerce_App/frontend/* /var/www/html/
+                sudo cp  -r E_Commerce_App/frontend/* /var/www/html/
                 EOF
             
 }
