@@ -58,5 +58,34 @@
             <h4> Thank YOU!</h4>
         </div>
     </div>
+
+
+    <script>
+        
+        const backendUrl = "http://54.160.132.14:5000";
+
+
+        function addToCart(){  
+            fetch(`${backendUrl}/addToCart`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error("Error in Add to Cart:", error));
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const buttons = document.querySelectorAll(".addToCart");
+            buttons.forEach(button => { // Loop through all buttons
+            button.addEventListener("click", addToCart);
+            });
+        });
+
+    </script>
+
 </body>
 </html>
