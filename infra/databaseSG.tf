@@ -1,5 +1,5 @@
-resource "aws_security_group" "ServerEC_Backend" {
-  name        = "ServerEC_Backend"
+resource "aws_security_group" "EC_Database" {
+  name        = "EC_Database"
   description = "Permitir HTTP, SSH, ICMP" 
 
     #SSH
@@ -15,14 +15,6 @@ resource "aws_security_group" "ServerEC_Backend" {
         from_port   = -1
         to_port     = -1
         protocol    = "icmp"  # Permite ping (ICMP)
-        cidr_blocks = ["0.0.0.0/0"]  
-    }
-
-    #Flask API to Frontend
-    ingress {
-        from_port   = 5000
-        to_port     = 5000
-        protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]  
     }
 
