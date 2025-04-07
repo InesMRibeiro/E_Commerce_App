@@ -8,3 +8,8 @@ output "frontend-ip" {
     value = aws_instance.frontend.public_ip
   
 }
+
+output "database-ip" {
+
+    value = aws_instance.database.public_ip
+}
