@@ -9,7 +9,7 @@ CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # ADD IP WITHOUT
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host='54.160.132.14', 
+        host='54.227.10.231', 
         database='ecommerce_db',
         user='ecommerce_user',
         password='password'
