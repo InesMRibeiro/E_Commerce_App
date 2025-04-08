@@ -5,35 +5,84 @@
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <style>
+        /* Adiciona o efeito hover no botão home */
+        .cart-button {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .cart-button:hover {
+            transform: scale(1.1);
+            color: #4CAF50; /* Cor do hover */
+        }
+
+        /* Adiciona o estilo de layout dos botões de pagamento */
+        .payment-button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            transition: background-color 0.3s;
+        }
+
+        .payment-button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <div class="slides slide1 cart-header">
-            <div class="rectangle-1">
-                <button class="cart-button" onclick="window.location.href='index.html'">
-                    <img class="cart-icon" src="images/home-icon.png" alt=" 🏠Home">
+        
+        <!-- Topo do carrinho -->
+        <div class="slides slide1 cart-header" style="position: relative;">
+            <div class="rectangle-1" style="position: absolute; top: 20px; left: 20px;">
+                <button class="cart-button" onclick="window.location.href='index.html'" style="font-size: 24px; background: none; border: none; cursor: pointer;">
+                    <div style="font-size: 30px;">🏠</div>
+                    <div>Home</div>
                 </button>
             </div>
             <h1> 🛒 Your Cart</h1>
         </div>
 
+        <!-- Produtos adicionados -->
         <div class="slides slide2 cart-body">
             <div class="rectangle-2">
                 <h2>Look what you picked! 🌟</h2>
             </div>
 
             <div id="cart-items" class="cart-items"></div>
-            <div id="cart-total" class="cart-total"></div>
+
+            <!-- Total e botão de comprar -->
+            <div style="text-align: right; margin-top: 20px; margin-right: 20px;">
+                <div id="cart-total" class="cart-total" style="font-size: 24px;"></div>
+                <button id="buy-button" style="margin-top: 10px; padding: 10px 20px; font-size: 18px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">Buy Now</button>
+            </div>
 
             <div class="circle1"></div>
             <div class="circle2"></div>
         </div>
 
-        <div class="slides slide3">
-            <img src="images/pngtree-teddy-bear-cartoon-png-image_10166896.png" alt="Thank you bear">
-            <h4>Thank you for shopping with us!</h4>
+        <!-- Finalizar Compra -->
+        <div class="slides slide3" id="checkout-section" style="display: none; text-align: center;">
+            <h2>Choose Payment Method 💳</h2>
+            <div style="margin-top: 20px;">
+                <button class="payment-button">💳 Visa</button>
+                <button class="payment-button">🏦 Card</button>
+                <button class="payment-button">📱 MBWay</button>
+            </div>
         </div>
+
     </div>
 
     <script>
@@ -56,10 +105,19 @@
                         itemDiv.innerHTML = `<p>${item.name} - <strong>$${item.price.toFixed(2)}</strong></p>`;
                         cartItemsDiv.appendChild(itemDiv);
                     });
-                    cartTotalDiv.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
+                    cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
                 }
             })
             .catch(error => console.error('Error loading cart:', error));
+
+        // Quando clicar em "Buy Now"
+        document.addEventListener('DOMContentLoaded', () => {
+            const buyButton = document.getElementById('buy-button');
+            buyButton.addEventListener('click', () => {
+                document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
+                document.getElementById('checkout-section').style.display = 'block'; // Mostra o checkout
+            });
+        });
     </script>
 
 </body>
