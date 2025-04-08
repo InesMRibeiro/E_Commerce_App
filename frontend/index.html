@@ -69,7 +69,7 @@
             fetch(`${backendUrl}/addToCart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ product_id: productId })
+                body: JSON.stringify(product)
             })
             .then(response => response.json())
             .then(data => {
@@ -80,11 +80,17 @@
         
         document.addEventListener("DOMContentLoaded", function() {
             const buttons = document.querySelectorAll(".addToCart");
-            buttons.forEach((button, index) => { 
-                button.addEventListener("click", () => addToCart(index + 1)); // IDs começam de 1
+            buttons.forEach(button => { 
+                button.addEventListener("click", () => {
+                    const product = {
+                        id: parseInt(button.getAttribute('data-id')),
+                        name: button.getAttribute('data-name'),
+                        price: parseFloat(button.getAttribute('data-price')),
+                    };
+                    addToCart(product); // IDs começam de 1
+                });
             });
         });        
-
     </script>
 
 </body>

@@ -30,7 +30,7 @@ def test_db():
         conn.close()
 
         if result:
-            return jsonify({"message": "Conexão bem-sucedida com o banco de dados!"}), 200
+            return onify({"message": "Conexão bem-sucedida com o banco de dados!"}), 200
         else:
             return jsonify({"message": "Falha na conexão!"}), 500
 

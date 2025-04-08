@@ -4,11 +4,37 @@
     <meta charset="UTF-8">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
-<body>
 
-    <h1>Your Cart 🛒</h1>
-    <div id="cart-items"></div>
+<body>
+    <div class="container">
+        <div class="slides slide1 cart-header">
+            <div class="rectangle-1">
+                <button class="cart-button" onclick="window.location.href='index.html'">
+                    <img class="cart-icon" src="images/home-icon.png" alt="Home">
+                </button>
+            </div>
+            <h1> 🛒 Your Cart</h1>
+        </div>
+
+        <div class="slides slide2 cart-body">
+            <div class="rectangle-2">
+                <h2>Look what you picked! 🌟</h2>
+            </div>
+
+            <div id="cart-items" class="cart-items"></div>
+            <div id="cart-total" class="cart-total"></div>
+
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+        </div>
+
+        <div class="slides slide3">
+            <img src="images/pngtree-teddy-bear-cartoon-png-image_10166896.png" alt="Thank you bear">
+            <h4>Thank you for shopping with us!</h4>
+        </div>
+    </div>
 
     <script>
         const backendUrl = "http://54.160.132.14:5000";
@@ -17,14 +43,20 @@
             .then(response => response.json())
             .then(data => {
                 const cartItemsDiv = document.getElementById('cart-items');
+                const cartTotalDiv = document.getElementById('cart-total');
+                let total = 0;
+
                 if (data.length === 0) {
-                    cartItemsDiv.innerHTML = "<p>Your cart is empty!</p>";
+                    cartItemsDiv.innerHTML = "<p class='empty-cart'>Your cart is empty! 😢</p>";
                 } else {
                     data.forEach(item => {
+                        total += item.price;
                         const itemDiv = document.createElement('div');
-                        itemDiv.innerHTML = `<p>${item.name} - $${item.price}</p>`;
+                        itemDiv.classList.add('cart-item');
+                        itemDiv.innerHTML = `<p>${item.name} - <strong>$${item.price.toFixed(2)}</strong></p>`;
                         cartItemsDiv.appendChild(itemDiv);
                     });
+                    cartTotalDiv.innerHTML = `<h2>Total: $${total.toFixed(2)}</h2>`;
                 }
             })
             .catch(error => console.error('Error loading cart:', error));
