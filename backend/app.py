@@ -67,7 +67,7 @@ def addToCart():
     
     if product:
         cart.append(product) #Adiciona o produto correto na lista cart
-        return jsonify({"message": f'{product["name"]} added to cart!'}), 200
+        return jsonify({"message": "Added to cart!"}), 200
     else:
         return jsonify({"message": "Product not found!"}), 404
 
