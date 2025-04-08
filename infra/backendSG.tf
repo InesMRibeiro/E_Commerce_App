@@ -34,6 +34,15 @@ resource "aws_security_group" "ServerEC_Backend" {
         cidr_blocks = ["0.0.0.0/0"]  
     }
 
+    #Permitir tráfego de saída para a porta 5432 para comunicação com o banco de dados
+    
+    #egress {
+        #from_port   = 5432
+        #to_port     = 5432
+        #protocol    = "tcp"
+        #cidr_blocks = ["<IP do banco de dados>/32"]  # Permita apenas a instância do banco de dados (substitua <IP do banco de dados>)
+    #}
+
     egress {
         from_port   = 0
         to_port     = 0

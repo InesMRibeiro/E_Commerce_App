@@ -12,7 +12,7 @@
     <div class = "container">
         <div class="slides slide1">
             <div class="rectangle-1">
-                <button class="cart-button" onclick="shoppingCart()">
+                <button class="cart-button" onclick="window.location.href='cart.html'">
                     <img class="cart-icon" src="images/image.png" alt="Shopping Cart">
                 </button>
             </div>
@@ -65,26 +65,25 @@
         
         const backendUrl = "http://54.160.132.14:5000";
 
-
-        function addToCart(){  
+        function addToCart(productId) {
             fetch(`${backendUrl}/addToCart`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ product_id: productId })
             })
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
             })
             .catch(error => console.error("Error in Add to Cart:", error));
-
         }
-
+        
         document.addEventListener("DOMContentLoaded", function() {
             const buttons = document.querySelectorAll(".addToCart");
-            buttons.forEach(button => { // Loop through all buttons
-            button.addEventListener("click", addToCart);
+            buttons.forEach((button, index) => { 
+                button.addEventListener("click", () => addToCart(index + 1)); // IDs começam de 1
             });
-        });
+        });        
 
     </script>
 

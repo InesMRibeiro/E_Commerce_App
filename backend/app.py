@@ -7,6 +7,8 @@ import psycopg2
 app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # ADD IP WITHOUT PORT
 
+#connection to the databse ->:NAO FUNCIONAL YET
+"""
 def get_db_connection():
     conn = psycopg2.connect(
         host='54.227.10.231', 
@@ -34,7 +36,7 @@ def test_db():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
+"""
 
 # Lista de produtos (simulando um banco de dados)
 products = [
@@ -50,9 +52,30 @@ cart = []
 def get_products():
     return jsonify(products), 200
 
+"""
 @app.route('/addToCart', methods=['POST'])
 def addToCart():
     return jsonify({"message": "Added to cart!"}), 200
+"""
+
+@app.route('/addToCart', methods=['POST'])
+def addToCart():
+    data = request.get_json()
+    product_id = data.get('product_id')
+
+    product = next((p for p in products if p["id"] == product_id), None)
+    
+    if product:
+        cart.append(product) #Adiciona o produto correto na lista cart
+        return jsonify({"message": f'{product["name"]} added to cart!'}), 200
+    else:
+        return jsonify({"message": "Product not found!"}), 404
+
+#Novo endpoint pra ver o carrinho
+#Assim o frontend pode fazer um fetch pra /cart e mostrar os produtos no carinho!
+@app.route('/cart', methods=['GET'])
+def get_cart():
+    return jsonify(cart), 200
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
