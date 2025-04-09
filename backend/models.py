@@ -8,7 +8,7 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
-    cart_items = db.relationship('Cart', backref='product', lazy=True)
+    cart_items = db.relationship('Cart', lazy=True)
 
 class Cart(db.Model):
     __tablename__ = 'cart'
