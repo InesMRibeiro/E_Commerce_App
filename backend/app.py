@@ -5,6 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS  # type: ignore
 from config import Config
 
+db = SQLAlchemy() 
+
 app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # Frontend IP without port
 app.config.from_object('config.Config')
