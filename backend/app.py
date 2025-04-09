@@ -5,15 +5,30 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS  # type: ignore
 from config import Config
 
-db = SQLAlchemy() 
-
 app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # Frontend IP without port
 app.config.from_object('config.Config')
-db.init_app(app) 
 
-# Importe os modelos aqui APÓS a inicialização do db
-from models import Product, Cart
+db = SQLAlchemy() 
+
+class Product(db.Model):
+    __tablename__ = 'products'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    qty = db.Column(db.Integer)
+    cart_items = db.relationship('Cart', lazy=True)
+
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    quantity = db.Column(db.Integer, default=1)
+
+    # Para facilitar a busca do produto associado
+    product = db.relationship('Product', backref='cart_entries', lazy=True)
+
+db.init_app(app)
 
 with app.app_context():
     db.create_all()
