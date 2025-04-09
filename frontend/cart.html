@@ -37,37 +37,39 @@
         </div>
 
         <!-- Finalizar Compra -->
-        <div class="slides slide3">
-            <div class=" rectangle-2">
-                <h2> Choose a payment method!</h2>
-             </div>
-             
-             <div class="payment-grid">
-                 <div class="product MBWAY">
-                     <img src="images/logo-mbway-1536x960.png" alt="MBWAY">
-                     <button class = "addToCart">SELECT</button>
-                 </div>
- 
-                 <div class="payment PAYPALL">
-                     <img src="images/paypall-removebg-preview.png" alt="PAYPALL">
-                     <button class = "addToCart">SELECT</button>
-                 </div>
- 
-                 <div class="payment VISA">
-                     <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="VISA">
-                     <button class = "addToCart">SELECT</button>
-                 </div>
- 
-             </div>
-             <div class="circle1"></div>
-             <div class="circle2"></div>
-             <div class="circle3"></div>
-         </div>
-         <div class="slides slide1">
-             <img src = "images/pngtree-teddy-bear-cartoon-png-image_10166896.png">
-             <h4> Thank YOU!</h4>
-         </div>
-     </div>
+        <div class="slides slide3" id="checkout-section" style="display: none;">
+            <div class="rectangle-2">
+                <h2>Choose a payment method!</h2>
+            </div>
+
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/logo-mbway-1536x960.png" alt="MBWAY">
+                    <button class="addToCart">SELECT</button>
+                </div>
+
+                <div class="product">
+                    <img src="images/paypall-removebg-preview.png" alt="PAYPALL">
+                    <button class="addToCart">SELECT</button>
+                </div>
+
+                <div class="product">
+                    <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="VISA">
+                    <button class="addToCart">SELECT</button>
+                </div>
+            </div>
+
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+        </div>
+
+        <!-- Thank you -->
+        <div class="slides slide3" id="thankyou-section" style="display: none;">
+            <img src="images/pngtree-teddy-bear-cartoon-png-image_10166896.png" alt="Teddy Bear">
+            <h4>Thank YOU!</h4>
+        </div>
+    </div>
 
     <script>
         const backendUrl = "http://54.160.132.14:5000";
@@ -99,7 +101,7 @@
             const buyButton = document.getElementById('buy-button');
             buyButton.addEventListener('click', () => {
                 document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
-                document.getElementById('checkout-section').style.display = 'block'; // Mostra o checkout
+                document.getElementById('checkout-section').style.display = 'block'; // Mostra pagamento
             });
         });
     </script>

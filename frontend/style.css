@@ -351,25 +351,51 @@
         color: white;
     }
 
-
-
-    .payment-grid {
+    #checkout-section .product-grid {
         display: flex;
         justify-content: center;
-        gap: 40px;
         flex-wrap: wrap;
-        margin-top: 40px;
+        width: 80%;
+        margin: 0 auto;
+        margin-top: 50px;
+        gap: 50px;
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
     }
     
-    .payment {
+    #checkout-section .product {
+        width: 250px;
+        text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
     
-    .payment img {
-        width: 200px;
+    #checkout-section .product img {
+        max-width: 100%;
         height: 200px;
         object-fit: contain;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: rgba(170, 125, 80, 0.50);
+    }
+    
+    #checkout-section .addToCart {
+        background-color: black;
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 1.2rem;
+        transition: background-color 0.3s ease;
+    }
+    
+    #checkout-section .addToCart:hover {
+        background-color: #333;
     }
     
