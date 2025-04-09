@@ -13,7 +13,7 @@ app.config.from_object('config.Config')
 db.init_app(app) 
 
 # Importe os modelos aqui APÓS a inicialização do db
-from .models import Product, Cart
+from models import Product, Cart
 
 with app.app_context():
     db.create_all()
