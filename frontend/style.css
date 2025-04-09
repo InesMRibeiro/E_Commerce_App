@@ -55,6 +55,18 @@
         right: 25px;
         transform: translateY(-50%);
     }
+
+    .home-button{
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translateY(-50%);
+    }
+
     
     .cart-icon {
         width: 60px;
@@ -62,6 +74,11 @@
         display: block; /* Remove any potential inline spacing */
     }
 
+    .home-icon {
+        width: 60px;
+        height: auto;
+        display: block; /* Remove any potential inline spacing */
+    }
 
     .slide1 h1{
         font-size: 70px;
