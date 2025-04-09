@@ -31,21 +31,21 @@
                 <div class="product product1">
                     <img src="images/macaco.png" alt="Product 1">
                     <p class="price">$19.99</p>
-                    <button class = "addToCart">Add To Cart</button>
+                    <button class = "addToCart" data-product-id= "1">Add To Cart</button>
                     <p class="stock">In Stock</p>
                 </div>
 
                 <div class="product product2">
                     <img src="images/panda.png" alt="Product 2">
                     <p class="price">$29.99</p>
-                    <button class = "addToCart">Add to Cart</button>
+                    <button class = "addToCart" data-product-id= "2">Add to Cart</button>
                     <p class="stock">In Stock</p>
                 </div>
 
                 <div class="product product3">
                     <img src="images/preguica.png" alt="Product 3">
                     <p class="price">$39.99</p>
-                    <button class = "addToCart">Add to Cart</button>
+                    <button class = "addToCart" data-product-id= "3">Add to Cart</button>
                     <p class="stock">In Stock</p>
                 </div>
 
@@ -81,9 +81,10 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             const buttons = document.querySelectorAll(".addToCart");
-            buttons.forEach((button, index) => { 
+            buttons.forEach( button  => { 
                 button.addEventListener("click", () => {
-                    addToCart(index + 1); // product IDs: 1, 2, 3
+                    const productId = button.getAttribute("data-product-id");
+                    addToCart(productId); 
                 });
             });
         });        

@@ -10,6 +10,6 @@ output "frontend-ip" {
 }
 
 output "database-ip" {
-
+    
     value = aws_instance.database.public_ip
 }
