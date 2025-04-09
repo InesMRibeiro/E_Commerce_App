@@ -9,16 +9,17 @@
 
 <body>
     <div class="container">
+        <!-- Slide 1 - Header -->
         <div class="slides slide1">
             <div class="rectangle-1">
                 <button class="home-button" onclick="window.location.href='index.html'">
                     <img class="home-icon" src="images/home-removed.png" alt="Home">
                 </button>
             </div>
-            <h1> 🛒 Your Cart</h1>
+            <h1>🛒 Your Cart</h1>
         </div>
 
-        <!-- Produtos adicionados -->
+        <!-- Slide 2 - Cart Items -->
         <div class="slides slide2 cart-body">
             <div class="rectangle-2">
                 <h2>Look what you picked! 🌟</h2>
@@ -36,24 +37,24 @@
             <div class="circle2"></div>
         </div>
 
-        <!-- Finalizar Compra -->
-        <div class="slides slide3" id="checkout-section" style="display: none;">
+        <!-- Slide 3 - Payment Methods -->
+        <div id="checkout-section" class="slides slide3" style="display: none;">
             <div class="rectangle-2">
                 <h2>Choose a payment method!</h2>
             </div>
 
-            <div class="product-grid">
-                <div class="product">
+            <div class="payment-grid">
+                <div class="payment-method">
                     <img src="images/logo-mbway-1536x960.png" alt="MBWAY">
                     <button class="addToCart">SELECT</button>
                 </div>
 
-                <div class="product">
-                    <img src="images/paypall-removebg-preview.png" alt="PAYPALL">
+                <div class="payment-method">
+                    <img src="images/paypall-removebg-preview.png" alt="PAYPAL">
                     <button class="addToCart">SELECT</button>
                 </div>
 
-                <div class="product">
+                <div class="payment-method">
                     <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="VISA">
                     <button class="addToCart">SELECT</button>
                 </div>
@@ -64,9 +65,9 @@
             <div class="circle3"></div>
         </div>
 
-        <!-- Thank you -->
-        <div class="slides slide3" id="thankyou-section" style="display: none;">
-            <img src="images/pngtree-teddy-bear-cartoon-png-image_10166896.png" alt="Teddy Bear">
+        <!-- Slide 4 - Thank You -->
+        <div class="slides slide3" style="display: none;" id="thank-you-section">
+            <img src="images/pngtree-teddy-bear-cartoon-png-image_10166896.png" alt="Thank You Bear">
             <h4>Thank YOU!</h4>
         </div>
     </div>
@@ -101,7 +102,7 @@
             const buyButton = document.getElementById('buy-button');
             buyButton.addEventListener('click', () => {
                 document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
-                document.getElementById('checkout-section').style.display = 'block'; // Mostra pagamento
+                document.getElementById('checkout-section').style.display = 'block'; // Mostra os métodos de pagamento
             });
         });
     </script>
