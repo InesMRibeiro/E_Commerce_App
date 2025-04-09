@@ -309,34 +309,12 @@
         margin-top: 50px;
     }
 
-    /* Home icon instead of cart icon on Cart page */
-    .cart-button img {
-        width: 50px;
-        height: auto;
-    }
-
     .cart-body .circle1, .cart-body .circle2 {
         z-index: 0;
     }
 
     button:hover {
         background-color: #45a049;
-    }
-
-    /* Adiciona o efeito hover no botão home */
-    .cart-button {
-        font-size: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        text-align: center;
-        display: inline-block;
-        transition: transform 0.3s ease, color 0.3s ease;
-    }
-
-    .cart-button:hover {
-        transform: scale(1.1);
-        color: #4CAF50; /* Cor do hover */
     }
 
     /* Adiciona o estilo de layout dos botões de pagamento */
