@@ -20,62 +20,46 @@
         </div>
 
         <!-- Slide 2 - Cart Items -->
-
-        <div class="slides slide2">
-            <div class=" rectangle-2">
-                <h3> Choose your payment method!</h3>
+        <div class="slides slide2 cart-body">
+            <div class="rectangle-2">
+                <h2>Look what you picked! 🌟</h2>
             </div>
-           
-            
-            <div class="payment-grid">
-                <div class="product product1">
-                    <img src="images/logo-mbway-1536x960.png" alt="MbWay">
-                    <button class = "selectPayment">Select Payment</button>
-                </div>
 
-                <div class="product product2">
-                    <img src="images/paypall-removebg-preview.png" alt="PayPall">
-                    <button class = "selectPayment">Select Payment</button>
-                </div>
+            <div id="cart-items" class="cart-items"></div>
 
-                <div class="product product3">
-                    <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="Visa">
-                    <button class = "selectPayment">Select Payment</button>
-                </div>
-
+            <!-- Total e botão de comprar -->
+            <div style="text-align: right; margin-top: 20px; margin-right: 20px;">
+                <div id="cart-total" class="cart-total" style="font-size: 24px;"></div>
+                <button id="buy-button" style="margin-top: 10px; padding: 10px 20px; font-size: 18px; cursor: pointer; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">Buy Now</button>
             </div>
+
             <div class="circle1"></div>
             <div class="circle2"></div>
-            <div class="circle3"></div>
         </div>
-
 
         <!-- Slide 3 - Payment Methods -->
         <div id="checkout-section" class="slides slide3" style="display: none;">
-            <div class="rectangle-2">
-                <h2>Choose a payment method!</h2>
-            </div>
-
-            <div class="checkout-grid">
-                <div class="checkout checkout1">
-                    <img src="images/logo-mbway-1536x960.png" alt="checkout 1">
-                    <button class="addToCart">SELECT</button>
+            <div class="slides slide2">
+                <div class=" rectangle-2">
+                    <h3> Choose your payment method!</h3>
                 </div>
-
-                <div class="checkout checkout2">
-                    <img src="images/paypall-removebg-preview.png" alt="checkout 2">
-                    <button class="addToCart">SELECT</button>
-                </div>
-
-                <div class="checkout checkout3">
-                    <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="checkout 3">
-                    <button class="addToCart">SELECT</button>
-                </div>
-            </div>
-
-            <div class="circle1"></div>
-            <div class="circle2"></div>
-            <div class="circle3"></div>
+                
+                <div class="payment-grid">
+                    <div class="product product1">
+                        <img src="images/logo-mbway-1536x960.png" alt="MbWay">
+                        <button class = "selectPayment">Select Payment</button>
+                    </div>
+    
+                    <div class="product product2">
+                        <img src="images/paypall-removebg-preview.png" alt="PayPall">
+                        <button class = "selectPayment">Select Payment</button>
+                    </div>
+    
+                    <div class="product product3">
+                        <img src="images/213724_card_cash_checkout_online shopping_payment method_icon.png" alt="Visa">
+                        <button class = "selectPayment">Select Payment</button>
+                    </div>
+    
         </div>
 
         <!-- Slide 4 - Thank You -->
