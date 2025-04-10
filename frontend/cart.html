@@ -23,6 +23,7 @@
 
             <div class = "rectangle-3">
                 <div id="cart-items" class="cart-items"></div>
+                <div id="cart-total" class="cart-total"></div>
             </div>
 
 
@@ -43,18 +44,21 @@
                 const cartTotalDiv = document.getElementById('cart-total');
                 let total = 0;
 
-                if (data.length === 0) {
+                if (data && data.items && data.items.length === 0) {
                     cartItemsDiv.innerHTML = "<p class='empty-cart'>Your cart is empty! 😢</p>";
-                } else {
-                    data.forEach(item => {
-                        total += item.price;
+                } else if (data && data.items) {
+                    data.items.forEach  (item => {
+                        total += item.price * item.quantity;
                         const itemDiv = document.createElement('div');
                         itemDiv.classList.add('cart-item');
-                        itemDiv.innerHTML = `<p>${item.name} - <strong>$${item.price.toFixed(2)}</strong></p>`;
+                        itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
                         cartItemsDiv.appendChild(itemDiv);
                     });
-                    cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+                    cartTotalDiv.innerHTML = `Total: $${data.total.toFixed(2)}`;
+                } else {
+                    cartItemsDiv.innerHTML = "<p class='error-loading'>Failed to load cart items.</p>";
                 }
+                
             })
             .catch(error => console.error('Error loading cart:', error));
 
