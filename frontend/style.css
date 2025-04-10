@@ -285,24 +285,51 @@
         left: 10%;
     }
 
-    .cart-body {
-        background-color: #F6CE88;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 150px;
-        position: relative;
+    
+    .rectangle-2 h1{
+        font-size:1.8rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0; 
     }
 
-    .cart-items {
-        margin-top: 50px;
+    .rectangle-3{
+        background-color: rgba(255, 255, 255, 0.65);
         width: 80%;
-        background-color: rgba(255, 255, 255, 0.8);
-        border-radius: 20px;
-        padding: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        height: 400px;
+        position: absolute;
+        top:25%;
+        left:10%;
+        z-index: 1;
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+        border-radius: 30px;
+
     }
+
+    .buy-button{
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        cursor: pointer;
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        transition: background-color 0.3s ease; /* Smooth transition */
+        position: absolute; /* Make the button absolute too */
+        top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
+        left: 50%; /* Center the button horizontally */
+        transform: translateX(-50%); /* Adjust for the center */
+        z-index: 2; /* Ensure it's above the rectangle if needed */
+    }
+
+    .buy-button:hover {
+        background-color: #333;
+    }
+
 
     .cart-item {
         font-size: 1.5rem;
@@ -350,6 +377,8 @@
     .selectPayment:hover {
         background-color: #333;
     }
+
+
     .payment-grid {
         display: flex;
         justify-content: center;
