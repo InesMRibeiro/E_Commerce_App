@@ -94,5 +94,17 @@ def select_payment():
     else:
         return jsonify({"message": "No payment method selected!"}), 400
     
+
+# Novo endpoint para limpar o carrinho
+@app.route('/admin/clearcart', methods=['POST'])
+def clear_cart():
+    try:
+        Cart.query.delete()
+        db.session.commit()
+        return jsonify({"message": "Cart table cleared successfully!"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+    
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -442,3 +442,22 @@ button {
 /* .circle1 { ... } */
 /* .circle2 { ... } */
 /* .circle3 { ... } */
+
+/* ==========================================================================
+   Estilos para office.html
+   ========================================================================== */
+
+.cleanCart{
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    padding: 12px 30px; /* Adjust padding for size */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Adjust font size */
+    position: absolute; /* Make the button absolute too */
+    top:30%; /* top of rectangle + height of rectangle + some spacing */
+    left: 15%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Adjust for the center */
+    z-index: 2; /* Ensure it's above the rectangle if needed */
+}

@@ -34,8 +34,8 @@
 
             cleanCartButton.addEventListener('click', () => {
                 if (confirm('Are you sure you want to clear the entire cart database? This action is irreversible!')) {
-                    fetch(`${backendUrl}/admin/clearcart`, { // Ensure this is the correct backend endpoint for clearing the cart
-                        method: 'POST', // Or 'DELETE', depending on your backend implementation
+                    fetch(`${backendUrl}/admin/clearcart`, { 
+                        method: 'POST', 
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -55,6 +55,6 @@
             });
         });
     </script>
-    
+
 </body>
 </html>
