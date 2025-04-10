@@ -41,7 +41,27 @@
     <script>
         
         const backendUrl = "http://54.160.132.14:5000";
-
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentButtons = document.querySelectorAll('.selectPayment');
+            paymentButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const paymentMethod = button.getAttribute('data-payment-method');
+                    fetch(`${backendUrl}/selectPayment`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ payment_method: paymentMethod })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                    })
+                    .catch(error => console.error('Error selecting payment:', error));
+                });
+            });
+        });
         
     </script>
 

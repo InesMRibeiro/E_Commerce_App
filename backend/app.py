@@ -83,5 +83,16 @@ def get_cart():
             })
     return jsonify({"items": cart_contents, "total": total_price}), 200
 
+# Novo endpoint para seleção de método de pagamento
+@app.route('/selectPayment', methods=['POST'])
+def select_payment():
+    data = request.get_json()
+    payment_method = data.get('payment_method')
+
+    if payment_method:
+        return jsonify({"message": f"Payment method {payment_method} selected!"}), 200
+    else:
+        return jsonify({"message": "No payment method selected!"}), 400
+    
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -45,6 +45,13 @@
         z-index: 1;
     }
 
+    .Homeimg {
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: contain;
+        margin-left: 10px; /* Ajuste o valor conforme necessário */
+    }
+
     .cart-button {
         background: none;
         border: none;
