@@ -282,22 +282,24 @@ button:hover {
 .rectangle-3 {
     background-color: rgba(255, 255, 255, 0.65);
     width: 80%;
-    min-height: auto; /* Adjusted height to be more flexible */
-    position: absolute;
+    min-height: auto;
+    position: absolute; /* Keep absolute positioning for vertical placement */
     top: 25%;
-    left: 9%;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for the element's own width */
     z-index: 1;
-    padding: 20px; /* Added padding for content spacing */
+    padding: 20px;
     border-radius: 30px;
     display: flex;
-    flex-direction: column; /* Arrange items vertically */
+    flex-direction: column;
+    align-items: center; /* Center the content (including .cart-items) inside */
    
 }
 
 .cart-items {
-    width: 80%; /* Or any width you prefer for the list */
+    width: 80%; 
     margin-bottom: 20px;
-    display: flex; /* Enable Flexbox on the container */
+    display: flex; 
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally within the container */
 }
