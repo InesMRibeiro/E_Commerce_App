@@ -295,21 +295,24 @@ button:hover {
 }
 
 .cart-items {
-    width: 100%;
+    width: 80%; /* Or any width you prefer for the list */
     margin-bottom: 20px;
+    display: flex; /* Enable Flexbox on the container */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the container */
 }
 
 .cart-item {
     font-size: 1.5rem;
-    margin-bottom: 10px; /* Reduced margin */
+    margin-bottom: 10px;
     color: #48240C;
     border-bottom: 1px solid rgba(72, 36, 12, 0.2);
-    padding-bottom: 5px; /* Reduced padding */
-    width: 80%; /* Limit width of items */
-    display: flex; /* Enable Flexbox for the cart item */
-    justify-content: space-between; /* Distribute space between item details */
-    align-items: center; /* Vertically align item details */
-    text-align: center; /* Align text within each part to the left */
+    padding-bottom: 5px;
+    width: 100%; /* Make each item take the full width of the centered container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left; 
 }
 
 .cart-item:last-child {
