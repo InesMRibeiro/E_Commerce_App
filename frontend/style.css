@@ -1,419 +1,422 @@
-    body {
-        font-family: 'Luckiest Guy', cursive;
-        margin: 0; 
-        padding: 0; 
-        box-sizing: border-box;
-    }
+/* ==========================================================================
+   Estilos Gerais (Comuns a todas as páginas)
+   ========================================================================== */
 
-    .container{
-        width: 100%;
-        height: 100vh;
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
+   body {
+    font-family: 'Luckiest Guy', cursive;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    }
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
 
-    .slides{
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        color:  #F6CE88;
-        scroll-snap-align: start;
-        position: relative;
-        flex-direction: column;
-        align-items: center;
-        transform: translateZ(0);  /* helps render the images */
+.slides {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    color: #F6CE88;
+    scroll-snap-align: start;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    transform: translateZ(0); /* helps render the images */
+}
 
-    }
+.rectangle-1 {
+    background-color: rgba(247, 214, 197, 0.5);
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
 
-    .slide1{
-        background-image: url("images/bigteddy.jpg"); 
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        z-index: 0;
-    }
+.circle1,
+.circle2,
+.circle3 {
+    background-color: rgba(170, 125, 80, 0.50);
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    border-radius: 150px;
+}
 
-    .rectangle-1{
-        background-color: rgba(247, 214, 197, 0.5); 
-        width: 100%;
-        height: 50px;
-        position: absolute;
-        top:0;
-        left:0;
-        z-index: 1;
-    }
+.circle1 {
+    top: -50px;
+    left: -35px;
+}
 
-    .Homeimg {
-        max-width: 70%;
-        max-height: 70%;
-        object-fit: contain;
-        margin-left: 10px; /* Ajuste o valor conforme necessário */
-    }
+.circle2 {
+    top: 85%;
+    left: 50%;
+}
 
-    .cart-button {
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        right: 25px;
-        transform: translateY(-50%);
-    }
+.circle3 {
+    top: -50px;
+    left: 85%;
+}
 
-    .home-button{
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        right: 25px;
-        transform: translateY(-50%);
-    }
+button {
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
 
-    
-    .cart-icon {
-        width: 60px;
-        height: auto;
-        display: block; /* Remove any potential inline spacing */
-    }
+button:hover {
+    background-color: #45a049;
+}
 
-    .home-icon {
-        width: 45px;
-        height: auto;
-        display: block; /* Remove any potential inline spacing */
-    }
+/* ==========================================================================
+   Estilos para index.html
+   ========================================================================== */
 
-    .slide1 h1{
-        font-size: 70px;
-        font-weight: 600;
-        max-width: 650px;
-        color: #48240C;
-        position: absolute; 
-        top: 15%;
-        left: 10%;
-    }
+.slide1 {
+    background-image: url("images/bigteddy.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 0;
+}
 
+.cart-button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+}
 
-    .slide2{
-        background-color: #F6CE88;
-        position: relative;
-        z-index: 0;
-        overflow: hidden; /* Add this line */
-    }
+.cart-icon {
+    width: 60px;
+    height: auto;
+    display: block; /* Remove any potential inline spacing */
+}
 
-    .rectangle-2{
-        background-color: rgba(255, 255, 255, 0.65);
-        width: 80%;
-        height: 100px;
-        position: absolute;
-        top:10%;
-        left:10%;
-        z-index: 1;
-        display: flex; 
-        justify-content: center; 
-        align-items: center;
-        border-radius: 30px;
-    }
+.slide1 h1 {
+    font-size: 70px;
+    font-weight: 600;
+    max-width: 650px;
+    color: #48240C;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+}
 
-    .rectangle-2 h2{
-        font-size:1.8rem;
-        font-weight: 200;
-        color: #48240C;
-        text-align: center; /*Centers the text*/
-        margin: 0; 
-    }
+.slide2 {
+    background-color: #F6CE88;
+    position: relative;
+    z-index: 0;
+    overflow: hidden; /* Add this line */
+}
 
-    .slide2 h3{
-        font-size:1.8rem;
-        font-weight: 200;
-        color: #48240C;
-        text-align: center; /*Centers the text*/
-        margin: 0; 
-        position: absolute;
-        top: 35%; /* Increase the top value */
-        left: 50%;
-        transform: translate(-50%, -50%);/* Center horizontally */
-    
-    }
+.rectangle-2 {
+    background-color: rgba(255, 255, 255, 0.65);
+    width: 80%;
+    height: 100px;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
 
-    .product-grid {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        flex-wrap: wrap;
-        width: 80%;  
-        position: absolute; 
-        top: 70%; /* Increase the top value */
-        left: 50%;
-        transform: translate(-50%, -50%);/* Center horizontally */
-        margin: 0;
-        gap: 50px;
-    }
+.rectangle-2 h2 {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #48240C;
+    text-align: center; /*Centers the text*/
+    margin: 0;
+}
 
+.slide2 h3 {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #48240C;
+    text-align: center; /*Centers the text*/
+    margin: 0;
+    position: absolute;
+    top: 35%; /* Increase the top value */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center horizontally */
+}
 
-    .product {
-        width: 250px;
-        text-align: center;
-        margin: 50px;
-        display: flex; 
-        flex-direction: column; 
-    }
+.product-grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 80%;
+    position: absolute;
+    top: 70%; /* Increase the top value */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center horizontally */
+    margin: 0;
+    gap: 50px;
+}
 
-    .product img {
-        max-width: 100%;
-        height: 200px;
-        object-fit: contain; 
-        margin-bottom: 8px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: rgba(170, 125, 80, 0.50);
-    }
+.product {
+    width: 250px;
+    text-align: center;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+}
 
-    .price {
-        font-weight: lighter;
-        font-size: 20px;
-        margin-bottom: 10px;
-        color: #d32f2f; 
-    }
+.product img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(170, 125, 80, 0.50);
+}
 
-    .addToCart {
-        background-color: black; /* Black background */
-        color: white; /* White text */
-        padding: 12px 30px; /* Adjust padding for size */
-        border: none; /* Remove default border */
-        border-radius: 30px; /* Rounded corners */
-        cursor: pointer;
-        font-weight: bold; /* Bold text */
-        font-size: 1.2rem; /* Adjust font size */
-        transition: background-color 0.3s ease; /* Smooth transition */
-    }
+.price {
+    font-weight: lighter;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #d32f2f;
+}
 
-    .addToCart:hover {
-        background-color: #333;
-    }
+.addToCart {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    padding: 12px 30px; /* Adjust padding for size */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    cursor: pointer;
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Adjust font size */
+}
 
-    .stock {
-        color: green;
-    }
+.addToCart:hover {
+    background-color: #333;
+}
 
-    .circle1{
+.stock {
+    color: green;
+}
 
-        background-color: rgba(170, 125, 80, 0.50);
-        width: 300px;
-        height: 300px;
-        position: absolute;
-        top: -50px;
-        left: -35px;
-        z-index:-1 ;
-        display: flex; 
-        border-radius: 150px;
+.slide3 {
+    background: linear-gradient(to top, rgba(170, 125, 80, 1), #F6CE88);
+    position: relative;
+    z-index: 0;
+}
 
-    }
+.slide3 img {
+    width: 350px;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 5%;
+}
 
-    
-    .circle2{
+.slide3 h4 {
+    font-size: 70px;
+    font-weight: 600;
+    max-width: 650px;
+    color: #48240C;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center horizontally */
+}
 
-        background-color: rgba(170, 125, 80, 0.50);
-        width: 300px;
-        height: 300px;
-        position: absolute;
-        top: 85%;
-        left: 50%;
-        z-index:-1 ;
-        display: flex; 
-        border-radius: 150px;
+/* ==========================================================================
+   Estilos para cart.html
+   ========================================================================== */
 
-    }
+/* Estilos gerais do body e container podem ser comuns */
+/* body { ... } */
+/* .container { ... } */
+/* .slides { ... } */
+/* .rectangle-1 { ... } */
 
+.home-button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+}
 
-    .slide3{
-        background: linear-gradient(to top, rgba(170, 125, 80, 1), #F6CE88);
-        position: relative;
-        z-index: 0;
-    }
-        
-    .circle3{
+.home-icon {
+    width: 45px;
+    height: auto;
+    display: block; /* Remove any potential inline spacing */
+}
 
-        background-color: rgba(170, 125, 80, 0.50);
-        width: 300px;
-        height: 300px;
-        position: absolute;
-        top: -50px;
-        left: 85%;
-        z-index:-1 ;
-        display: flex; 
-        border-radius: 150px;
+/* .slide2 {
+    /* Estilos gerais para o slide 2 (repetido do index) */
+/* } */
 
-    }
+/* .rectangle-2 {
+    /* Estilos para o título da página do carrinho (pode ser similar ao do index) */
+/* } */
 
-    .slide3 img{
+.rectangle-2 h2 {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #48240C;
+    text-align: center; /*Centers the text*/
+    margin: 0;
+}
 
-        width: 350px;
-        position: absolute;
-        z-index: 1;
-        top: 50%;
-        left: 5%;
-    }
+.rectangle-3 {
+    background-color: rgba(255, 255, 255, 0.65);
+    width: 80%;
+    min-height: auto; /* Adjusted height to be more flexible */
+    position: absolute;
+    top: 25%;
+    left: 9%;
+    z-index: 1;
+    padding: 20px; /* Added padding for content spacing */
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column; /* Arrange items vertically */
+   
+}
 
-    
-    .slide3 h4{
-        font-size: 70px;
-        font-weight: 600;
-        max-width: 650px;
-        color: #48240C;
-        position: absolute; 
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);/* Center horizontally */
-    }
+.cart-items {
+    width: 100%;
+    margin-bottom: 20px;
+}
 
-    /* CART PAGE STYLES */
+.cart-item {
+    font-size: 1.5rem;
+    margin-bottom: 10px; /* Reduced margin */
+    color: #48240C;
+    border-bottom: 1px solid rgba(72, 36, 12, 0.2);
+    padding-bottom: 5px; /* Reduced padding */
+    width: 80%; /* Limit width of items */
+    text-align: center; /* Center text within item */
+}
 
-    .cart-header {
-        background-image: url("images/bigteddy.jpg"); 
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        position: relative;
-        z-index: 0;
-    }
+.cart-item:last-child {
+    border-bottom: none;
+}
 
-    .cart-header h1 {
-        font-size: 60px;
-        font-weight: 600;
-        max-width: 700px;
-        color: #48240C;
-        position: absolute;
-        top: 30%;
-        left: 10%;
-    }
+.cart-total {
+    margin-top: auto; /* Adicionar esta linha */
+    font-size: 2rem;
+    color: #d32f2f;
+    font-weight: bold;
+    text-align: center; /* Manter o alinhamento do texto */
+    width: 80%; /* Manter a largura */
+    align-self: center; /* Centralizar o elemento dentro do flex container */
+}
 
-    
-    .rectangle-2 h1{
-        font-size:1.8rem;
-        font-weight: 200;
-        color: #48240C;
-        text-align: center; /*Centers the text*/
-        margin: 0; 
-    }
+.empty-cart {
+    font-size: 2rem;
+    color: #48240C;
+    text-align: center;
+    margin-top: 50px;
+}
 
-    .rectangle-3{
-        background-color: rgba(255, 255, 255, 0.65);
-        width: 80%;
-        height: 400px;
-        position: absolute;
-        top:25%;
-        left:10%;
-        z-index: 1;
-        display: flex; 
-        justify-content: center; 
-        align-items: center;
-        border-radius: 30px;
+.buy-button {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    padding: 12px 30px; /* Adjust padding for size */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Adjust font size */
+    position: absolute; /* Make the button absolute too */
+    top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
+    left: 50%; /* Center the button horizontally */
+    transform: translateX(-50%); /* Adjust for the center */
+    z-index: 2; /* Ensure it's above the rectangle if needed */
+}
 
-    }
+.buy-button:hover {
+    background-color: #333;
+}
 
-    .buy-button{
-        background-color: black; /* Black background */
-        color: white; /* White text */
-        padding: 12px 30px; /* Adjust padding for size */
-        border: none; /* Remove default border */
-        border-radius: 30px; /* Rounded corners */
-        cursor: pointer;
-        font-weight: bold; /* Bold text */
-        font-size: 1.2rem; /* Adjust font size */
-        transition: background-color 0.3s ease; /* Smooth transition */
-        position: absolute; /* Make the button absolute too */
-        top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
-        left: 50%; /* Center the button horizontally */
-        transform: translateX(-50%); /* Adjust for the center */
-        z-index: 2; /* Ensure it's above the rectangle if needed */
-    }
+/* Estilos dos círculos podem ser comuns */
+/* .circle1 { ... } */
+/* .circle2 { ... } */
 
-    .buy-button:hover {
-        background-color: #333;
-    }
+/* ==========================================================================
+   Estilos para payment.html
+   ========================================================================== */
 
+/* Estilos gerais do body e container podem ser comuns */
+/* body { ... } */
+/* .container { ... } */
+/* .slides { ... } */
+/* .rectangle-2 { ... } */
 
-    .cart-item {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        color: #48240C;
-        border-bottom: 1px solid rgba(72, 36, 12, 0.2);
-        padding-bottom: 10px;
-    }
+.rectangle-2 h1 {
+    font-size: 1.8rem;
+    font-weight: 200;
+    color: #48240C;
+    text-align: center; /*Centers the text*/
+    margin: 0;
+}
 
-    .cart-total {
-        margin-top: 30px;
-        font-size: 2rem;
-        color: #d32f2f;
-        font-weight: bold;
-    }
+.payment-grid {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    width: 80%;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    gap: 50px;
+}
 
-    .empty-cart {
-        font-size: 2rem;
-        color: #48240C;
-        text-align: center;
-        margin-top: 50px;
-    }
+.payment-method {
+    width: 250px;
+    text-align: center;
+    margin: 50px;
+    display: flex;
+    flex-direction: column;
+}
 
-    .cart-body .circle1, .cart-body .circle2 {
-        z-index: 0;
-    }
+.payment-method img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(170, 125, 80, 0.50);
+}
 
-    button:hover {
-        background-color: #45a049;
-    }
+.selectPayment {
+    background-color: black; /* Black background */
+    color: white; /* White text */
+    padding: 12px 30px; /* Adjust padding for size */
+    border: none; /* Remove default border */
+    border-radius: 30px; /* Rounded corners */
+    font-weight: bold; /* Bold text */
+    font-size: 1.2rem; /* Adjust font size */
+}
 
-    /* Adiciona o estilo de layout dos botões de pagamento */
-    .selectPayment {
-        background-color: black; /* Black background */
-        color: white; /* White text */
-        padding: 12px 30px; /* Adjust padding for size */
-        border: none; /* Remove default border */
-        border-radius: 30px; /* Rounded corners */
-        cursor: pointer;
-        font-weight: bold; /* Bold text */
-        font-size: 1.2rem; /* Adjust font size */
-        transition: background-color 0.3s ease; /* Smooth transition */
-    }
+.selectPayment:hover {
+    background-color: #333;
+}
 
-    .selectPayment:hover {
-        background-color: #333;
-    }
-
-
-    .payment-grid {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        flex-wrap: wrap;
-        width: 80%;  
-        position: absolute; 
-        top: 55%; 
-        left: 50%;
-        transform: translate(-50%, -50%);
-        gap: 50px;
-    }
-    
-    .payment-method {
-        width: 250px;
-        text-align: center;
-        margin: 50px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .payment-method img {
-        max-width: 100%;
-        height: 200px;
-        object-fit: contain;
-        margin-bottom: 8px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        background-color: rgba(170, 125, 80, 0.50);
-    }
-    
+/* Estilos dos círculos podem ser comuns */
+/* .circle1 { ... } */
+/* .circle2 { ... } */
+/* .circle3 { ... } */
