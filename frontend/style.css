@@ -306,7 +306,10 @@ button:hover {
     border-bottom: 1px solid rgba(72, 36, 12, 0.2);
     padding-bottom: 5px; /* Reduced padding */
     width: 80%; /* Limit width of items */
-    text-align: center; /* Center text within item */
+    display: flex; /* Enable Flexbox for the cart item */
+    justify-content: space-between; /* Distribute space between item details */
+    align-items: center; /* Vertically align item details */
+    text-align: left; /* Align text within each part to the left */
 }
 
 .cart-item:last-child {
