@@ -335,22 +335,21 @@
     }
 
     /* Adiciona o estilo de layout dos botões de pagamento */
-    .payment-button {
-        margin: 10px;
-        padding: 15px 30px;
-        font-size: 18px;
+    .selectPayment {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
         cursor: pointer;
-        border: 2px solid #4CAF50;
-        border-radius: 5px;
-        background-color: #f5f5f5;
-        transition: background-color 0.3s;
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        transition: background-color 0.3s ease; /* Smooth transition */
     }
 
-    .payment-button:hover {
-        background-color: #4CAF50;
-        color: white;
+    .selectPayment:hover {
+        background-color: #333;
     }
-
     #checkout-section .product-grid {
         display: flex;
         justify-content: center;
@@ -407,7 +406,7 @@
         flex-wrap: wrap;
         width: 80%;  
         position: absolute; 
-        top: 70%; 
+        top: 55%; 
         left: 50%;
         transform: translate(-50%, -50%);
         gap: 50px;
