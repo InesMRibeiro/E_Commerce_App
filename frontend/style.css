@@ -14,6 +14,7 @@
     height: 100vh;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
+
 }
 
 .slides {
@@ -96,6 +97,22 @@ button {
 
 .cart-icon {
     width: 60px;
+    height: auto;
+    display: block; /* Remove any potential inline spacing */
+}
+
+.admin-office{
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    left: 25px;
+    transform: translateY(-50%);
+}
+
+.admin-icon {
+    width: 40px;
     height: auto;
     display: block; /* Remove any potential inline spacing */
 }

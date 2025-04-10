@@ -1,0 +1,60 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E_Commerce_App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class = "container">
+        <div class="slides slide2">
+            <button class="home-button" onclick="window.location.href='index.html'">
+                <img class="home-icon" src="images/hom_image.png" alt="Home">
+            </button>
+            <div class=" rectangle-2">
+                <h1>Back Office</h1>
+            </div>
+
+            <button class = "cleanCart">Clean Cart</button>
+            <div id="messageArea"></div>
+            
+        </div>
+    </div>
+
+
+    <script>
+        const backendUrl = "http://54.160.132.14:5000";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cleanCartButton = document.querySelector('.cleanCart');
+            const messageArea = document.getElementById('messageArea');
+
+            cleanCartButton.addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear the entire cart database? This action is irreversible!')) {
+                    fetch(`${backendUrl}/admin/clearcart`, { // Ensure this is the correct backend endpoint for clearing the cart
+                        method: 'POST', // Or 'DELETE', depending on your backend implementation
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        messageArea.textContent = data.message || data.error || 'Cart operation completed.';
+                        if (data.error) {
+                            messageArea.style.color = 'red';
+                        } else {
+                            messageArea.style.color = 'green';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error clearing cart:', error);
+                        messageArea.textContent = 'An error occurred while trying to clear the cart.';
+                        messageArea.style.color = 'red';
+                    });
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
