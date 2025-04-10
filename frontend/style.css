@@ -309,7 +309,7 @@ button:hover {
     display: flex; /* Enable Flexbox for the cart item */
     justify-content: space-between; /* Distribute space between item details */
     align-items: center; /* Vertically align item details */
-    text-align: left; /* Align text within each part to the left */
+    text-align: center; /* Align text within each part to the left */
 }
 
 .cart-item:last-child {
