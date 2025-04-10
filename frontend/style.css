@@ -70,9 +70,6 @@ button {
     transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-button:hover {
-    background-color: #45a049;
-}
 
 /* ==========================================================================
    Estilos para index.html
@@ -252,7 +249,7 @@ button:hover {
     border: none;
     padding: 0;
     position: absolute;
-    top: 50%;
+    top: 4%;
     right: 25px;
     transform: translateY(-50%);
 }
