@@ -33,34 +33,49 @@
 <script>
     const backendUrl = "http://54.160.132.14:5000";
 
-    // Função para obter token do localStorage
     function getToken() {
         return localStorage.getItem("token");
     }
 
-    function get_cart() {
+    async function get_cart() {
         const token = getToken();
-    
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartTotalDiv = document.getElementById('cart-total');
+
         if (!token) {
-            alert("Por favor, faça login primeiro.");
+            cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
+            cartTotalDiv.innerHTML = "";
             return;
         }
 
-        fetch(`${backendUrl}/cart`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`, // Inclui o token no cabeçalho Authorization
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            const cartItemsDiv = document.getElementById('cart-items');
-            const cartTotalDiv = document.getElementById('cart-total');
-            let total = 0;
+        try {
+            const response = await fetch(`${backendUrl}/cart`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
 
-            if (data && data.items && data.items.length === 0) {
-                cartItemsDiv.innerHTML = "<p class='empty-cart'>Your cart is empty! 😢</p>";
-            } else if (data && data.items) {
+            if (!response.ok) {
+                let errorMessage = `Erro ao carregar o carrinho: ${response.status}`;
+                try {
+                    const errorData = await response.json();
+                    if (errorData && errorData.message) {
+                        errorMessage += ` - ${errorData.message}`;
+                    }
+                } catch (jsonError) {
+                    console.error("Erro ao analisar JSON de erro:", jsonError);
+                }
+                cartItemsDiv.innerHTML = `<p class='error'>${errorMessage}</p>`;
+                cartTotalDiv.innerHTML = "";
+                return;
+            }
+
+            const data = await response.json();
+
+            if (data && data.items && data.items.length > 0) {
+                let total = 0;
+                cartItemsDiv.innerHTML = ''; // Limpa o conteúdo anterior
                 data.items.forEach(item => {
                     total += item.price * item.quantity;
                     const itemDiv = document.createElement('div');
@@ -68,25 +83,30 @@
                     itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
                     cartItemsDiv.appendChild(itemDiv);
                 });
-                cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`; // Corrigido para somar o total corretamente
+                cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
             } else {
-                cartItemsDiv.innerHTML = "<p class='error-loading'>Failed to load cart items.</p>";
+                cartItemsDiv.innerHTML = "<p class='empty-cart'>O seu carrinho está vazio! 😢</p>";
+                cartTotalDiv.innerHTML = "";
             }
-        })
-        .catch(error => console.error('Error loading cart:', error));
+
+        } catch (error) {
+            console.error('Erro ao buscar o carrinho:', error);
+            cartItemsDiv.innerHTML = "<p class='error'>Ocorreu um erro ao carregar o carrinho.</p>";
+            cartTotalDiv.innerHTML = "";
+        }
     }
 
-    // Quando clicar em "Buy Now"
     document.addEventListener('DOMContentLoaded', () => {
         const buyButton = document.getElementById('buy-button');
-        buyButton.addEventListener('click', () => {
-            document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
-            document.getElementById('checkout-section').style.display = 'block'; // Mostra os métodos de pagamento
-        });
+        if (buyButton) {
+            buyButton.addEventListener('click', () => {
+                window.location.href = 'payment.html';
+            });
+        } else {
+            console.error("Elemento 'buy-button' não encontrado!");
+        }
 
-
-    console.log("Chamando a função get_cart()"); // Adiciona esta linha
-    get_cart();
+        get_cart(); // Chama a função para carregar o carrinho ao carregar a página
     });
 </script>
 
