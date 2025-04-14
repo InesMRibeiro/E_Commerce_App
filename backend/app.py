@@ -1,18 +1,21 @@
-## Código relacionado com o backend da applicação e API
-
 from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS  # type: ignore
 from config import Config
+import os  # Import the os module
+import secrets  # Import the secrets module
+from datetime import timedelta  # Import timedelta
 
 app = Flask(__name__)
-CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # Frontend IP without port
+CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}})  # Frontend IP without port
 app.config.from_object('config.Config')
-app.config['SECRET_KEY'] = 'insecure' 
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'  # Add this line
-app.config['SESSION_COOKIE_SECURE'] = True # Add this line
+app.config['SECRET_KEY'] = 'insecure'  # VERY INSECURE: DO NOT USE IN PRODUCTION
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+app.config['SESSION_COOKIE_SECURE'] = False # Changed to false
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)  # Add this line
 
-db = SQLAlchemy() 
+db = SQLAlchemy()
+
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -37,7 +40,6 @@ class Cart(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer, default=1)
-
     user = db.relationship('User', back_populates='cart_items', lazy=True)
     product = db.relationship('Product', back_populates='cart_items', lazy=True)
 
@@ -67,8 +69,8 @@ def signup():
     # Auto-login after successful signup
     user = User.query.filter_by(username=username).first()  # Get the newly created user
     session['user_id'] = user.id  # Set the user_id in the session
-    print(f"Signup: User {username} logged in with session id {session['user_id']}") #added
-
+    session.permanent = True # Make session permanent
+    print(f"Signup: User {username} logged in with session id {session['user_id']}")
 
     return jsonify({"message": "User created and logged in successfully"}), 201
 
@@ -82,13 +84,15 @@ def login():
 
     user = User.query.filter_by(username=username).first()
 
-    if user and user.password == password: 
+    if user and user.password == password:
         session['user_id'] = user.id
-        print(f"Login: User {username} logged in with session id {session['user_id']}") #added
+        session.permanent = True # Make session permanent
+        print(f"Login: User {username} logged in with session id {session['user_id']}")
         return jsonify({"message": "Logged in successfully!"}), 200
     else:
         return jsonify({"message": "Username or password is incorrect"}), 401
-    
+
+
 @app.route('/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
@@ -99,6 +103,7 @@ def get_products():
 @app.route('/addToCart', methods=['POST'])
 def addToCart():
     if 'user_id' not in session:
+        print(f"AddToCart: User not logged in.  Session contents: {session}")
         return jsonify({"message": "User not logged in."}), 401
 
     user_id = session['user_id']
@@ -123,11 +128,11 @@ def addToCart():
 
 
 
-#Novo endpoint pra ver o carrinho
-#Assim o frontend pode fazer um fetch pra /cart e mostrar os produtos no carinho!
+# Novo endpoint pra ver o carrinho
 @app.route('/cart', methods=['GET'])
 def get_cart():
     if 'user_id' not in session:
+        print(f"GetCart: User not logged in. Session contents: {session}")
         return jsonify({"message": "User not logged in."}), 401
 
     user_id = session['user_id']
@@ -160,7 +165,7 @@ def select_payment():
         return jsonify({"message": f"Payment method {payment_method} selected!"}), 200
     else:
         return jsonify({"message": "No payment method selected!"}), 400
-    
+
 
 # Novo endpoint para limpar o carrinho
 @app.route('/admin/clearcart', methods=['POST'])
@@ -172,6 +177,7 @@ def clear_cart():
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
-    
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
