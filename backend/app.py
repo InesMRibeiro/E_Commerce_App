@@ -22,6 +22,7 @@ class User(db.Model):
 class Product(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
     cart_items = db.relationship('Cart', back_populates='product', lazy=True)
@@ -82,34 +83,45 @@ def get_products():
     product_list = [{"id": p.id, "name": p.name, "price": p.price} for p in products]
     return jsonify(product_list), 200
 
+from flask import session
+
 @app.route('/addToCart', methods=['POST'])
 def addToCart():
+    if 'user_id' not in session:
+        return jsonify({"message": "User not logged in."}), 401
+
+    user_id = session['user_id']
     data = request.get_json()
     product_id = data.get('product_id')
 
     product = Product.query.get(product_id)
-    if product:
-        # Verificar se o item já está no carrinho
-        existing_cart_item = Cart.query.filter_by(product_id=product_id).first()
-
-        if existing_cart_item:
-            existing_cart_item.quantity += 1
-            db.session.commit()
-            return jsonify({"message": f"{product.name} quantity updated in cart!"}), 200
-        else:
-            new_cart_item = Cart(product_id=product.id)
-            db.session.add(new_cart_item)
-            db.session.commit()
-            return jsonify({"message": f"{product.name} added to cart!"}), 201
-    else:
+    if not product:
         return jsonify({"message": "Product not found!"}), 404
+
+    existing_cart_item = Cart.query.filter_by(user_id=user_id, product_id=product_id).first()
+
+    if existing_cart_item:
+        existing_cart_item.quantity += 1
+        db.session.commit()
+        return jsonify({"message": f"{product.id} quantity updated in cart!"}), 200
+    else:
+        new_cart_item = Cart(user_id=user_id, product_id=product.id, quantity=1)
+        db.session.add(new_cart_item)
+        db.session.commit()
+        return jsonify({"message": f"{product.id} added to cart!"}), 201
+
 
 
 #Novo endpoint pra ver o carrinho
 #Assim o frontend pode fazer um fetch pra /cart e mostrar os produtos no carinho!
 @app.route('/cart', methods=['GET'])
 def get_cart():
-    cart_items = Cart.query.all()
+    if 'user_id' not in session:
+        return jsonify({"message": "User not logged in."}), 401
+
+    user_id = session['user_id']
+    cart_items = Cart.query.filter_by(user_id=user_id).all()
+
     cart_contents = []
     total_price = 0
     for item in cart_items:
@@ -123,7 +135,9 @@ def get_cart():
                 "price": product.price,
                 "quantity": item.quantity
             })
+
     return jsonify({"items": cart_contents, "total": total_price}), 200
+
 
 # Novo endpoint para seleção de método de pagamento
 @app.route('/selectPayment', methods=['POST'])
