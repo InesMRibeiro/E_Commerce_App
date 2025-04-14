@@ -31,6 +31,8 @@
 
                 <button type="submit" class="CreateAccount">Create Account</button>
 
+                <button type="submit" class="LogIn">Log In</button>
+
             </div>
         </div>
     </div>
@@ -77,6 +79,44 @@
                 } catch (error) {
                     console.error("There was an error creating the account:", error);
                     alert("Failed to create account. Please try again later.");
+                }
+            });
+
+            loginButton.addEventListener('click', async () => {
+                const usernameInput = document.querySelector('#username');
+                const passwordInput = document.querySelector('#password');
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                if (!username || !password) {
+                    alert("Please enter both username and password.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${backendUrl}/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username, password }),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.token) {
+                        // 🔐 Guarda o token no localStorage
+                        localStorage.setItem("token", data.token);
+
+                        alert("Logged in successfully!");
+                        window.location.href = 'index.html'; // Redireciona para a homepage
+                    } else {
+                        alert(`Invalid login credentials: ${data.message}`);
+                    }
+
+                } catch (error) {
+                    console.error("There was an error logging in:", error);
+                    alert("Failed to log in. Please try again later.");
                 }
             });
         });

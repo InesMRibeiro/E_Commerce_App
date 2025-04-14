@@ -1,572 +1,588 @@
-/* ==========================================================================
-   Estilos Gerais (Comuns a todas as páginas)
-   ========================================================================== */
-
-   body {
-    font-family: 'Luckiest Guy', cursive;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.container {
-    width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-
-}
-
-.slides {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    color: #F6CE88;
-    scroll-snap-align: start;
-    position: relative;
-    flex-direction: column;
-    align-items: center;
-    transform: translateZ(0); /* helps render the images */
-}
-
-.rectangle-1 {
-    background-color: rgba(247, 214, 197, 0.5);
-    width: 100%;
-    height: 50px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-.circle1,
-.circle2,
-.circle3 {
-    background-color: rgba(170, 125, 80, 0.50);
-    width: 300px;
-    height: 300px;
-    position: absolute;
-    z-index: -1;
-    display: flex;
-    border-radius: 150px;
-}
-
-.circle1 {
-    top: -50px;
-    left: -35px;
-}
-
-.circle2 {
-    top: 85%;
-    left: 50%;
-}
-
-.circle3 {
-    top: -50px;
-    left: 85%;
-}
-
-button {
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
-}
-
-
-/* ==========================================================================
-   Estilos para index.html
-   ========================================================================== */
-
-.slide1 {
-    background-image: url("images/bigteddy.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    z-index: 0;
-}
-
-.cart-button {
-    background: none;
-    border: none;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    right: 25px;
-    transform: translateY(-50%);
-}
-
-.cart-icon {
-    width: 60px;
-    height: auto;
-    display: block; /* Remove any potential inline spacing */
-}
-
-.admin-office{
-    background: none;
-    border: none;
-    padding: 0;
-    position: absolute;
-    top: 50%;
-    left: 25px;
-    transform: translateY(-50%);
-}
-
-.admin-icon {
-    width: 40px;
-    height: auto;
-    display: block; /* Remove any potential inline spacing */
-}
-
-.slide1 h1 {
-    font-size: 70px;
-    font-weight: 600;
-    max-width: 650px;
-    color: #48240C;
-    position: absolute;
-    top: 15%;
-    left: 10%;
-}
-
-.slide2 {
-    background-color: #F6CE88;
-    position: relative;
-    z-index: 0;
-    overflow: hidden; /* Add this line */
-}
-
-.rectangle-2 {
-    background-color: rgba(255, 255, 255, 0.65);
-    width: 80%;
-    height: 100px;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-}
-
-.rectangle-2 h2 {
-    font-size: 1.8rem;
-    font-weight: 200;
-    color: #48240C;
-    text-align: center; /*Centers the text*/
-    margin: 0;
-}
-
-.slide2 h3 {
-    font-size: 1.8rem;
-    font-weight: 200;
-    color: #48240C;
-    text-align: center; /*Centers the text*/
-    margin: 0;
-    position: absolute;
-    top: 35%; /* Increase the top value */
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center horizontally */
-}
-
-.product-grid {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    width: 80%;
-    position: absolute;
-    top: 70%; /* Increase the top value */
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center horizontally */
-    margin: 0;
-    gap: 50px;
-}
-
-.product {
-    width: 250px;
-    text-align: center;
-    margin: 50px;
-    display: flex;
-    flex-direction: column;
-}
-
-.product img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgba(170, 125, 80, 0.50);
-}
-
-.price {
-    font-weight: lighter;
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #d32f2f;
-}
-
-.addToCart {
-    background-color: black; /* Black background */
-    color: white; /* White text */
-    padding: 12px 30px; /* Adjust padding for size */
-    border: none; /* Remove default border */
-    border-radius: 30px; /* Rounded corners */
-    cursor: pointer;
-    font-weight: bold; /* Bold text */
-    font-size: 1.2rem; /* Adjust font size */
-}
-
-.addToCart:hover {
-    background-color: #333;
-}
-
-.stock {
-    color: green;
-}
-
-.slide3 {
-    background: linear-gradient(to top, rgba(170, 125, 80, 1), #F6CE88);
-    position: relative;
-    z-index: 0;
-}
-
-.slide3 img {
-    width: 350px;
-    position: absolute;
-    z-index: 1;
-    top: 50%;
-    left: 5%;
-}
-
-.slide3 h4 {
-    font-size: 70px;
-    font-weight: 600;
-    max-width: 650px;
-    color: #48240C;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center horizontally */
-}
-
-/* ==========================================================================
-   Estilos para Sign-Up.html
-   ========================================================================== */
-
-
-
-.rectangle-4 {
-    width: 80%;
-    height: 100px;
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 30px;
-}
-
-
-.rectangle-4 h1 {
-    font-size: 3rem;
-    font-weight: 200;
-    color: #48240C;
-    text-align: center; /*Centers the text*/
-    margin: 0;
-}
-
-
-.rectangle-5 {
-    width: 30%;
-    max-width: 400px;
-    height: 400px; /* Adjust height to fit content */
-    padding: 30px;
-    position: absolute;
-    top: 55%;
-    left: 25%;
-    transform: translate(-40%, -50%);
-    z-index: 1;
-    display: flex;        /* Use flexbox for content alignment */
-    flex-direction: column;
-    align-items: center;    /* Center content horizontally */
-    border-radius: 30px;
-    background: rgba(170, 125, 80, 0.5);
-    gap: 30px;          /* Space between the main elements */
-  }
-  
-  .login-container {
-    width: 80%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    /* Remove position: absolute, top, left */
-    padding-top: 40px
-  }
-  
-  .input-wrapper {
-    width: 1%;
-    height: 40px;
-    border: 1px solid #ccc;
-    background-color: white;
-    padding: 0 15px;
-    display: flex;
-    align-items: center;
-    border-radius: 20px;
-    margin-bottom: 50px; 
-  }
-  
-  .input-wrapper label {
-    font-size: 1em;
-    color: black;
-    margin-right: 10px;
-  }
-  
-  .input-wrapper input[type="text"],
-  .input-wrapper input[type="password"] {
-    flex-grow: 1;
-    border: none;
-    background-color: transparent;
-    font-size: 1em;
-    outline: none;
-    color: black;
-  }
-  
-  /* Remove absolute positioning from input wrappers */
-  .username-wrapper {
-    z-index: 2;
-    width: 100%; /* Make them take full width of login-container */
-  }
-  
-  .password-wrapper {
-    width: 100%; /* Make them take full width of login-container */
-    margin-bottom: 100px;
-  }
-
-  button[type="submit"].CreateAccount {
-    background-color: black; /* Black background */
-    color: white; /* White text */
-    padding: 12px 30px; /* Adjust padding for size */
-    border: none; /* Remove default border */
-    border-radius: 30px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    font-size: 1.2rem; /* Adjust font size */
-}
-
-.CreateAccount:hover {
-    background-color: #333;
-}
-
-/* ==========================================================================
-   Estilos para cart.html
-   ========================================================================== */
-
-/* Estilos gerais do body e container podem ser comuns */
-/* body { ... } */
-/* .container { ... } */
-/* .slides { ... } */
-/* .rectangle-1 { ... } */
-
-.home-button {
-    background: none;
-    border: none;
-    padding: 0;
-    position: absolute;
-    top: 4%;
-    right: 25px;
-    transform: translateY(-50%);
-}
-
-.home-icon {
-    width: 45px;
-    height: auto;
-    display: block; /* Remove any potential inline spacing */
-}
-
-/* .slide2 {
-    /* Estilos gerais para o slide 2 (repetido do index) */
-/* } */
-
-/* .rectangle-2 {
-    /* Estilos para o título da página do carrinho (pode ser similar ao do index) */
-/* } */
-
-.rectangle-2 h2 {
-    font-size: 1.8rem;
-    font-weight: 200;
-    color: #48240C;
-    text-align: center; /*Centers the text*/
-    margin: 0;
-}
-
-.rectangle-3 {
-    background-color: rgba(255, 255, 255, 0.65);
-    width: 80%;
-    min-height: auto;
-    position: absolute; /* Keep absolute positioning for vertical placement */
-    top: 25%;
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Adjust for the element's own width */
-    z-index: 1;
-    padding: 20px;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the content (including .cart-items) inside */
-   
-}
-
-.cart-items {
-    width: 80%; 
-    margin-bottom: 20px;
-    display: flex; 
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within the container */
-}
-
-.cart-item {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: #48240C;
-    border-bottom: 1px solid rgba(72, 36, 12, 0.2);
-    padding-bottom: 5px;
-    width: 100%; /* Make each item take the full width of the centered container */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: left; 
-}
-
-.cart-item:last-child {
-    border-bottom: none;
-}
-
-.cart-total {
-    margin-top: auto; /* Adicionar esta linha */
-    font-size: 2rem;
-    color: #d32f2f;
-    font-weight: bold;
-    text-align: center; /* Manter o alinhamento do texto */
-    width: 80%; /* Manter a largura */
-    align-self: center; /* Centralizar o elemento dentro do flex container */
-}
-
-.empty-cart {
-    font-size: 2rem;
-    color: #48240C;
-    text-align: center;
-    margin-top: 50px;
-}
-
-.buy-button {
-    background-color: black; /* Black background */
-    color: white; /* White text */
-    padding: 12px 30px; /* Adjust padding for size */
-    border: none; /* Remove default border */
-    border-radius: 30px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    font-size: 1.2rem; /* Adjust font size */
-    position: absolute; /* Make the button absolute too */
-    top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
-    left: 50%; /* Center the button horizontally */
-    transform: translateX(-50%); /* Adjust for the center */
-    z-index: 2; /* Ensure it's above the rectangle if needed */
-}
-
-.buy-button:hover {
-    background-color: #333;
-}
-
-/* Estilos dos círculos podem ser comuns */
-/* .circle1 { ... } */
-/* .circle2 { ... } */
-
-/* ==========================================================================
-   Estilos para payment.html
-   ========================================================================== */
-
-/* Estilos gerais do body e container podem ser comuns */
-/* body { ... } */
-/* .container { ... } */
-/* .slides { ... } */
-/* .rectangle-2 { ... } */
-
-.rectangle-2 h1 {
-    font-size: 1.8rem;
-    font-weight: 200;
-    color: #48240C;
-    text-align: center; /*Centers the text*/
-    margin: 0;
-}
-
-.payment-grid {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-wrap: wrap;
-    width: 80%;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 50px;
-}
-
-.payment-method {
-    width: 250px;
-    text-align: center;
-    margin: 50px;
-    display: flex;
-    flex-direction: column;
-}
-
-.payment-method img {
-    max-width: 100%;
-    height: 200px;
-    object-fit: contain;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgba(170, 125, 80, 0.50);
-}
-
-.selectPayment {
-    background-color: black; /* Black background */
-    color: white; /* White text */
-    padding: 12px 30px; /* Adjust padding for size */
-    border: none; /* Remove default border */
-    border-radius: 30px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    font-size: 1.2rem; /* Adjust font size */
-}
-
-.selectPayment:hover {
-    background-color: #333;
-}
-
-/* Estilos dos círculos podem ser comuns */
-/* .circle1 { ... } */
-/* .circle2 { ... } */
-/* .circle3 { ... } */
-
-/* ==========================================================================
-   Estilos para office.html
-   ========================================================================== */
-
-.cleanCart{
-    background-color: black; /* Black background */
-    color: white; /* White text */
-    padding: 12px 30px; /* Adjust padding for size */
-    border: none; /* Remove default border */
-    border-radius: 30px; /* Rounded corners */
-    font-weight: bold; /* Bold text */
-    font-size: 1.2rem; /* Adjust font size */
-    position: absolute; /* Make the button absolute too */
-    top:30%; /* top of rectangle + height of rectangle + some spacing */
-    left: 15%; /* Center the button horizontally */
-    transform: translateX(-50%); /* Adjust for the center */
-    z-index: 2; /* Ensure it's above the rectangle if needed */
-}
+    /* ==========================================================================
+    Estilos Gerais (Comuns a todas as páginas)
+    ========================================================================== */
+
+    body {
+        font-family: 'Luckiest Guy', cursive;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .container {
+        width: 100%;
+        height: 100vh;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+
+    }
+
+    .slides {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        color: #F6CE88;
+        scroll-snap-align: start;
+        position: relative;
+        flex-direction: column;
+        align-items: center;
+        transform: translateZ(0); /* helps render the images */
+    }
+
+    .rectangle-1 {
+        background-color: rgba(247, 214, 197, 0.5);
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    .circle1,
+    .circle2,
+    .circle3 {
+        background-color: rgba(170, 125, 80, 0.50);
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        z-index: -1;
+        display: flex;
+        border-radius: 150px;
+    }
+
+    .circle1 {
+        top: -50px;
+        left: -35px;
+    }
+
+    .circle2 {
+        top: 85%;
+        left: 50%;
+    }
+
+    .circle3 {
+        top: -50px;
+        left: 85%;
+    }
+
+    button {
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition */
+    }
+
+
+    /* ==========================================================================
+    Estilos para index.html
+    ========================================================================== */
+
+    .slide1 {
+        background-image: url("images/bigteddy.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        position: relative;
+        z-index: 0;
+    }
+
+    .cart-button {
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        right: 25px;
+        transform: translateY(-50%);
+    }
+
+    .cart-icon {
+        width: 60px;
+        height: auto;
+        display: block; /* Remove any potential inline spacing */
+    }
+
+    .admin-office{
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        left: 25px;
+        transform: translateY(-50%);
+    }
+
+    .admin-icon {
+        width: 40px;
+        height: auto;
+        display: block; /* Remove any potential inline spacing */
+    }
+
+    .slide1 h1 {
+        font-size: 70px;
+        font-weight: 600;
+        max-width: 650px;
+        color: #48240C;
+        position: absolute;
+        top: 15%;
+        left: 10%;
+    }
+
+    .slide2 {
+        background-color: #F6CE88;
+        position: relative;
+        z-index: 0;
+        overflow: hidden; /* Add this line */
+    }
+
+    .rectangle-2 {
+        background-color: rgba(255, 255, 255, 0.65);
+        width: 80%;
+        height: 100px;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+    }
+
+    .rectangle-2 h2 {
+        font-size: 1.8rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0;
+    }
+
+    .slide2 h3 {
+        font-size: 1.8rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0;
+        position: absolute;
+        top: 35%; /* Increase the top value */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center horizontally */
+    }
+
+    .product-grid {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        width: 80%;
+        position: absolute;
+        top: 70%; /* Increase the top value */
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center horizontally */
+        margin: 0;
+        gap: 50px;
+    }
+
+    .product {
+        width: 250px;
+        text-align: center;
+        margin: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product img {
+        max-width: 100%;
+        height: 200px;
+        object-fit: contain;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: rgba(170, 125, 80, 0.50);
+    }
+
+    .price {
+        font-weight: lighter;
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #d32f2f;
+    }
+
+    .addToCart {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        cursor: pointer;
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+    }
+
+    .addToCart:hover {
+        background-color: #333;
+    }
+
+    .stock {
+        color: green;
+    }
+
+    .slide3 {
+        background: linear-gradient(to top, rgba(170, 125, 80, 1), #F6CE88);
+        position: relative;
+        z-index: 0;
+    }
+
+    .slide3 img {
+        width: 350px;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 5%;
+    }
+
+    .slide3 h4 {
+        font-size: 70px;
+        font-weight: 600;
+        max-width: 650px;
+        color: #48240C;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center horizontally */
+    }
+
+    /* ==========================================================================
+    Estilos para Sign-Up.html
+    ========================================================================== */
+
+
+
+    .rectangle-4 {
+        width: 80%;
+        height: 100px;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 30px;
+    }
+
+
+    .rectangle-4 h1 {
+        font-size: 3rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0;
+    }
+
+
+    .rectangle-5 {
+        width: 30%;
+        max-width: 400px;
+        height: 400px; /* Adjust height to fit content */
+        padding: 30px;
+        position: absolute;
+        top: 25%;
+        z-index: 1;
+        display: flex;        /* Use flexbox for content alignment */
+        flex-direction: column;
+        align-items: center;    /* Center content horizontally */
+        border-radius: 30px;
+        background: rgba(170, 125, 80, 0.5);
+        gap: 30px;          /* Space between the main elements */
+    }
+    
+    .login-container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center items horizontally */
+        /* Remove position: absolute, top, left */
+        padding-top: 40px
+    }
+    
+    .input-wrapper {
+        width: 1%;
+        height: 40px;
+        border: 1px solid #ccc;
+        background-color: white;
+        padding: 0 15px;
+        display: flex;
+        align-items: center;
+        border-radius: 20px;
+        margin-bottom: 50px; 
+    }
+    
+    .input-wrapper label {
+        font-size: 1em;
+        color: black;
+        margin-right: 10px;
+    }
+    
+    .input-wrapper input[type="text"],
+    .input-wrapper input[type="password"] {
+        flex-grow: 1;
+        border: none;
+        background-color: transparent;
+        font-size: 1em;
+        outline: none;
+        color: black;
+    }
+    
+    /* Remove absolute positioning from input wrappers */
+    .username-wrapper {
+        z-index: 2;
+        width: 100%; /* Make them take full width of login-container */
+    }
+    
+    .password-wrapper {
+        width: 100%; /* Make them take full width of login-container */
+        margin-bottom: 80px;
+    }
+
+    button[type="submit"].CreateAccount {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        width: 250px;
+    }
+
+    .CreateAccount:hover {
+        background-color: #333;
+    }
+
+    button[type="submit"].LogIn {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        width: 250px;
+        margin-top: 25px;
+    }
+
+    .LogIn:hover {
+        background-color: #333;
+    }
+
+
+    /* ==========================================================================
+    Estilos para cart.html
+    ========================================================================== */
+
+    /* Estilos gerais do body e container podem ser comuns */
+    /* body { ... } */
+    /* .container { ... } */
+    /* .slides { ... } */
+    /* .rectangle-1 { ... } */
+
+    .home-button {
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 4%;
+        right: 25px;
+        transform: translateY(-50%);
+    }
+
+    .home-icon {
+        width: 45px;
+        height: auto;
+        display: block; /* Remove any potential inline spacing */
+    }
+
+    /* .slide2 {
+        /* Estilos gerais para o slide 2 (repetido do index) */
+    /* } */
+
+    /* .rectangle-2 {
+        /* Estilos para o título da página do carrinho (pode ser similar ao do index) */
+    /* } */
+
+    .rectangle-2 h2 {
+        font-size: 1.8rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0;
+    }
+
+    .rectangle-3 {
+        background-color: rgba(255, 255, 255, 0.65);
+        width: 80%;
+        min-height: auto;
+        position: absolute; /* Keep absolute positioning for vertical placement */
+        top: 25%;
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust for the element's own width */
+        z-index: 1;
+        padding: 20px;
+        border-radius: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the content (including .cart-items) inside */
+    
+    }
+
+    .cart-items {
+        width: 80%; 
+        margin-bottom: 20px;
+        display: flex; 
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally within the container */
+    }
+
+    .cart-item {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #48240C;
+        border-bottom: 1px solid rgba(72, 36, 12, 0.2);
+        padding-bottom: 5px;
+        width: 100%; /* Make each item take the full width of the centered container */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left; 
+    }
+
+    .cart-item:last-child {
+        border-bottom: none;
+    }
+
+    .cart-total {
+        margin-top: auto; /* Adicionar esta linha */
+        font-size: 2rem;
+        color: #d32f2f;
+        font-weight: bold;
+        text-align: center; /* Manter o alinhamento do texto */
+        width: 80%; /* Manter a largura */
+        align-self: center; /* Centralizar o elemento dentro do flex container */
+    }
+
+    .empty-cart {
+        font-size: 2rem;
+        color: #48240C;
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .buy-button {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        position: absolute; /* Make the button absolute too */
+        top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
+        left: 50%; /* Center the button horizontally */
+        transform: translateX(-50%); /* Adjust for the center */
+        z-index: 2; /* Ensure it's above the rectangle if needed */
+    }
+
+    .buy-button:hover {
+        background-color: #333;
+    }
+
+    /* Estilos dos círculos podem ser comuns */
+    /* .circle1 { ... } */
+    /* .circle2 { ... } */
+
+    /* ==========================================================================
+    Estilos para payment.html
+    ========================================================================== */
+
+    /* Estilos gerais do body e container podem ser comuns */
+    /* body { ... } */
+    /* .container { ... } */
+    /* .slides { ... } */
+    /* .rectangle-2 { ... } */
+
+    .rectangle-2 h1 {
+        font-size: 1.8rem;
+        font-weight: 200;
+        color: #48240C;
+        text-align: center; /*Centers the text*/
+        margin: 0;
+    }
+
+    .payment-grid {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+        width: 80%;
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        gap: 50px;
+    }
+
+    .payment-method {
+        width: 250px;
+        text-align: center;
+        margin: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .payment-method img {
+        max-width: 100%;
+        height: 200px;
+        object-fit: contain;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: rgba(170, 125, 80, 0.50);
+    }
+
+    .selectPayment {
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+    }
+
+    .selectPayment:hover {
+        background-color: #333;
+    }
+
+    /* Estilos dos círculos podem ser comuns */
+    /* .circle1 { ... } */
+    /* .circle2 { ... } */
+    /* .circle3 { ... } */
+
+    /* ==========================================================================
+    Estilos para office.html
+    ========================================================================== */
+
+    .cleanCart{
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 1.2rem; /* Adjust font size */
+        position: absolute; /* Make the button absolute too */
+        top:30%; /* top of rectangle + height of rectangle + some spacing */
+        left: 15%; /* Center the button horizontally */
+        transform: translateX(-50%); /* Adjust for the center */
+        z-index: 2; /* Ensure it's above the rectangle if needed */
+    }
