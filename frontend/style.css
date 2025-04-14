@@ -96,22 +96,21 @@
     }
 
     .cart-icon {
-        width: 60px;
+        width: 40px;
         height: auto;
         display: block; /* Remove any potential inline spacing */
     }
-
-    .admin-office{
+    .login-button {
         background: none;
         border: none;
         padding: 0;
         position: absolute;
         top: 50%;
-        left: 25px;
+        right: 6%;
         transform: translateY(-50%);
     }
 
-    .admin-icon {
+    .login-icon {
         width: 40px;
         height: auto;
         display: block; /* Remove any potential inline spacing */
