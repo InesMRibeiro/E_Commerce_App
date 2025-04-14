@@ -30,43 +30,62 @@
             <div class="circle2"></div>
         </div>
 
-    <script>
-        const backendUrl = "http://54.160.132.14:5000";
+<script>
+    const backendUrl = "http://54.160.132.14:5000";
 
-        fetch(`${backendUrl}/cart`)
-            .then(response => response.json())
-            .then(data => {
-                const cartItemsDiv = document.getElementById('cart-items');
-                const cartTotalDiv = document.getElementById('cart-total');
-                let total = 0;
+    // Função para obter token do localStorage
+    function getToken() {
+        return localStorage.getItem("token");
+    }
 
-                if (data && data.items && data.items.length === 0) {
-                    cartItemsDiv.innerHTML = "<p class='empty-cart'>Your cart is empty! 😢</p>";
-                } else if (data && data.items) {
-                    data.items.forEach  (item => {
-                        total += item.price * item.quantity;
-                        const itemDiv = document.createElement('div');
-                        itemDiv.classList.add('cart-item');
-                        itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
-                        cartItemsDiv.appendChild(itemDiv);
-                    });
-                    cartTotalDiv.innerHTML = `Total: $${data.total.toFixed(2)}`;
-                } else {
-                    cartItemsDiv.innerHTML = "<p class='error-loading'>Failed to load cart items.</p>";
-                }
-                
-            })
-            .catch(error => console.error('Error loading cart:', error));
+    function get_cart() {
+        const token = getToken();
+    
+        if (!token) {
+            alert("Por favor, faça login primeiro.");
+            return;
+        }
 
-        // Quando clicar em "Buy Now"
-        document.addEventListener('DOMContentLoaded', () => {
-            const buyButton = document.getElementById('buy-button');
-            buyButton.addEventListener('click', () => {
-                document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
-                document.getElementById('checkout-section').style.display = 'block'; // Mostra os métodos de pagamento
-            });
+        fetch(`${backendUrl}/cart`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`, // Inclui o token no cabeçalho Authorization
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartTotalDiv = document.getElementById('cart-total');
+            let total = 0;
+
+            if (data && data.items && data.items.length === 0) {
+                cartItemsDiv.innerHTML = "<p class='empty-cart'>Your cart is empty! 😢</p>";
+            } else if (data && data.items) {
+                data.items.forEach(item => {
+                    total += item.price * item.quantity;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+                    itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
+                    cartItemsDiv.appendChild(itemDiv);
+                });
+                cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`; // Corrigido para somar o total corretamente
+            } else {
+                cartItemsDiv.innerHTML = "<p class='error-loading'>Failed to load cart items.</p>";
+            }
+        })
+        .catch(error => console.error('Error loading cart:', error));
+    }
+
+    // Quando clicar em "Buy Now"
+    document.addEventListener('DOMContentLoaded', () => {
+        const buyButton = document.getElementById('buy-button');
+        buyButton.addEventListener('click', () => {
+            document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
+            document.getElementById('checkout-section').style.display = 'block'; // Mostra os métodos de pagamento
         });
-    </script>
+    });
+</script>
+
 
 </body>
 </html>

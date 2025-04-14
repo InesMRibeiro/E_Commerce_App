@@ -132,12 +132,12 @@ def addToCart():
     if existing_cart_item:
         existing_cart_item.quantity += 1
         db.session.commit()
-        return jsonify({"message": f"{product.id} quantity updated in cart!"}), 200
+        return jsonify({"message": f"{product.name} quantity updated in cart!"}), 200
     else:
         new_cart_item = Cart(user_id=user_id, product_id=product.id, quantity=1)
         db.session.add(new_cart_item)
         db.session.commit()
-        return jsonify({"message": f"{product.id} added to cart!"}), 201
+        return jsonify({"message": f"{product.name} added to cart!"}), 201
 
 
 
