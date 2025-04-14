@@ -65,6 +65,8 @@ def signup():
     # Auto-login after successful signup
     user = User.query.filter_by(username=username).first()  # Get the newly created user
     session['user_id'] = user.id  # Set the user_id in the session
+    print(f"Signup: User {username} logged in with session id {session['user_id']}") #added
+
 
     return jsonify({"message": "User created and logged in successfully"}), 201
 
@@ -80,6 +82,7 @@ def login():
 
     if user and user.password == password: 
         session['user_id'] = user.id
+        print(f"Login: User {username} logged in with session id {session['user_id']}") #added
         return jsonify({"message": "Logged in successfully!"}), 200
     else:
         return jsonify({"message": "Username or password is incorrect"}), 401
