@@ -9,6 +9,8 @@ app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # Frontend IP without port
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'insecure' 
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'  # Add this line
+app.config['SESSION_COOKIE_SECURE'] = True # Add this line
 
 db = SQLAlchemy() 
 
