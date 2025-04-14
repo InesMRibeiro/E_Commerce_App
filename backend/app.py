@@ -23,7 +23,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
-    cart_items = db.relationship('Cart', lazy=True)
+    cart_items = db.relationship('Cart', backref='product', lazy=True)  
 
 class Cart(db.Model):
     __tablename__ = 'cart'
