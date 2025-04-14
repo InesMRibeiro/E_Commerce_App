@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E_Commerce_App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class = "container">
+        <div class="slides slide2">
+            <button class="home-button" onclick="window.location.href='index.html'">
+                <img class="home-icon" src="images/hom_image.png" alt="Home">
+            </button>
+            <div class=" rectangle-4">
+                <h1>Welcome!</h1>
+            </div>
+
+            <div class="rectangle-5">
+                <div class="login-container">
+                    <div class="input-wrapper username-wrapper">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                </div>
+                <div class="input-wrapper password-wrapper">
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password">
+                </div>
+
+                <button type="submit" class="CreateAccount">Create Account</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const backendUrl = "http://54.160.132.14:5000";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const createAccountButton = document.querySelector('.CreateAccount');
+
+            createAccountButton.addEventListener('click', async (event) => {
+            
+
+                const usernameInput = document.querySelector('#username');
+                const passwordInput = document.querySelector('#password');
+                const username = usernameInput.value;
+                const password = passwordInput.value;
+
+                if (!username || !password) {
+                    alert("Please enter both username and password.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch(`${backendUrl}/signup`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ username: username, password: password }),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        alert(data.message); // "Account created successfully"
+                        // Optionally redirect the user or clear the form
+                        usernameInput.value = '';
+                        passwordInput.value = '';
+                    } else {
+                        alert(`Error creating account: ${data.message}`);
+                    }
+
+                } catch (error) {
+                    console.error("There was an error creating the account:", error);
+                    alert("Failed to create account. Please try again later.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

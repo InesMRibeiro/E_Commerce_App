@@ -1,6 +1,6 @@
 ## Código relacionado com o backend da applicação e API
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS  # type: ignore
 from config import Config
@@ -10,6 +10,13 @@ CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}}) # Frontend IP wi
 app.config.from_object('config.Config')
 
 db = SQLAlchemy() 
+
+class User (db.Model):
+    __tablename__ = 'user'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    cart_items = db.relationship('Cart', backref='user', lazy=True)
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -34,6 +41,38 @@ with app.app_context():
     db.create_all()
 
 
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    if not username or not password:
+        return jsonify({"message": "Username and password are required"}), 400
+
+    if User.query.filter_by(username=username).first():
+        return jsonify({"message": "Username already exists"}), 409
+
+    new_user = User(username=username, password=password) # Store plain-text password
+    db.session.add(new_user)
+    db.session.commit()
+    return jsonify({"message": "User created successfully"}), 201
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    user = User.query.filter_by(username=username).first()
+
+    if user and user.password == password: 
+        session['user_id'] = user.id
+        return jsonify({"message": "Logged in successfully!"}), 200
+    else:
+        return jsonify({"message": "Username or password is incorrect"}), 401
+    
 @app.route('/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
