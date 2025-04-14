@@ -21,8 +21,6 @@ class User (db.Model):
 class Product(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
-    name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
     cart_items = db.relationship('Cart', lazy=True)
@@ -30,6 +28,8 @@ class Product(db.Model):
 class Cart(db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) 
+    name = db.Column(db.String(100), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     quantity = db.Column(db.Integer, default=1)
 
