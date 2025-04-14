@@ -1,20 +1,42 @@
-from flask import Flask, request, jsonify, session
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS  # type: ignore
+from flask_cors import CORS # type: ignore
 from config import Config
-import os  # Import the os module
-import secrets  # Import the secrets module
-from datetime import timedelta  # Import timedelta
+import jwt
+from datetime import datetime, timedelta
 
 app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}})  # Frontend IP without port
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'insecure'  # VERY INSECURE: DO NOT USE IN PRODUCTION
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = False # Changed to false
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=30)  # Add this line
+
 
 db = SQLAlchemy()
+
+# ---------------- JWT HELPERS ----------------
+def generate_token(user_id):
+    payload = {
+        'user_id': user_id,
+        'exp': datetime.utcnow() + timedelta(days=1)
+    }
+    return jwt.encode(payload, app.config['SECRET_KEY'], algorithm='HS256')
+
+def decode_token(token):
+    try:
+        payload = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])
+        return payload['user_id']
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
+
+# ---------------- AUTH HELPER ----------------
+def get_user_id_from_request():
+    auth_header = request.headers.get('Authorization')
+    if not auth_header or not auth_header.startswith("Bearer "):
+        return None
+    token = auth_header.split(" ")[1]
+    return decode_token(token)
 
 
 class User(db.Model):
@@ -62,18 +84,12 @@ def signup():
     if User.query.filter_by(username=username).first():
         return jsonify({"message": "Username already exists"}), 409
 
-    new_user = User(username=username, password=password)  # Store plain-text password
+    new_user = User(username=username, password=password)
     db.session.add(new_user)
     db.session.commit()
 
-    # Auto-login after successful signup
-    user = User.query.filter_by(username=username).first()  # Get the newly created user
-    session['user_id'] = user.id  # Set the user_id in the session
-    session.permanent = True # Make session permanent
-    print(f"Signup: User {username} logged in with session id {session['user_id']}")
-
-    return jsonify({"message": "User created and logged in successfully"}), 201
-
+    token = generate_token(new_user.id)
+    return jsonify({"message": "User created successfully", "token": token}), 201
 
 
 @app.route('/login', methods=['POST'])
@@ -85,12 +101,10 @@ def login():
     user = User.query.filter_by(username=username).first()
 
     if user and user.password == password:
-        session['user_id'] = user.id
-        session.permanent = True # Make session permanent
-        print(f"Login: User {username} logged in with session id {session['user_id']}")
-        return jsonify({"message": "Logged in successfully!"}), 200
+        token = generate_token(user.id)
+        return jsonify({"message": "Login successful!", "token": token}), 200
     else:
-        return jsonify({"message": "Username or password is incorrect"}), 401
+        return jsonify({"message": "Invalid credentials"}), 401
 
 
 @app.route('/products', methods=['GET'])
@@ -102,11 +116,10 @@ def get_products():
 
 @app.route('/addToCart', methods=['POST'])
 def addToCart():
-    if 'user_id' not in session:
-        print(f"AddToCart: User not logged in.  Session contents: {session}")
-        return jsonify({"message": "User not logged in."}), 401
+    user_id = get_user_id_from_request()
+    if not user_id:
+        return jsonify({"message": "Unauthorized"}), 401
 
-    user_id = session['user_id']
     data = request.get_json()
     product_id = data.get('product_id')
 
@@ -128,16 +141,15 @@ def addToCart():
 
 
 
+
 # Novo endpoint pra ver o carrinho
 @app.route('/cart', methods=['GET'])
 def get_cart():
-    if 'user_id' not in session:
-        print(f"GetCart: User not logged in. Session contents: {session}")
-        return jsonify({"message": "User not logged in."}), 401
+    user_id = get_user_id_from_request()
+    if not user_id:
+        return jsonify({"message": "Unauthorized"}), 401
 
-    user_id = session['user_id']
     cart_items = Cart.query.filter_by(user_id=user_id).all()
-
     cart_contents = []
     total_price = 0
     for item in cart_items:
@@ -153,7 +165,6 @@ def get_cart():
             })
 
     return jsonify({"items": cart_contents, "total": total_price}), 200
-
 
 # Novo endpoint para seleção de método de pagamento
 @app.route('/selectPayment', methods=['POST'])

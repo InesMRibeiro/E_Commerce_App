@@ -65,32 +65,45 @@
 
 
     <script>
-        
         const backendUrl = "http://54.160.132.14:5000";
-
+    
+        // Função para obter token do localStorage
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+    
         function addToCart(productId) {
+            const token = getToken();
+    
+            if (!token) {
+                alert("Por favor, faça login primeiro.");
+                return;
+            }
+    
             fetch(`${backendUrl}/addToCart`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({product_id: productId})
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify({ product_id: productId })
             })
             .then(response => response.json())
             .then(data => {
                 alert(data.message);
             })
-            .catch(error => console.error("Error in Add to Cart:", error));
+            .catch(error => console.error("Erro ao adicionar ao carrinho:", error));
         }
-        
-
+    
         document.addEventListener("DOMContentLoaded", function() {
             const buttons = document.querySelectorAll(".addToCart");
-            buttons.forEach( button  => { 
+            buttons.forEach(button => {
                 button.addEventListener("click", () => {
                     const productId = button.getAttribute("data-product-id");
-                    addToCart(productId); 
+                    addToCart(productId);
                 });
             });
-        });        
+        });
     </script>
 
 </body>
