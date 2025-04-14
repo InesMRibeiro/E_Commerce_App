@@ -11,30 +11,33 @@ app.config.from_object('config.Config')
 
 db = SQLAlchemy() 
 
-class User (db.Model):
+class User(db.Model):
     __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    cart_items = db.relationship('Cart', backref='user', lazy=True)
+    cart_items = db.relationship('Cart', backref='user', lazy=True)  # User has many Cart items
+
 
 class Product(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
-    cart_items = db.relationship('Cart', backref='product', lazy=True)  
+    cart_items = db.relationship('Cart', backref='product', lazy=True)  # Product can be in many Cart items
+
 
 class Cart(db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Cart belongs to a User
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)  # Cart has a Product
     quantity = db.Column(db.Integer, default=1)
 
     # Para facilitar a busca do produto associado
     product = db.relationship('Product', backref='cart_entries', lazy=True)
-    user = db.relationship('User', backref='cart', lazy=True) # CHANGED BACKREF NAME
+    user = db.relationship('User', backref='cart', lazy=True)  # Cart belongs to a User
+
 
 db.init_app(app)
 
