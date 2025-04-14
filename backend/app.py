@@ -57,10 +57,16 @@ def signup():
     if User.query.filter_by(username=username).first():
         return jsonify({"message": "Username already exists"}), 409
 
-    new_user = User(username=username, password=password) # Store plain-text password
+    new_user = User(username=username, password=password)  # Store plain-text password
     db.session.add(new_user)
     db.session.commit()
-    return jsonify({"message": "User created successfully"}), 201
+
+    # Auto-login after successful signup
+    user = User.query.filter_by(username=username).first()  # Get the newly created user
+    session['user_id'] = user.id  # Set the user_id in the session
+
+    return jsonify({"message": "User created and logged in successfully"}), 201
+
 
 
 @app.route('/login', methods=['POST'])
@@ -83,7 +89,6 @@ def get_products():
     product_list = [{"id": p.id, "name": p.name, "price": p.price} for p in products]
     return jsonify(product_list), 200
 
-from flask import session
 
 @app.route('/addToCart', methods=['POST'])
 def addToCart():
