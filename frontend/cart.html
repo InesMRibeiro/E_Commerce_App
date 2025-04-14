@@ -78,6 +78,7 @@
 
     // Quando clicar em "Buy Now"
     document.addEventListener('DOMContentLoaded', () => {
+        console.log("DOMContentLoaded event fired.");
         const buyButton = document.getElementById('buy-button');
         buyButton.addEventListener('click', () => {
             document.querySelector('.cart-body').style.display = 'none'; // Esconde o carrinho
