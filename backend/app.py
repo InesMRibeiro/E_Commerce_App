@@ -6,12 +6,13 @@ import jwt
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-CORS(app, resources={"/*": {"origins": "http://54.204.92.62"}})  # Frontend IP without port
+CORS(app, resources={"/*": {"origins": "http://16.16.25.162"}})  # Frontend IP without port
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'insecure'  # VERY INSECURE: DO NOT USE IN PRODUCTION
 
 
 db = SQLAlchemy()
+
 
 # ---------------- JWT HELPERS ----------------
 def generate_token(user_id):
@@ -70,6 +71,10 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
+
+@app.route('/', methods=['GET'])
+def health_check():
+    return jsonify({"message": "Service is healthy!"}), 200
 
 
 @app.route('/signup', methods=['POST'])
