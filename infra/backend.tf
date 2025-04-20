@@ -1,5 +1,6 @@
 resource "aws_instance" "api_server" {
     ami                     = var.ami_id
+    count                   = var.instance_count 
     instance_type           = var.instance_type
     security_groups         = [aws_security_group.ServerEC_Backend.name] 
     key_name                = var.key_name
@@ -42,6 +43,11 @@ resource "aws_instance" "api_server" {
                 git config --global --add safe.directory /home/ubuntu/E_Commerce_App
 
                 sudo chown -R ubuntu:ubuntu /home/ubuntu/E_Commerce_App
+
+                echo "sudo chown terminated"
+
+                python3 app.py
+                echo "Aplication is running"
                 
                 EOF
 }

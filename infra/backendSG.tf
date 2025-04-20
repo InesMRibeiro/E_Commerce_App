@@ -18,14 +18,15 @@ resource "aws_security_group" "ServerEC_Backend" {
         cidr_blocks = ["0.0.0.0/0"]  
     }
 
-    #Flask API to Frontend
+
+    # Permitir tráfego HTTP (porta 5000) do Load Balancer para o Backend
     ingress {
         from_port   = 5000
         to_port     = 5000
         protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]  
+        cidr_blocks = ["0.0.0.0/0"]  # Pode ser mais restrito se quiseres
     }
-
+    
     #Flask API to Database
       ingress {
         from_port   = 5432
