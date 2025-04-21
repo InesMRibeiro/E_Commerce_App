@@ -1,29 +1,57 @@
 resource "aws_instance" "database" {
-    ami                     = var.ami_id
-    instance_type           = var.instance_type
-    security_groups         = [aws_security_group.EC_Database.name]
-    key_name                = var.key_name
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  security_groups = [aws_security_group.EC_Database.name]
+  key_name      = var.key_name
 
-    tags = {
-        Name = "E-Commerce - Database"
-    }
+  tags = {
+    Name = "E-Commerce - Database"
+  }
 
-    user_data = <<-EOF
-    #cloud-config
-    runcmd:
-      - sudo apt update -y >> /var/log/user-data.log 2>&1
-      - sudo apt install -y postgresql postgresql-contrib >> /var/log/user-data.log 2>&1
-      - echo "PostgreSQL installed." >> /var/log/user-data.log
-      - sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/$(pg_ls_clusters --no-header | awk '{print $1}')/main/postgresql.conf >> /var/log/user-data.log
-      - echo "Listen address configured." >> /var/log/user-data.log
-      - echo "host    all             inapp             0.0.0.0/0                 md5" | sudo tee -a /etc/postgresql/$(pg_ls_clusters --no-header | awk '{print $1}')/main/pg_hba.conf >> /var/log/user-data.log
-      - echo "pg_hba.conf configured for backend access." >> /var/log/user-data.log
-      - sudo -u postgres psql -c "CREATE USER inapp WITH PASSWORD 'password';" >> /var/log/user-data.log 2>&1
-      - echo "Database 'e_commerce_db' and user 'inapp' created." >> /var/log/user-data.log
-      - sudo -u postgres psql -c "CREATE DATABASE e_commerce_db OWNER inapp;" >> /var/log/user-data.log 2>&1
-      - sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE e_commerce_db TO inapp;" >> /var/log/user-data.log 2>&1
-      - echo "All privileges granted to user 'inapp' on database 'e_commerce_db'." >> /var/log/user-data.log
-      - sudo systemctl restart postgresql >> /var/log/user-data.log 2>&1
-      - echo "PostgreSQL setup completed!" >> /var/log/user-data.log
-    EOF
+  user_data = <<-EOF
+    #!/bin/bash
+    exec > /var/log/user-data.log 2>&1
+    set -x
+
+    echo "Iniciando configuração automática do PostgreSQL..."
+
+    # Atualizar pacotes
+    sudo apt update -y
+    echo "Pacotes atualizados."
+
+    # Instalar PostgreSQL
+    sudo apt install -y postgresql postgresql-contrib
+    echo "PostgreSQL instalado."
+
+    # Criar utilizador e base de dados PostgreSQL
+    sudo -u postgres psql -c "CREATE USER inapp WITH PASSWORD 'inapp';"
+    echo "Utilizador 'inapp' criado."
+
+    sudo -u postgres psql -c "CREATE DATABASE inapp_db;"
+    echo "Base de dados 'inapp_db' criada."
+
+    sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE inapp_db TO inapp;"
+    echo "Privilégios concedidos ao utilizador 'inapp' na base de dados 'inapp_db'."
+
+    # Conceder permissão CREATE no schema public
+    sudo -u postgres psql -d inapp_db -c "GRANT CREATE ON SCHEMA public TO inapp;"
+    echo "Permissão CREATE concedida ao utilizador 'inapp' no schema public."
+
+    # Alterar listen_addresses no postgresql.conf
+    sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/16/main/postgresql.conf
+    echo "listen_addresses configurado para '*'."
+
+    # Adicionar regras ao pg_hba.conf
+    echo "" >> /etc/postgresql/16/main/pg_hba.conf
+    echo "# Configurações adicionadas por user-data" >> /etc/postgresql/16/main/pg_hba.conf
+    echo "local   inapp_db         inapp                               md5" >> /etc/postgresql/16/main/pg_hba.conf
+    echo "host    inapp_db         inapp          0.0.0.0/0                    md5" >> /etc/postgresql/16/main/pg_hba.conf
+    echo "Regras adicionadas ao pg_hba.conf."
+
+    # Reiniciar o PostgreSQL
+    sudo systemctl restart postgresql
+    echo "PostgreSQL reiniciado."
+
+    echo "Configuração automática do PostgreSQL concluída!"
+  EOF
 }
