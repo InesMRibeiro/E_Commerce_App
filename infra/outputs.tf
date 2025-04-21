@@ -14,6 +14,7 @@ output "database-ip" {
     value = aws_instance.database.public_ip
 }
 
+
 output "load_balancer_dns_name" {
   value = aws_lb.EC_LB.dns_name
   description = "O nome DNS do Application Load Balancer"
