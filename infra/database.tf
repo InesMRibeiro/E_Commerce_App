@@ -48,5 +48,4 @@ EOL
 
                 echo "PostgreSQL setup completed!"
                 EOF
-
 }
