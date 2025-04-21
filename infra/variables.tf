@@ -24,5 +24,5 @@ variable "instance_count" {
 variable "key_name" {
     description = "Nome da chave SSH"
     type = string
-    default = "RSA_key"
+    default = "my_rsa"
 }
