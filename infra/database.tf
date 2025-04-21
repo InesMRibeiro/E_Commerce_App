@@ -16,9 +16,7 @@ resource "aws_instance" "database" {
       - echo "PostgreSQL installed." >> /var/log/user-data.log
       - sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/$(pg_ls_clusters --no-header | awk '{print $1}')/main/postgresql.conf >> /var/log/user-data.log
       - echo "Listen address configured." >> /var/log/user-data.log
-      - sudo tee -a /etc/postgresql/$(pg_ls_clusters --no-header | awk '{print $1}')/main/pg_hba.conf <<EOL >> /var/log/user-data.log
-host    all             inapp             0.0.0.0/0                 md5
-EOL
+      - echo "host    all             inapp             0.0.0.0/0                 md5" | sudo tee -a /etc/postgresql/$(pg_ls_clusters --no-header | awk '{print $1}')/main/pg_hba.conf >> /var/log/user-data.log
       - echo "pg_hba.conf configured for backend access." >> /var/log/user-data.log
       - sudo -u postgres psql -c "CREATE USER inapp WITH PASSWORD 'password';" >> /var/log/user-data.log 2>&1
       - echo "Database 'e_commerce_db' and user 'inapp' created." >> /var/log/user-data.log
