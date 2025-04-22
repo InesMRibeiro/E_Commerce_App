@@ -184,6 +184,11 @@
         transform: translate(-50%, -50%); /* Center horizontally */
     }
 
+    .slide2 h4 {
+        color: #48240C;
+    }
+
+
     .product-grid {
         display: flex; /* Alinha os produtos horizontalmente */
         flex-direction: row; /* Garante que os itens fiquem em linha */
