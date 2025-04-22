@@ -138,7 +138,7 @@
         top: 60%; /* Ajuste a posição vertical conforme necessário */
         left: 50%;
         transform: translate(-50%, -50%);
-        width: calc(300px * 3 + 50px * 2); /* Largura para mostrar 3 produtos + 2 gaps */
+        width: 75%; /* Largura para mostrar 3 produtos + 2 gaps */
         height: 450px; /* Altura suficiente para os produtos */
         background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
         border-radius: 15px;
