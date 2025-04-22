@@ -122,7 +122,7 @@
         padding: 0;
         position: absolute;
         top: 50%;
-        left: 6%; /* Ajuste a posição conforme necessário */
+        left: 25px; /* Ajuste a posição conforme necessário */
         transform: translateY(-50%);
         cursor: pointer;
         z-index: 2;
