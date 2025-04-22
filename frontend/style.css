@@ -135,19 +135,20 @@
 
     .products-container {
         position: absolute; /* Posiciona dentro do slide2 */
-        top: 60%; /* Ajuste a posição vertical conforme necessário */
+        top: 50%; /* Ajuste a posição vertical conforme necessário */
         left: 50%;
         transform: translate(-50%, -50%);
         width: 75%; /* Largura para mostrar 3 produtos + 2 gaps */
         height: 450px; /* Altura suficiente para os produtos */
         background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
         border-radius: 15px;
-        overflow-y: scroll; /* Habilita o scroll vertical */
-        scroll-snap-type: y mandatory; /* Força o snap nos elementos filhos */
+        overflow-x: auto;; /* Habilita o scroll vertical */
+        scroll-snap-type: x mandatory; /* Força o snap nos elementos filhos */
         display: flex; /* Garante que os filhos (product-grid) se alinhem horizontalmente */
         align-items: center; /* Alinha os itens verticalmente no centro */
         padding: 20px; /* Adiciona um pouco de padding interno */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
+        white-space: nowrap;
     }
 
     .rectangle-2 {
