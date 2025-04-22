@@ -6,7 +6,7 @@ import jwt
 from datetime import datetime, timedelta
 
 app = Flask(__name__)
-CORS(app, resources={"/*": {"origins": "http://13.60.220.170"}})  # Frontend IP without port
+CORS(app, resources={"/*": {"origins": "http://51.20.72.220"}})  # Frontend IP without port
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'insecure'  # VERY INSECURE: DO NOT USE IN PRODUCTION
 
