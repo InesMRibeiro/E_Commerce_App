@@ -199,7 +199,6 @@
         margin: 10; /* Remove a margem padrão */
         padding: 0; /* Remova qualquer padding desnecessário */
         position: static; /* Remova o posicionamento absoluto */
-        justify-content: center; /* Alinha os produtos à esquerda dentro do contêiner */
         margin-left: 20px;
     }
 
