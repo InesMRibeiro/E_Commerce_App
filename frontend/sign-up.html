@@ -42,6 +42,13 @@
         const backendUrl = "http://EC-LB-1780375435.eu-north-1.elb.amazonaws.com:80";
     
         document.addEventListener('DOMContentLoaded', () => {
+
+            const token = localStorage.getItem('token');
+            if (token) {
+                alert('You are already loged in.');
+                window.location.href = 'index.html';
+            }
+
             const createAccountButton = document.querySelector('.CreateAccount');
             const loginButton=document.querySelector('.LogIn');
     
