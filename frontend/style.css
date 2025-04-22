@@ -648,7 +648,7 @@
         border: none;
         padding: 0;
         position: absolute;
-        top: 10%;
+        top: 4%;
         left: 25px; /* Ajuste a posição conforme necessário */
         transform: translateY(-50%);
         cursor: pointer;
