@@ -133,6 +133,23 @@
         overflow: hidden; /* Add this line */
     }
 
+    .products-container {
+        position: absolute; /* Posiciona dentro do slide2 */
+        top: 65%; /* Ajuste a posição vertical conforme necessário */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: calc(250px * 3 + 50px * 2); /* Largura para mostrar 3 produtos + 2 gaps */
+        height: 280px; /* Altura suficiente para os produtos */
+        background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+        border-radius: 15px;
+        overflow-y: scroll; /* Habilita o scroll vertical */
+        scroll-snap-type: x mandatory; /* Força o snap nos elementos filhos */
+        display: flex; /* Garante que os filhos (product-grid) se alinhem horizontalmente */
+        align-items: center; /* Alinha os itens verticalmente no centro */
+        padding: 20px; /* Adiciona um pouco de padding interno */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
+    }
+
     .rectangle-2 {
         background-color: rgba(255, 255, 255, 0.65);
         width: 80%;
@@ -168,17 +185,18 @@
     }
 
     .product-grid {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        flex-wrap: wrap;
-        width: 80%;
-        position: absolute;
-        top: 70%; /* Increase the top value */
-        left: 50%;
-        transform: translate(-50%, -50%); /* Center horizontally */
-        margin: 0;
-        gap: 50px;
+        display: flex; /* Alinha os produtos horizontalmente */
+        flex-direction: row; /* Garante que os itens fiquem em linha */
+        gap: 50px; /* Espaçamento entre os produtos */
+        width: fit-content; /* A largura se ajusta ao conteúdo (9 produtos + gaps) */
+        margin: 0; /* Remove a margem padrão */
+        padding: 0; /* Remova qualquer padding desnecessário */
+        position: static; /* Remova o posicionamento absoluto */
+        top: auto; /* Remova a propriedade top */
+        left: auto; /* Remova a propriedade left */
+        transform: none; /* Remova a transformação de centralização */
+        flex-wrap: nowrap; /* Impede que os produtos quebrem para a próxima linha */
+        justify-content: flex-start; /* Alinha os produtos à esquerda dentro do contêiner */
     }
 
     .product {
@@ -187,6 +205,7 @@
         margin: 50px;
         display: flex;
         flex-direction: column;
+        scroll-snap-align: start;
     }
 
     .product img {
