@@ -58,7 +58,7 @@
                 .then(products => {
                     productGrid.innerHTML = ''; // Limpa o conteúdo anterior
                     let productCount = 0;
-
+                    console.log(products);
                     productGrid = document.getElementById("productGrid");
 
                     products.forEach(product => {
