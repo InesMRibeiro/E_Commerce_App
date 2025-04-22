@@ -18,6 +18,9 @@
                 <button class="cart-button" onclick="window.location.href='cart.html'">
                     <img class="cart-icon" src="images/shopcart.png" alt="Shopping Cart">
                 </button>
+                <button id="logout-button" class="logout-image-button" style="display: none;">
+                    <img class="logout-icon" src="images/17367.png" alt="Logout">
+                </button>
             </div>
             <h1> IN <br>
             Store
@@ -137,7 +140,29 @@
             });
 
             fetchProducts(); 
+            const logoutButton = document.getElementById('logout-button');
+            const token = localStorage.getItem('token');
+
+            if (token) {
+                logoutButton.style.display = 'block'; // Mostra o botão de logout
+                // Esconde os botões de login/signup (opcional)
+                const loginButton = document.querySelector('.login-button');
+                if (loginButton) {
+                    loginButton.style.display = 'none';
+                }
+                } else {
+                    logoutButton.style.display = 'none'; // Garante que o botão esteja escondido se não houver token
+                 }
+
+            logoutButton.addEventListener('click', () => {
+                // Remove o token do localStorage
+                localStorage.removeItem('token');
+                alert('Logged out successfully!');
+                // Redireciona para a página inicial
+                window.location.href = 'index.html';
+            });
         });
+
     </script>
 
 </body>
