@@ -54,6 +54,7 @@ class Product(db.Model):
     name = db.Column(db.String(100), nullable=False)
     price = db.Column(db.Float, nullable=False)
     qty = db.Column(db.Integer)
+    image_url = db.Column(db.String(255))
     cart_items = db.relationship('Cart', back_populates='product', lazy=True)
 
 
@@ -115,8 +116,8 @@ def login():
 @app.route('/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
-    product_list = [{"id": p.id, "name": p.name, "price": p.price} for p in products]
-    return jsonify(product_list), 200
+    product_list = [{"id": p.id, "name": p.name, "price": p.price, "imageUrl": p.image_url} for p in products]
+    return jsonify(product_list[:9]), 200
 
 
 @app.route('/addToCart', methods=['POST'])
