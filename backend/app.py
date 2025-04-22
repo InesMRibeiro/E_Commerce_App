@@ -45,6 +45,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(128), nullable=False)
+    role = db.Column(db.String(20), default='user') 
     cart_items = db.relationship('Cart', back_populates='user', lazy=True)
 
 
@@ -111,6 +112,21 @@ def login():
         return jsonify({"message": "Login successful!", "token": token}), 200
     else:
         return jsonify({"message": "Invalid credentials"}), 401
+    
+
+@app.route('/loginAdmin', methods=['POST'])
+def login_admin():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+
+    user = User.query.filter_by(username=username, role='admin').first() # Busca um usuário com a role 'admin'
+
+    if user and user.password == password:
+        token = generate_token(user.id)
+        return jsonify({"message": "Admin login successful!", "token": token}), 200
+    else:
+        return jsonify({"message": "Invalid admin credentials"}), 401
 
 
 @app.route('/products', methods=['GET'])
