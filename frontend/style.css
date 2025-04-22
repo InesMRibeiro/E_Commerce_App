@@ -143,7 +143,7 @@
         background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
         border-radius: 15px;
         overflow-y: scroll; /* Habilita o scroll vertical */
-        scroll-snap-type: x mandatory; /* Força o snap nos elementos filhos */
+        scroll-snap-type: y mandatory; /* Força o snap nos elementos filhos */
         display: flex; /* Garante que os filhos (product-grid) se alinhem horizontalmente */
         align-items: center; /* Alinha os itens verticalmente no centro */
         padding: 20px; /* Adiciona um pouco de padding interno */
