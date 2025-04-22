@@ -134,6 +134,7 @@
         display: block; /* Remove qualquer espaçamento inline padrão */
     }
 
+    
     .slide1 h1 {
         font-size: 70px;
         font-weight: 600;
@@ -640,4 +641,22 @@
         left: 15%; /* Center the button horizontally */
         transform: translateX(-50%); /* Adjust for the center */
         z-index: 2; /* Ensure it's above the rectangle if needed */
+    }
+
+    .logout-image-button2 {
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 10%;
+        left: 25px; /* Ajuste a posição conforme necessário */
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 2;
+    }
+    
+    .logout-icon2 {
+        width: 40px; /* Ajuste o tamanho da imagem conforme necessário */
+        height: auto;
+        display: block; /* Remove qualquer espaçamento inline padrão */
     }
