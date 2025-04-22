@@ -135,11 +135,11 @@
 
     .products-container {
         position: absolute; /* Posiciona dentro do slide2 */
-        top: 65%; /* Ajuste a posição vertical conforme necessário */
+        top: 60%; /* Ajuste a posição vertical conforme necessário */
         left: 50%;
         transform: translate(-50%, -50%);
-        width: calc(250px * 3 + 50px * 2); /* Largura para mostrar 3 produtos + 2 gaps */
-        height: 280px; /* Altura suficiente para os produtos */
+        width: calc(300px * 3 + 50px * 2); /* Largura para mostrar 3 produtos + 2 gaps */
+        height: 350px; /* Altura suficiente para os produtos */
         background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
         border-radius: 15px;
         overflow-y: scroll; /* Habilita o scroll vertical */
@@ -173,13 +173,13 @@
     }
 
     .slide2 h3 {
-        font-size: 1.8rem;
+        font-size: 2.8rem;
         font-weight: 200;
         color: #48240C;
         text-align: center; /*Centers the text*/
         margin: 0;
         position: absolute;
-        top: 35%; /* Increase the top value */
+        top: 20%; /* Increase the top value */
         left: 50%;
         transform: translate(-50%, -50%); /* Center horizontally */
     }
@@ -264,7 +264,7 @@
         max-width: 650px;
         color: #48240C;
         position: absolute;
-        top: 25%;
+        top: 45%;
         left: 50%;
         transform: translate(-50%, -50%); /* Center horizontally */
     }
