@@ -211,6 +211,19 @@ def clear_cart():
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+@app.route('/admin/products', methods=['GET'])
+def get_all_products(current_user):
+    products = Product.query.all()
+    output = []
+    for product in products:
+        product_data = {}
+        product_data['id'] = product.id
+        product_data['name'] = product.name
+        product_data['price'] = product.price
+        product_data['qty'] = product.qty
+        product_data['image_url'] = product.image_url
+        output.append(product_data)
+    return jsonify(output)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
