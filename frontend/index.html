@@ -53,6 +53,7 @@
         }
 
         function fetchProducts() {
+            console.log("A função fetchProducts() foi chamada!");
             fetch(`${backendUrl}/products`)
                 .then(response => response.json())
                 .then(products => {
@@ -133,6 +134,8 @@
                     addToCart(productId);
                 });
             });
+
+            fetchProducts(); 
         });
     </script>
 
