@@ -22,7 +22,7 @@
             </div>
 
             <button class = "cleanCart">Clean Cart</button>
-            <button id="seeProducts" class="back-office-button">See Products</button> <!- NOVO BOTÃO -->
+            <button id="seeProducts" class="seeProducts">See Products</button>
             <div id="messageArea"></div>
             <div id="productsList"></div>
             
@@ -35,7 +35,9 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const cleanCartButton = document.querySelector('.cleanCart');
-            const messageArea = document.getElementById('messageArea');
+            const messageArea = document.getElementById('messageArea'); 
+            const seeProductsButton = document.getElementById('seeProducts');
+            const productsListDiv = document.getElementById('productsList');
 
             cleanCartButton.addEventListener('click', () => {
                 if (confirm('Are you sure you want to clear the entire cart database? This action is irreversible!')) {
@@ -79,6 +81,34 @@
                 alert('Logged out successfully!');
                 // Redireciona para a página inicial
                 window.location.href = 'index.html';
+            });
+
+
+            seeProductsButton.addEventListener('click', () => {
+                fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Envia o token para autenticação
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(products => {
+                    // Exibe a lista de produtos na div productsList
+                    productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
+                        products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
+                        '</ul>';
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                    productsListDiv.textContent = 'Failed to load products.';
+                    productsListDiv.style.color = 'red';
+                });
             });
         });
     </script>
