@@ -194,14 +194,10 @@
         flex-direction: row; /* Garante que os itens fiquem em linha */
         gap: 50px; /* Espaçamento entre os produtos */
         width: fit-content; /* A largura se ajusta ao conteúdo (9 produtos + gaps) */
-        margin: 0; /* Remove a margem padrão */
+        margin: 10; /* Remove a margem padrão */
         padding: 0; /* Remova qualquer padding desnecessário */
         position: static; /* Remova o posicionamento absoluto */
-        top: auto; /* Remova a propriedade top */
-        left: auto; /* Remova a propriedade left */
-        transform: none; /* Remova a transformação de centralização */
-        flex-wrap: nowrap; /* Impede que os produtos quebrem para a próxima linha */
-        justify-content: flex-start; /* Alinha os produtos à esquerda dentro do contêiner */
+        justify-content: center; /* Alinha os produtos à esquerda dentro do contêiner */
     }
 
     .product {
