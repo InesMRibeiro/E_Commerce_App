@@ -59,6 +59,8 @@
                     productGrid.innerHTML = ''; // Limpa o conteúdo anterior
                     let productCount = 0;
 
+                    productGrid = document.getElementById("productGrid");
+
                     products.forEach(product => {
                         if (productCount < 9) {
                             const productDiv = document.createElement('div');
