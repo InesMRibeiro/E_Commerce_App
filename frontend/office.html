@@ -20,8 +20,6 @@
             <div class=" rectangle-2">
                 <h1>Back Office</h1>
             </div>
-
-            <button class = "cleanCart">Clean Cart</button>
             <button id="seeProducts" class="seeProducts">See Products</button>
             <div id="messageArea"></div>
             <div id="productsList"></div>
@@ -89,7 +87,6 @@
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` // Envia o token para autenticação
                     }
                 })
                 .then(response => {
