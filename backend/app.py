@@ -4,6 +4,7 @@ from flask_cors import CORS # type: ignore
 from config import Config
 import jwt
 from datetime import datetime, timedelta
+from functools import wraps
 
 app = Flask(__name__)
 CORS(app, resources={"/*": {"origins": "http://51.20.72.220"}})  # Frontend IP without port
@@ -39,6 +40,19 @@ def get_user_id_from_request():
     token = auth_header.split(" ")[1]
     return decode_token(token)
 
+def admin_required():
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            user_id = get_user_id_from_request()
+            if not user_id:
+                return jsonify({"message": "Unauthorized"}), 401
+            user = User.query.get(user_id)
+            if not user or user.role != 'admin':
+                return jsonify({"message": "Admin access required"}), 403
+            return f(user, *args, **kwargs)
+        return decorated_function
+    return decorator
 
 class User(db.Model):
     __tablename__ = 'user'
@@ -224,6 +238,35 @@ def get_all_products(current_user):
         product_data['image_url'] = product.image_url
         output.append(product_data)
     return jsonify(output)
+
+@app.route('/admin/add_product', methods=['POST'])
+@admin_required()
+def add_new_product(admin_user):
+    data = request.get_json()
+    name = data.get('name')
+    price = data.get('price')
+    qty = data.get('qty')
+    image_url = data.get('image_url')
+
+    if not name or price is None or image_url is None:
+        return jsonify({"error": "Name, price, and image URL are required"}), 400
+
+    try:
+        price = float(price)
+        if qty is not None:
+            qty = int(qty)
+        else:
+            qty = 0  # Default quantity if not provided
+
+        new_product = Product(name=name, price=price, qty=qty, image_url=image_url)
+        db.session.add(new_product)
+        db.session.commit()
+        return jsonify({"message": f"Product '{name}' added successfully!"}), 201
+    except ValueError:
+        return jsonify({"error": "Invalid price or quantity"}), 400
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

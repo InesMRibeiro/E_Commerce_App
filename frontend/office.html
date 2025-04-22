@@ -21,9 +21,31 @@
                 <h1>Back Office</h1>
             </div>
             <button id="seeProducts" class="seeProducts">See Products</button>
-            <div id="messageArea"></div>
             <div id="productsList"></div>
-            
+
+            <h2>Add New Product</h2>
+            <form id="addProductForm">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="price">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" required>
+                </div>
+                <div>
+                    <label for="qty">Quantity:</label>
+                    <input type="number" id="qty" name="qty">
+                </div>
+                <div>
+                    <label for="image_url">Image URL:</label>
+                    <input type="url" id="image_url" name="image_url" required>
+                </div>
+                <button type="submit">Add Product</button>
+                <div id="addProductMessage" style="margin-top: 10px;"></div>
+            </form>
+
+            <div id="messageArea"></div>
         </div>
     </div>
 
@@ -36,29 +58,8 @@
             const messageArea = document.getElementById('messageArea'); 
             const seeProductsButton = document.getElementById('seeProducts');
             const productsListDiv = document.getElementById('productsList');
-
-            cleanCartButton.addEventListener('click', () => {
-                if (confirm('Are you sure you want to clear the entire cart database? This action is irreversible!')) {
-                    fetch(`${backendUrl}/admin/clearcart`, { 
-                        method: 'POST', 
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        messageArea.textContent = data.message || data.error || 'Cart operation completed.';
-                        if (data.error) {
-                            messageArea.style.color = 'red';
-                        } else {
-                            messageArea.style.color = 'green';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error clearing cart:', error);
-                        messageArea.textContent = 'An error occurred while trying to clear the cart.';
-                        messageArea.style.color = 'red';
-                    });
-                }
-
-            });
+            const addProductForm = document.getElementById('addProductForm');
+            const addProductMessage = document.getElementById('addProductMessage');
             const logoutButton = document.getElementById('logout-button2');
             const token = localStorage.getItem('token');
 
@@ -80,34 +81,106 @@
                 // Redireciona para a página inicial
                 window.location.href = 'index.html';
             });
+               
 
+            if (cleanCartButton) { // Verifica se o botão existe antes de adicionar o listener
+                cleanCartButton.addEventListener('click', () => {
+                if (confirm('Are you sure you want to clear the entire cart database? This action is irreversible!')) {
+                    fetch(`${backendUrl}/admin/clearcart`, { 
+                        method: 'POST', 
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        messageArea.textContent = data.message || data.error || 'Cart operation completed.';
+                        if (data.error) {
+                            messageArea.style.color = 'red';
+                        } else {
+                            messageArea.style.color = 'green';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error clearing cart:', error);
+                        messageArea.textContent = 'An error occurred while trying to clear the cart.';
+                        messageArea.style.color = 'red';
+                    });
+                }
 
-            seeProductsButton.addEventListener('click', () => {
-                fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(products => {
-                    // Exibe a lista de produtos na div productsList
-                    productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
-                        products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
-                        '</ul>';
-                })
-                .catch(error => {
-                    console.error('Error fetching products:', error);
-                    productsListDiv.textContent = 'Failed to load products.';
-                    productsListDiv.style.color = 'red';
-                });
+            });
+        }
+
+        seeProductsButton.addEventListener('click', () => {
+            fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(products => {
+                // Exibe a lista de produtos na div productsList
+                productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
+                    products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
+                    '</ul>';
+            })
+            .catch(error => {
+                console.error('Error fetching products:', error);
+                productsListDiv.textContent = 'Failed to load products.';
+                productsListDiv.style.color = 'red';
             });
         });
+
+        addProductForm.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const nameInput = document.getElementById('name');
+            const priceInput = document.getElementById('price');
+            const qtyInput = document.getElementById('qty');
+            const imageUrlInput = document.getElementById('image_url');
+
+            const newProduct = {
+                name: nameInput.value,
+                price: parseFloat(priceInput.value),
+                qty: parseInt(qtyInput.value) || 0,
+                image_url: imageUrlInput.value,
+            };
+
+            const token = localStorage.getItem('token');
+
+            try {
+                const response = await fetch(`${backendUrl}/admin/add_product`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token, // Send token for authentication
+                    },
+                    body: JSON.stringify(newProduct),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    addProductMessage.textContent = data.message || 'Product added successfully!';
+                    addProductMessage.style.color = 'green';
+                    addProductForm.reset(); // Clear the form
+                    // Optionally, refresh the product list
+                    seeProductsButton.click();
+                } else {
+                    addProductMessage.textContent = data.error || 'Failed to add product.';
+                    addProductMessage.style.color = 'red';
+                }
+            } catch (error) {
+                console.error('Error adding product:', error);
+                addProductMessage.textContent = 'An error occurred while adding the product.';
+                addProductMessage.style.color = 'red';
+            }
+        });
+    });
+        
     </script>
 
 </body>
