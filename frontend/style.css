@@ -139,7 +139,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         width: 75%; /* Largura para mostrar 3 produtos + 2 gaps */
-        height: 525px; /* Altura suficiente para os produtos */
+        height: 550px; /* Altura suficiente para os produtos */
         background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
         border-radius: 15px;
         overflow-x: auto;; /* Habilita o scroll vertical */
