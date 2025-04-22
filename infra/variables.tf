@@ -17,12 +17,12 @@ variable "instance_type" {
 variable "instance_count" {
   description = "Número de instâncias backend"
   type        = number
-  default     = 3
+  default     = 1
 }
 
 #chave ssh
 variable "key_name" {
     description = "Nome da chave SSH"
     type = string
-    default = "my_rsa"
+    default = "RSA_key"
 }
