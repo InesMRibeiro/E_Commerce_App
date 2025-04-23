@@ -1,7 +1,7 @@
-output "backend-ip" {
+# output "backend-ip" {
 
-     value = [for inst in aws_instance.api_server : inst.public_ip]
-}
+#      value = [for inst in aws_instance.api_server : inst.public_ip]
+# }
 
 output "frontend-ip" {
 
