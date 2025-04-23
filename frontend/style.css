@@ -686,19 +686,24 @@
 
     .office-slide .rectangle-2 {
         width: 80%;
-        height: auto; /* Ajustar a altura ao conteúdo */
+        height: 60px; /* Defina uma altura fixa */
         padding: 15px;
-        margin-top: 80px; /* Espaço abaixo dos botões fixos */
-        margin-bottom: 20px;
-        position: relative; /* Para que o texto dentro seja posicionado normalmente */
-        justify-content: center;
+        margin-top: 80px;
+        margin-bottom: 100px;
+        position: relative;
+        top: auto; /* Remover posicionamento absoluto */
+        left: auto;
+        transform: translateX(0);
         text-align: center;
         border-radius: 15px;
+        display: flex; /* Adicione display flex para alinhar verticalmente */
+        align-items: center; /* Alinhar verticalmente o conteúdo */
+        justify-content: center; /* Centralizar horizontalmente o conteúdo */
     }
-
+    
     .office-slide .rectangle-2 h1 {
-        font-size: 2rem;
-        margin: 0;
+        font-size: 3rem;
+        margin: 0; /* Certifique-se de que não há margens no h1 */
     }
 
     .office-slide #seeProducts {
