@@ -791,3 +791,52 @@
         font-weight: bold;
         color: red; /* Cor padrão para mensagens */
     }
+
+
+        /* ==========================================================================
+    Estilos específicos para o seeProducts dooffice.html
+    ========================================================================== */
+
+    /* Estilos para a tabela de produtos no Back Office */
+    .office-slide #productsList table {
+        width: 100%; /* A tabela ocupa toda a largura do container */
+        border-collapse: collapse; /* Colapsa as bordas das células em uma única borda */
+        margin-top: 20px; /* Adiciona um espaço acima da tabela */
+        background-color: white; /* Fundo branco para a tabela */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+        border-radius: 8px; /* Bordas arredondadas para a tabela */
+        overflow: hidden; /* Garante que as bordas arredondadas funcionem corretamente com o fundo */
+    }
+
+    .office-slide #productsList th,
+    .office-slide #productsList td {
+        padding: 12px 15px; /* Espaçamento interno para as células */
+        text-align: left; /* Alinha o texto à esquerda por padrão */
+        border-bottom: 1px solid #ddd; /* Linha divisória sutil entre as linhas */
+    }
+
+    .office-slide #productsList th {
+        background-color: #f2f2f2; /* Fundo cinza claro para o cabeçalho */
+        font-weight: bold; /* Texto em negrito para o cabeçalho */
+        color: #48240C; /* Cor do texto do cabeçalho */
+    }
+
+    .office-slide #productsList tbody tr:nth-child(even) {
+        background-color: #f9f9f9; /* Fundo levemente diferente para linhas pares para melhor leitura */
+    }
+
+    .office-slide #productsList tbody tr:hover {
+        background-color: #e0e0e0; /* Efeito de hover suave nas linhas */
+    }
+
+    .office-slide #productsList td:first-child {
+        text-align: center; /* Centraliza o ID */
+    }
+
+    /* Opcional: Estilo para a legenda da tabela */
+    .office-slide #productsList h3 {
+        font-size: 1.5rem;
+        color: #48240C;
+        text-align: center;
+        margin-bottom: 10px;
+    }
