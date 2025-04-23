@@ -678,6 +678,20 @@
         padding: 20px 0; /* Adicionar um pouco de padding vertical */
     }
 
+    .office-slide .home-button {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        transform: translateY(0);
+    }
+
+    .office-slide .logout-image-button2 {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transform: translateY(0);
+    }
+
     .office-slide .rectangle-2 {
         width: 80%;
         height: auto; /* Ajustar a altura ao conteúdo */
