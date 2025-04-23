@@ -678,6 +678,24 @@
         padding: 20px 0; /* Adicionar um pouco de padding vertical */
     }
 
+    .office-slide .rectangle-2 {
+        width: 80%;
+        height: auto; /* Ajustar a altura ao conteúdo */
+        padding: 15px;
+        margin-top: 80px; /* Espaço abaixo dos botões fixos */
+        margin-bottom: 20px;
+        position: relative; /* Para que o texto dentro seja posicionado normalmente */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+    }
+
+    .office-slide .rectangle-2 h1 {
+        font-size: 2rem;
+        margin: 0;
+    }
+
     .office-slide #seeProducts {
         position: relative;
         top: auto; /* Remover posicionamento absoluto */
