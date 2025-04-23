@@ -109,10 +109,12 @@
         }
 
             seeProductsButton.addEventListener('click', () => {
+                const token = localStorage.getItem('token'); // Obtém o token do localStorage
                 fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token, // 
                     }
                 })
                 .then(response => {

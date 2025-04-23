@@ -226,6 +226,7 @@ def clear_cart():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/admin/products', methods=['GET'])
+@admin_required() # Adicione esta linha
 def get_all_products(current_user):
     products = Product.query.all()
     output = []
