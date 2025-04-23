@@ -9,14 +9,15 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="slide2 office-slide"> <button class="home-button" onclick="window.location.href='index.html'">
+    <div class = "container">
+        <div class="slides slide2">
+            <button class="home-button" onclick="window.location.href='index.html'">
                 <img class="home-icon" src="images/hom_image.png" alt="Home">
             </button>
             <button id="logout-button2" class="logout-image-button2" style="display: none;">
                 <img class="logout-icon2" src="images/17367.png" alt="Logout">
             </button>
-            <div class="rectangle-2">
+            <div class=" rectangle-2">
                 <h1>Back Office</h1>
             </div>
             <button id="seeProducts" class="seeProducts">See Products</button>
@@ -43,7 +44,6 @@
                 <button type="submit">Add Product</button>
                 <div id="addProductMessage" style="margin-top: 10px;"></div>
             </form>
-
 
             <div id="messageArea"></div>
         </div>
@@ -108,78 +108,78 @@
             });
         }
 
-        seeProductsButton.addEventListener('click', () => {
-            fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(products => {
-                // Exibe a lista de produtos na div productsList
-                productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
-                    products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
-                    '</ul>';
-            })
-            .catch(error => {
-                console.error('Error fetching products:', error);
-                productsListDiv.textContent = 'Failed to load products.';
-                productsListDiv.style.color = 'red';
-            });
-        });
-
-        addProductForm.addEventListener('submit', async (event) => {
-            event.preventDefault(); // Prevent the default form submission
-
-            const nameInput = document.getElementById('name');
-            const priceInput = document.getElementById('price');
-            const qtyInput = document.getElementById('qty');
-            const imageUrlInput = document.getElementById('image_url');
-
-            const newProduct = {
-                name: nameInput.value,
-                price: parseFloat(priceInput.value),
-                qty: parseInt(qtyInput.value) || 0,
-                image_url: imageUrlInput.value,
-            };
-
-            const token = localStorage.getItem('token');
-
-            try {
-                const response = await fetch(`${backendUrl}/admin/add_product`, {
-                    method: 'POST',
+            seeProductsButton.addEventListener('click', () => {
+                fetch(`${backendUrl}/admin/products`, { // Requisição para o novo endpoint
+                    method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token, // Send token for authentication
-                    },
-                    body: JSON.stringify(newProduct),
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(products => {
+                    // Exibe a lista de produtos na div productsList
+                    productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
+                        products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
+                        '</ul>';
+                })
+                .catch(error => {
+                    console.error('Error fetching products:', error);
+                    productsListDiv.textContent = 'Failed to load products.';
+                    productsListDiv.style.color = 'red';
                 });
+            });
 
-                const data = await response.json();
+            addProductForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent the default form submission
 
-                if (response.ok) {
-                    addProductMessage.textContent = data.message || 'Product added successfully!';
-                    addProductMessage.style.color = 'green';
-                    addProductForm.reset(); // Clear the form
-                    // Optionally, refresh the product list
-                    seeProductsButton.click();
-                } else {
-                    addProductMessage.textContent = data.error || 'Failed to add product.';
+                const nameInput = document.getElementById('name');
+                const priceInput = document.getElementById('price');
+                const qtyInput = document.getElementById('qty');
+                const imageUrlInput = document.getElementById('image_url');
+
+                const newProduct = {
+                    name: nameInput.value,
+                    price: parseFloat(priceInput.value),
+                    qty: parseInt(qtyInput.value) || 0,
+                    image_url: imageUrlInput.value,
+                };
+
+                const token = localStorage.getItem('token');
+
+                try {
+                    const response = await fetch(`${backendUrl}/admin/add_product`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token, // Send token for authentication
+                        },
+                        body: JSON.stringify(newProduct),
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        addProductMessage.textContent = data.message || 'Product added successfully!';
+                        addProductMessage.style.color = 'green';
+                        addProductForm.reset(); // Clear the form
+                        // Optionally, refresh the product list
+                        seeProductsButton.click();
+                    } else {
+                        addProductMessage.textContent = data.error || 'Failed to add product.';
+                        addProductMessage.style.color = 'red';
+                    }
+                } catch (error) {
+                    console.error('Error adding product:', error);
+                    addProductMessage.textContent = 'An error occurred while adding the product.';
                     addProductMessage.style.color = 'red';
                 }
-            } catch (error) {
-                console.error('Error adding product:', error);
-                addProductMessage.textContent = 'An error occurred while adding the product.';
-                addProductMessage.style.color = 'red';
-            }
+            });
         });
-    });
         
     </script>
 
