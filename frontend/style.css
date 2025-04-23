@@ -669,7 +669,6 @@
         background-color: #F6CE88;
         position: relative;
         z-index: 0;
-        overflow: auto; /* Permitir rolagem se o conteúdo for muito longo */
         height: auto; /* Ajustar a altura automaticamente ao conteúdo */
         min-height: 100vh; /* Garantir que ocupe pelo menos a altura da tela */
         display: flex;
@@ -679,21 +678,24 @@
     }
 
     .office-slide .rectangle-2 {
+        background-color: rgba(255, 255, 255, 0.65);
         width: 80%;
-        height: auto; /* Ajustar a altura ao conteúdo */
-        padding: 15px;
-        margin-top: 80px; /* Espaço abaixo dos botões fixos */
-        margin-bottom: 20px;
-        position: relative; /* Para que o texto dentro seja posicionado normalmente */
+        height: 100px;
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        z-index: 1;
+        display: flex;
         justify-content: center;
-        text-align: center;
-        border-radius: 15px;
+        align-items: center;
+        border-radius: 30px;
     }
 
     .office-slide .rectangle-2 h1 {
         font-size: 2rem;
         margin: 0;
     }
+    
 
     .office-slide #seeProducts {
         position: relative;
