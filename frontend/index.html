@@ -73,7 +73,14 @@
                             productDiv.classList.add(`product${product.id}`); // Adiciona uma classe única
 
                             const img = document.createElement('img');
-                            img.src = product.imageUrl; // Usa o URL da imagem retornado pelo backend
+                            // *** Lógica para construir a URL da imagem ***
+                            if (product.imageUrl && (product.imageUrl.startsWith('http://') || product.imageUrl.startsWith('https://'))) {
+                                img.src = product.imageUrl; // É um URL completo
+                            } else if (product.imageUrl) {
+                                img.src = `images/${product.imageUrl}`; // É um caminho relativo (assumindo pasta 'images')
+                            } else {
+                                img.src = 'images/default_image.png'; // Placeholder se não houver URL
+                            }
                             img.alt = product.name;
 
                             const name = document.createElement('h4'); // Adiciona o nome do produto
