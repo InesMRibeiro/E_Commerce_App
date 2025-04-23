@@ -643,6 +643,21 @@
         z-index: 2; /* Ensure it's above the rectangle if needed */
     }
 
+    .hideProducts{
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 8px 15px; /* Adjust padding for size */
+        border: none; /* Remove default border */
+        border-radius: 20px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
+        font-size: 0.9rem; /* Adjust font size */
+        position: absolute; /* Make the button absolute too */
+        top:30%; /* top of rectangle + height of rectangle + some spacing */
+        left: 15%; /* Center the button horizontally */
+        transform: translateX(-50%); /* Adjust for the center */
+        z-index: 2; /* Ensure it's above the rectangle if needed */
+    }
+
     .logout-image-button2 {
         background: none;
         border: none;
@@ -707,6 +722,14 @@
     }
 
     .office-slide #seeProducts {
+        position: relative;
+        top: auto; /* Remover posicionamento absoluto */
+        left: auto;
+        transform: translateX(0);
+        margin-bottom: 20px;
+    }
+
+    .office-slide #hideProducts {
         position: relative;
         top: auto; /* Remover posicionamento absoluto */
         left: auto;
