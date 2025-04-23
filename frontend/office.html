@@ -125,9 +125,29 @@
                 })
                 .then(products => {
                     // Exibe a lista de produtos na div productsList
-                    productsListDiv.innerHTML = '<h3>Products:</h3><ul>' +
-                        products.map(product => `<li>ID: ${product.id}, Name: ${product.name}</li>`).join('') +
-                        '</ul>';
+                    productsListDiv.innerHTML = `
+                    <table border="1" cellpadding="6" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${products.map(product => `
+                                <tr>
+                                    <td>${product.id}</td>
+                                    <td>${product.name}</td>
+                                    <td>$${product.price.toFixed(2)}</td>
+                                    <td>${product.qty}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                
                 })
                 .catch(error => {
                     console.error('Error fetching products:', error);
@@ -181,17 +201,6 @@
                     addProductMessage.style.color = 'red';
                 }
             });
-
-            function isValidURL(str) {
-                const pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-                    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-                    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-                    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-                    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-                    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-                return !!pattern.test(str);
-            }
-  
         });
         
     </script>
