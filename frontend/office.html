@@ -21,6 +21,7 @@
                 <h1>Back Office</h1>
             </div>
             <button id="seeProducts" class="seeProducts">See Products</button>
+            <button id="hideProducts" class="hideProducts" style="display:none;">Hide Products</button>
             <div id="productsList"></div>
 
             <h2>Add New Product</h2>
@@ -62,6 +63,7 @@
             const addProductMessage = document.getElementById('addProductMessage');
             const logoutButton = document.getElementById('logout-button2');
             const token = localStorage.getItem('token');
+            const hideProductsButton = document.getElementById('hideProducts');
 
             if (token) {
                 logoutButton.style.display = 'block'; // Mostra o botão de logout
@@ -126,7 +128,6 @@
                 .then(products => {
                     // Exibe a lista de produtos na div productsList
                     productsListDiv.innerHTML = `
-                    <h3>Products:</h3>
                     <table class="products-table">
                         <thead>
                             <tr>
@@ -148,12 +149,22 @@
                         </tbody>
                     </table>
                 `;
+                seeProductsButton.style.display = 'none'; // Oculta o botão "See Products"
+                hideProductsButton.style.display = 'block'; // Mostra o botão "Hide Products"
+                productsListDiv.style.display = 'block'; // Garante que a lista seja visível
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
                 productsListDiv.textContent = 'Failed to load products.';
                 productsListDiv.style.color = 'red';
             });
+        });
+
+
+        hideProductsButton.addEventListener('click', () => {
+            productsListDiv.style.display = 'none'; // Oculta a lista de produtos
+            seeProductsButton.style.display = 'block'; // Mostra o botão "See Products" novamente
+            hideProductsButton.style.display = 'none'; // Oculta o botão "Hide Products"
         });
 
             addProductForm.addEventListener('submit', async (event) => {
