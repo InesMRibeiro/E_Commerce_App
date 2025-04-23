@@ -678,7 +678,7 @@
         padding: 20px 0; /* Adicionar um pouco de padding vertical */
     }
 
-    .office-slide .rectangle-2 {
+    .office-slide .rectangle {
         width: 80%;
         height: auto; /* Ajustar a altura ao conteúdo */
         padding: 15px;
