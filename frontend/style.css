@@ -681,8 +681,8 @@
         border: none;
         padding: 0;
         position: absolute;
-        top: 4%; /* Mantém a mesma posição vertical do logout */
-        right: 25px; /* Alinha o botão à direita, ajuste conforme necessário */
+        top: 4%;
+        left: 25px; /* Ajuste a posição conforme necessário */
         transform: translateY(-50%);
         cursor: pointer;
         z-index: 2;
