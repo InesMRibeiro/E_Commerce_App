@@ -167,7 +167,9 @@ const backendUrl = "http://13.48.195.33:5000";
                     .then(data => {
                         if (data.is_admin) {
                             adminBackofficeButton.style.display = 'block';
-                            cartButton.style.display = 'none'; // Esconde o botão do carrinho
+                            if (cartButton && cartButton.parentNode === rectangle1) {
+                                rectangle1.removeChild(cartButton); // Remove o botão do carrinho
+                            }
                             logoutButton.style.display = 'block';
                             const loginButton = document.querySelector('.login-button');
                             if (loginButton) {
