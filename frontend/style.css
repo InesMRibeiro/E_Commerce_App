@@ -682,16 +682,15 @@
         padding: 0;
         position: absolute;
         top: 4%;
-        left: 80px; /* Ajuste a posição conforme necessário */
+        right: 25px;
         transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 2;
     }
 
     .admin-backoffice-icon {
-        width: 40px; /* Mantém o mesmo tamanho do ícone de logout */
+        width: 45px; /* Mantém o mesmo tamanho do ícone de logout */
         height: auto;
-        display: block; /* Remove qualquer espaçamento inline padrão */
+        display: block;
+         /* Remove qualquer espaçamento inline padrão */
     }
 
     /* ==========================================================================
