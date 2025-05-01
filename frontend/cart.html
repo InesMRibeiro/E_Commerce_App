@@ -1,110 +1,114 @@
 <!DOCTYPE html>
  <html lang="en">
  <head>
-  <meta charset="UTF-8">
-  <title>Shopping Cart</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+     <meta charset="UTF-8">
+     <title>Shopping Cart</title>
+     <link rel="stylesheet" href="style.css">
+     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
  </head>
+ 
  <body>
-  <div class="container">
-   <div class="slides slide2">
-    <button class="home-button" onclick="window.location.href='index.html'">
-     <img class="home-icon" src="images/hom_image.png" alt="Home">
-    </button>
-    <div class="rectangle-2">
-     <h2>Look what you picked! 🌟</h2>
-    </div>
-    <div class = "rectangle-3">
-     <div id="cart-items" class="cart-items"></div>
-     <div id="cart-total" class="cart-total"></div>
-    </div>
-
-    <button class="buy-button" onclick="window.location.href='payment.html'">Buy</button>
-
-    <div class="circle1"></div>
-    <div class="circle2"></div>
-   </div>
-
-   <script>
-    const backendUrl = "http://13.48.195.33:5000";
-
-    function getToken() {
-     return localStorage.getItem("token");
-    }
-
-    async function get_cart() {
-     const token = getToken();
-     const cartItemsDiv = document.getElementById('cart-items');
-     const cartTotalDiv = document.getElementById('cart-total');
-
-     if (!token) {
-      cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
-      cartTotalDiv.innerHTML = "";
-      return;
+     <div class="container">
+         <!-- Slide 1 - Cart Items -->
+         <div class="slides slide2">
+             <button class="home-button" onclick="window.location.href='index.html'">
+                 <img class="home-icon" src="images/hom_image.png" alt="Home">
+             </button>
+             <div class="rectangle-2">
+                 <h2>Look what you picked! 🌟</h2>
+             </div>
+             <div class = "rectangle-3">
+                 <div id="cart-items" class="cart-items"></div>
+                 <div id="cart-total" class="cart-total"></div>
+             </div>
+ 
+ 
+             <!-- Total e botão de comprar -->
+             <button class="buy-button" onclick="window.location.href='payment.html'">Buy</button>
+ 
+             <div class="circle1"></div>
+             <div class="circle2"></div>
+         </div>
+ 
+ <script>
+    const backendUrl = "http://13.48.195.33:5000";    
+ 
+     function getToken() {
+         return localStorage.getItem("token");
      }
-
-     try {
-      const response = await fetch(`${backendUrl}/cart`, {
-       method: 'GET',
-       headers: {
-        'Authorization': `Bearer ${token}`,
-       },
-      });
-
-      if (!response.ok) {
-       let errorMessage = `Erro ao carregar o carrinho: ${response.status}`;
-       try {
-        const errorData = await response.json();
-        if (errorData && errorData.message) {
-         errorMessage += ` - ${errorData.message}`;
-        }
-       } catch (jsonError) {
-        console.error("Erro ao analisar JSON de erro:", jsonError);
-       }
-       cartItemsDiv.innerHTML = `<p class='error'>${errorMessage}</p>`;
-       cartTotalDiv.innerHTML = "";
-       return;
-      }
-
-      const data = await response.json();
-
-      if (data && data.items && data.items.length > 0) {
-       let total = 0;
-       cartItemsDiv.innerHTML = ''; // Limpa o conteúdo anterior
-       data.items.forEach(item => {
-        total += item.price * item.quantity;
-        const itemDiv = document.createElement('div');
-        itemDiv.classList.add('cart-item');
-        itemDiv.innerHTML = `<p><span class="math-inline">\{item\.name\} \(x</span>{item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
-        cartItemsDiv.appendChild(itemDiv);
-       });
-       cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
-      } else {
-       cartItemsDiv.innerHTML = "<p class='empty-cart'>O seu carrinho está vazio! 😢</p>";
-       cartTotalDiv.innerHTML = "";
-      }
-
-     } catch (error) {
-      console.error('Erro ao buscar o carrinho:', error);
-      cartItemsDiv.innerHTML = "<p class='error'>Ocorreu um erro ao carregar o carrinho.</p>";
-      cartTotalDiv.innerHTML = "";
+ 
+     async function get_cart() {
+         const token = getToken();
+         const cartItemsDiv = document.getElementById('cart-items');
+         const cartTotalDiv = document.getElementById('cart-total');
+ 
+         if (!token) {
+             cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
+             cartTotalDiv.innerHTML = "";
+             return;
+         }
+ 
+         try {
+             const response = await fetch(`${backendUrl}/cart`, {
+                 method: 'GET',
+                 headers: {
+                     'Authorization': `Bearer ${token}`,
+                 },
+             });
+ 
+             if (!response.ok) {
+                 let errorMessage = `Erro ao carregar o carrinho: ${response.status}`;
+                 try {
+                     const errorData = await response.json();
+                     if (errorData && errorData.message) {
+                         errorMessage += ` - ${errorData.message}`;
+                     }
+                 } catch (jsonError) {
+                     console.error("Erro ao analisar JSON de erro:", jsonError);
+                 }
+                 cartItemsDiv.innerHTML = `<p class='error'>${errorMessage}</p>`;
+                 cartTotalDiv.innerHTML = "";
+                 return;
+             }
+ 
+             const data = await response.json();
+ 
+             if (data && data.items && data.items.length > 0) {
+                 let total = 0;
+                 cartItemsDiv.innerHTML = ''; // Limpa o conteúdo anterior
+                 data.items.forEach(item => {
+                     total += item.price * item.quantity;
+                     const itemDiv = document.createElement('div');
+                     itemDiv.classList.add('cart-item');
+                     itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
+                     cartItemsDiv.appendChild(itemDiv);
+                 });
+                 cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+             } else {
+                 cartItemsDiv.innerHTML = "<p class='empty-cart'>O seu carrinho está vazio! 😢</p>";
+                 cartTotalDiv.innerHTML = "";
+             }
+ 
+         } catch (error) {
+             console.error('Erro ao buscar o carrinho:', error);
+             cartItemsDiv.innerHTML = "<p class='error'>Ocorreu um erro ao carregar o carrinho.</p>";
+             cartTotalDiv.innerHTML = "";
+         }
      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-     const buyButton = document.getElementById('buy-button');
-     if (buyButton) {
-      buyButton.addEventListener('click', () => {
-       window.location.href = 'payment.html';
-      });
-     } else {
-      console.error("Elemento 'buy-button' não encontrado!");
-     }
-
-     get_cart();
-    });
-   </script>
-  </div>
+ 
+     document.addEventListener('DOMContentLoaded', () => {
+         const buyButton = document.getElementById('buy-button');
+         if (buyButton) {
+             buyButton.addEventListener('click', () => {
+                 window.location.href = 'payment.html';
+             });
+         } else {
+             console.error("Elemento 'buy-button' não encontrado!");
+         }
+ 
+         get_cart(); 
+     });
+ </script>
+ 
  </body>
  </html>
