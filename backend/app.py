@@ -239,6 +239,7 @@ def get_all_products(current_user):
         product_data['image_url'] = product.image_url
         output.append(product_data)
     return jsonify(output)
+
 #new
 @app.route('/admin/check_admin', methods=['GET'])
 def check_admin():
@@ -250,6 +251,7 @@ def check_admin():
         return jsonify({"is_admin": True}), 200
     else:
         return jsonify({"is_admin": False}), 200
+    
 
 @app.route('/admin/add_product', methods=['POST'])
 @admin_required()
