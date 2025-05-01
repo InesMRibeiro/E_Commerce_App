@@ -22,7 +22,7 @@
                     <img class="logout-icon" src="images/17367.png" alt="Logout">
                 </button>
                 <button id="admin-backoffice-button" class="admin-backoffice-button" style="display: none;" onclick="window.location.href='office.html'">
-                    <img class="admin-backoffice-icon" src="images/hom_image.png" alt="Back Office">
+                    <img class="admin-backoffice-icon" src="images/settings.png" alt="Back Office">
                 </button>
             </div>
             <h1> IN <br>
@@ -152,6 +152,7 @@ const backendUrl = "http://13.48.195.33:5000";
             const logoutButton = document.getElementById('logout-button');
             const adminBackofficeButton = document.getElementById('admin-backoffice-button'); // Novo botão
             const token = localStorage.getItem('token');
+            const cartButton = document.querySelector('.cart-button'); // Obtém o botão do carrinho
 
             function checkAdminStatus() {
                 if (token) {
@@ -166,6 +167,7 @@ const backendUrl = "http://13.48.195.33:5000";
                     .then(data => {
                         if (data.is_admin) {
                             adminBackofficeButton.style.display = 'block';
+                            cartButton.style.display = 'none'; // Esconde o botão do carrinho
                             logoutButton.style.display = 'block';
                             const loginButton = document.querySelector('.login-button');
                             if (loginButton) {
@@ -173,6 +175,7 @@ const backendUrl = "http://13.48.195.33:5000";
                             }
                         } else {
                             adminBackofficeButton.style.display = 'none';
+                            cartButton.style.display = 'block'; // Mostra o botão do carrinho
                             logoutButton.style.display = 'block';
                             const loginButton = document.querySelector('.login-button');
                             if (loginButton) {
@@ -191,6 +194,7 @@ const backendUrl = "http://13.48.195.33:5000";
                     });
                 } else {
                     adminBackofficeButton.style.display = 'none';
+                    cartButton.style.display = 'block'; // Mostra o carrinho para usuários não logados
                     logoutButton.style.display = 'none';
                     const loginButton = document.querySelector('.login-button');
                     if (loginButton) {
