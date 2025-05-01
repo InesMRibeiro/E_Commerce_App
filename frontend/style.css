@@ -676,22 +676,23 @@
         display: block; /* Remove qualquer espaçamento inline padrão */
     }
 
-    .admin-backoffice-button {
+    .backoffice-image-button {
         background: none;
         border: none;
         padding: 0;
         position: absolute;
-        top: 4%; /* Mantém a mesma posição vertical do logout */
-        right: 25px; /* Alinha o botão à direita, ajuste conforme necessário */
+        top: 50%;
+        right: 25px;
         transform: translateY(-50%);
         cursor: pointer;
         z-index: 2;
     }
 
     .admin-backoffice-icon {
-        width: 40px; /* Mantém o mesmo tamanho do ícone de logout */
+        width: 45px; /* Mantém o mesmo tamanho do ícone de logout */
         height: auto;
-        display: block; /* Remove qualquer espaçamento inline padrão */
+        display: block;
+         /* Remove qualquer espaçamento inline padrão */
     }
 
     /* ==========================================================================
