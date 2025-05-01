@@ -676,6 +676,24 @@
         display: block; /* Remove qualquer espaçamento inline padrão */
     }
 
+    .admin-backoffice-button {
+        background: none;
+        border: none;
+        padding: 0;
+        position: absolute;
+        top: 4%; /* Mantém a mesma posição vertical do logout */
+        right: 25px; /* Alinha o botão à direita, ajuste conforme necessário */
+        transform: translateY(-50%);
+        cursor: pointer;
+        z-index: 2;
+    }
+
+    .admin-backoffice-icon {
+        width: 40px; /* Mantém o mesmo tamanho do ícone de logout */
+        height: auto;
+        display: block; /* Remove qualquer espaçamento inline padrão */
+    }
+
     /* ==========================================================================
     Estilos específicos para office.html
     ========================================================================== */

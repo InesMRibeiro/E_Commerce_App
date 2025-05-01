@@ -21,6 +21,9 @@
                 <button id="logout-button" class="logout-image-button" style="display: none;">
                     <img class="logout-icon" src="images/17367.png" alt="Logout">
                 </button>
+                <button id="admin-backoffice-button" class="admin-backoffice-button" style="display: none;" onclick="window.location.href='office.html'">
+                    <img class="admin-backoffice-icon" src="images/17367.png" alt="Back Office">
+                </button>
             </div>
             <h1> IN <br>
             Store
@@ -148,18 +151,56 @@
 
             fetchProducts(); 
             const logoutButton = document.getElementById('logout-button');
+            const adminBackofficeButton = document.getElementById('admin-backoffice-button'); // Novo botão
             const token = localStorage.getItem('token');
 
-            if (token) {
-                logoutButton.style.display = 'block'; // Mostra o botão de logout
-                // Esconde os botões de login/signup (opcional)
-                const loginButton = document.querySelector('.login-button');
-                if (loginButton) {
-                    loginButton.style.display = 'none';
-                }
+            function checkAdminStatus() {
+                if (token) {
+                    // Envie uma requisição para o backend para verificar a role do usuário
+                    fetch(`${backendUrl}/admin/check_admin`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_admin) {
+                            adminBackofficeButton.style.display = 'block';
+                            logoutButton.style.display = 'block';
+                            const loginButton = document.querySelector('.login-button');
+                            if (loginButton) {
+                                loginButton.style.display = 'none';
+                            }
+                        } else {
+                            adminBackofficeButton.style.display = 'none';
+                            logoutButton.style.display = 'block';
+                            const loginButton = document.querySelector('.login-button');
+                            if (loginButton) {
+                                loginButton.style.display = 'none';
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao verificar status de admin:', error);
+                        adminBackofficeButton.style.display = 'none';
+                        logoutButton.style.display = 'block';
+                        const loginButton = document.querySelector('.login-button');
+                        if (loginButton) {
+                            loginButton.style.display = 'none';
+                        }
+                    });
                 } else {
-                    logoutButton.style.display = 'none'; // Garante que o botão esteja escondido se não houver token
-                 }
+                    adminBackofficeButton.style.display = 'none';
+                    logoutButton.style.display = 'none';
+                    const loginButton = document.querySelector('.login-button');
+                    if (loginButton) {
+                        loginButton.style.display = 'block';
+                    }
+                }
+            }
+
+            checkAdminStatus(); // Chama a função na inicialização
 
             logoutButton.addEventListener('click', () => {
                 // Remove o token do localStorage
