@@ -21,7 +21,7 @@
                 <button id="logout-button" class="logout-image-button" style="display: none;">
                     <img class="logout-icon" src="images/17367.png" alt="Logout">
                 </button>
-                <button id="admin-backoffice-button" class="admin-image-button" style="display: none;">
+                <button id="backoffice-button" class="admin-image-button" style="display: none;" onclick="window.location.href='office.html'">
                     <img class="admin-backoffice-icon" src="images/settings.png" alt="Back Office">
                 </button>
             </div>
@@ -150,7 +150,7 @@ const backendUrl = "http://13.48.195.33:5000";
 
             fetchProducts(); 
             const logoutButton = document.getElementById('logout-button');
-            const adminBackofficeButton = document.getElementById('admin-backoffice-button'); // Novo botão
+            const adminBackofficeButton = document.getElementById('backoffice-button'); // Novo botão
             const token = localStorage.getItem('token');
             const cartButton = document.querySelector('.cart-button'); // Obtém o botão do carrinho
             const rectangle1 = document.querySelector('.rectangle-1'); // Obtém o container dos botões
