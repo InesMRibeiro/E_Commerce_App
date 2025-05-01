@@ -153,7 +153,8 @@ const backendUrl = "http://13.48.195.33:5000";
             const adminBackofficeButton = document.getElementById('admin-backoffice-button'); // Novo botão
             const token = localStorage.getItem('token');
             const cartButton = document.querySelector('.cart-button'); // Obtém o botão do carrinho
-
+            const rectangle1 = document.querySelector('.rectangle-1'); // Obtém o container dos botões
+            
             function checkAdminStatus() {
                 if (token) {
                     // Envie uma requisição para o backend para verificar a role do usuário
