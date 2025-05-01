@@ -46,6 +46,10 @@ resource "aws_launch_template" "launch_template" {
 
                 sudo chown -R ubuntu:ubuntu /home/ubuntu/E_Commerce_App
 
+                echo "Starting Flask application..."
+                python3 /home/ubuntu/E_Commerce_App/backend/app.py
+                echo "Flask application started!"
+
                 EOF
     )
 }
