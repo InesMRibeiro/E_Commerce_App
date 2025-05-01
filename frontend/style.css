@@ -683,7 +683,9 @@
         position: absolute;
         top: 4%;
         right: 25px;
-        transform: translateY(-50%);
+        transform: translateY(-45%);
+        cursor: pointer;
+        z-index: 2;
     }
 
     .admin-backoffice-icon {
