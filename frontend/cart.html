@@ -42,10 +42,12 @@
         const token = getToken();
         const cartItemsDiv = document.getElementById('cart-items');
         const cartTotalDiv = document.getElementById('cart-total');
+        const buyButton = document.getElementById('buy-button'); // Obtém a referência ao botão
 
         if (!token) {
             cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
             cartTotalDiv.innerHTML = "";
+            if (buyButton) buyButton.style.display = 'none'; // Esconde o botão se não estiver logado
             return;
         }
 
@@ -85,9 +87,11 @@
                     cartItemsDiv.appendChild(itemDiv);
                 });
                 cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+                if (buyButton) buyButton.style.display = 'block'; // Mostra o botão se houver itens
             } else {
                 cartItemsDiv.innerHTML = "<p class='empty-cart'>O seu carrinho está vazio! 😢</p>";
                 cartTotalDiv.innerHTML = "";
+                if (buyButton) buyButton.style.display = 'none'; // Esconde o botão se o carrinho estiver vazio
             }
 
         } catch (error) {
