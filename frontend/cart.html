@@ -32,7 +32,7 @@
 
 <script>
     const backendUrl = "http://EC-LB-126878543.eu-north-1.elb.amazonaws.com:80";
-    
+
 
     function getToken() {
         return localStorage.getItem("token");
@@ -42,7 +42,7 @@
         const token = getToken();
         const cartItemsDiv = document.getElementById('cart-items');
         const cartTotalDiv = document.getElementById('cart-total');
-        const buyButton = document.getElementById('buy-button'); // Obtém a referência ao botão
+        const buyButton = document.querySelector('.buy-button'); // Obtém a referência ao botão usando a classe
 
         if (!token) {
             cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
@@ -71,6 +71,7 @@
                 }
                 cartItemsDiv.innerHTML = `<p class='error'>${errorMessage}</p>`;
                 cartTotalDiv.innerHTML = "";
+                if (buyButton) buyButton.style.display = 'none'; // Esconde o botão em caso de erro ao carregar
                 return;
             }
 
@@ -98,11 +99,12 @@
             console.error('Erro ao buscar o carrinho:', error);
             cartItemsDiv.innerHTML = "<p class='error'>Ocorreu um erro ao carregar o carrinho.</p>";
             cartTotalDiv.innerHTML = "";
+            if (buyButton) buyButton.style.display = 'none'; // Esconde o botão em caso de erro geral
         }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        const buyButton = document.getElementById('buy-button');
+        const buyButton = document.querySelector('.buy-button'); // Garante que a referência seja obtida também no carregamento
         if (buyButton) {
             buyButton.addEventListener('click', () => {
                 window.location.href = 'payment.html';
@@ -111,7 +113,7 @@
             console.error("Elemento 'buy-button' não encontrado!");
         }
 
-        get_cart(); 
+        get_cart();
     });
 </script>
 
