@@ -681,9 +681,9 @@
         border: none;
         padding: 0;
         position: absolute;
-        top: 15%;
+        top: 35%;
         right: 25px;
-        transform: translateY(-45%);
+        transform: translateY(-50%);
         cursor: pointer;
         z-index: 2;
     }
