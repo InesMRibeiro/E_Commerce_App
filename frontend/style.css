@@ -676,13 +676,13 @@
         display: block; /* Remove qualquer espaçamento inline padrão */
     }
 
-    .admin-image-button {
+    .backoffice-image-button {
         background: none;
         border: none;
         padding: 0;
         position: absolute;
         top: 4%;
-        left: 25px; /* Ajuste a posição conforme necessário */
+        left: 80px; /* Ajuste a posição conforme necessário */
         transform: translateY(-50%);
         cursor: pointer;
         z-index: 2;
