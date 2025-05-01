@@ -16,9 +16,9 @@ resource "aws_lb_target_group" "EC_Backend_TG" {
   health_check {
     path                = "/"
     interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    timeout             = 10
+    healthy_threshold   = 3
+    unhealthy_threshold = 3
     matcher             = "200-499"
   }
 }
