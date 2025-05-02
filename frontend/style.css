@@ -560,7 +560,7 @@
         border-radius: 30px; /* Rounded corners */
         font-weight: bold; /* Bold text */
         position: absolute; /* Make the button absolute too */
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, 0%);
 
     }
 
