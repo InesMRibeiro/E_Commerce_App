@@ -228,7 +228,7 @@
             async function deleteProductPost(productId) {
                 const token = localStorage.getItem('token');
                 try {
-                    const response = await fetch(`${backendUrl}/admin/del_product`, {
+                    const response = await fetch(`${backendUrl}/admin/del_product`,{
                         method: 'POST', // Changed to POST
                         headers: {
                             'Authorization': 'Bearer ' + token,
