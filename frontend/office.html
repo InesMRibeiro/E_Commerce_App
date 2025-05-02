@@ -144,7 +144,7 @@
                                     <td>${product.name}</td>
                                     <td>$${product.price.toFixed(2)}</td>
                                     <td>${product.qty}</td>
-                                    <td><button class="delete-button" data-product-id="${product.id}">Delete</button></td>
+                                    <td><button class="delete-button-post" data-product-id="${product.id}">Delete</button></td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -155,12 +155,12 @@
                 productsListDiv.style.display = 'block'; // Garante que a lista seja visível
             
                  // Adiciona event listeners para os botões de delete dinamicamente
-                const deleteButtons = productsListDiv.querySelectorAll('.delete-button');
-                deleteButtons.forEach(button => {
+                const deleteButtonsPOST = productsListDiv.querySelectorAll('.delete-button-post');
+                deleteButtonsPost.forEach(button => {
                     button.addEventListener('click', function() {
                         const productId = this.dataset.productId;
                         if (confirm(`Are you sure you want to delete product ID ${productId}?`)) {
-                            deleteProduct(productId);
+                            deleteProductPost(productId);
                         }
                     });
                 });
@@ -224,31 +224,32 @@
                     addProductMessage.style.color = 'red';
                 }
             });
-
-            async function deleteProduct(productId) {
+            
+            async function deleteProductPost(productId) {
                 const token = localStorage.getItem('token');
                 try {
-                    const response = await fetch(`<span class="math-inline">\{backendUrl\}/admin/products/</span>{productId}`, {
-                        method: 'DELETE',
+                    const response = await fetch(`${backendUrl}/admin/products/delete`, {
+                        method: 'POST', // Changed to POST
                         headers: {
                             'Authorization': 'Bearer ' + token,
+                            'Content-Type': 'application/json', // Important for sending data in the body
                         },
+                        body: JSON.stringify({ product_id: productId }), // Send the product ID in the body
                     });
 
                     const data = await response.json();
 
                     if (response.ok) {
-                        messageArea.textContent = data.message || `Product ID ${productId} deleted successfully!`;
+                        messageArea.textContent = data.message || `Product ID ${productId} deleted successfully (POST)!`;
                         messageArea.style.color = 'green';
-                        // Refresh the product list
                         seeProductsButton.click();
                     } else {
-                        messageArea.textContent = data.error || `Failed to delete product ID ${productId}.`;
+                        messageArea.textContent = data.error || `Failed to delete product ID ${productId} (POST).`;
                         messageArea.style.color = 'red';
                     }
                 } catch (error) {
                     console.error('Error deleting product:', error);
-                    messageArea.textContent = `An error occurred while deleting product ID ${productId}.`;
+                    messageArea.textContent = `An error occurred while deleting product ID ${productId} (POST).`;
                     messageArea.style.color = 'red';
                 }
             }

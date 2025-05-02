@@ -252,17 +252,24 @@ def check_admin():
     else:
         return jsonify({"is_admin": False}), 200
     
-#neww
-@app.route('/admin/products/<int:product_id>', methods=['DELETE'])
+# Novo endpoint para apagar produto usando POST (obtendo ID do body)
+@app.route('/admin/products/delete', methods=['POST'])
 @admin_required()
-def delete_product(admin_user, product_id):
+def delete_product_post(admin_user):
+    data = request.get_json()
+    product_id = data.get('product_id')
+
+    if not product_id:
+        return jsonify({"error": "Product ID is required"}), 400
+
     product = Product.query.get(product_id)
     if product:
         db.session.delete(product)
         db.session.commit()
-        return jsonify({"message": f"Product ID {product_id} deleted successfully!"}), 200
+        return jsonify({"message": f"Product ID {product_id} deleted successfully (POST)!"}), 200
     else:
         return jsonify({"error": f"Product with ID {product_id} not found!"}), 404
+    
 
 @app.route('/admin/add_product', methods=['POST'])
 @admin_required()
