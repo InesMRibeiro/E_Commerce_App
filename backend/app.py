@@ -255,7 +255,7 @@ def check_admin():
 # Novo endpoint para apagar produto usando POST (obtendo ID do body)
 @app.route('/admin/del_product', methods=['POST'])
 @admin_required()
-def delete_product():
+def delete_product(admin_user):
     try:
         data = request.get_json()
         product_id = data.get('product_id')
