@@ -263,6 +263,9 @@ def delete_product(admin_user):
         if not product_id:
             return jsonify({'error': 'Product ID is required'}), 400
 
+        # Remover itens na tabela cart que estão referenciando o produto
+        Cart.query.filter_by(product_id=product_id).delete()
+
         product = Product.query.get(product_id)
         if not product:
             return jsonify({'error': 'Product not found'}), 404
