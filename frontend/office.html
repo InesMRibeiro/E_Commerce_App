@@ -155,7 +155,7 @@
                 productsListDiv.style.display = 'block'; // Garante que a lista seja visível
             
                  // Adiciona event listeners para os botões de delete dinamicamente
-                const deleteButtonsPOST = productsListDiv.querySelectorAll('.delete-button-post');
+                const deleteButtonsPost = productsListDiv.querySelectorAll('.delete-button-post');
                 deleteButtonsPost.forEach(button => {
                     button.addEventListener('click', function() {
                         const productId = this.dataset.productId;
