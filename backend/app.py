@@ -253,7 +253,7 @@ def check_admin():
         return jsonify({"is_admin": False}), 200
     
 # Novo endpoint para apagar produto usando POST (obtendo ID do body)
-@app.route('/admin/products/delete', methods=['POST'])
+@app.route('/admin/del_product', methods=['POST'])
 @admin_required()
 def delete_product_post(admin_user):
     data = request.get_json()
