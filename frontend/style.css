@@ -848,7 +848,19 @@
         color: red; /* Cor padrão para mensagens */
     }
 
+    .delete-button-post{
+        background-color: black; /* Black background */
+        color: white; /* White text */
+        padding: 12px 30px; /* Adjust padding for size */
+        border: none; /* Rem    ove default border */
+        border-radius: 30px; /* Rounded corners */
+        font-weight: bold; /* Bold text */
 
+    }
+
+    .delete-button-post:hover {
+        background-color: #333;
+    }
         /* ==========================================================================
     Estilos específicos para o seeProducts dooffice.html
     ========================================================================== */
