@@ -559,11 +559,7 @@
         border: none; /* Remove default border */
         border-radius: 30px; /* Rounded corners */
         font-weight: bold; /* Bold text */
-        font-size: 1.2rem; /* Adjust font size */
         position: absolute; /* Make the button absolute too */
-        top: calc(25% + 400px + 20px); /* top of rectangle + height of rectangle + some spacing */
-        left: 50%; /* Center the button horizontally */
-        transform: translateX(-50%); /* Adjust for the center */
         z-index: 2; /* Ensure it's above the rectangle if needed */
     }
 
