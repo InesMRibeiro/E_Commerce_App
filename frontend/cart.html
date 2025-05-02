@@ -24,7 +24,7 @@
  
  
              <!-- Total e botão de comprar -->
-             <button class="buy-button" onclick="window.location.href='payment.html'">Buy</button>
+             <button id="buy-button" class="buy-button" onclick="window.location.href='payment.html'">Buy</button>
  
              <div class="circle1"></div>
              <div class="circle2"></div>
@@ -41,10 +41,12 @@
          const token = getToken();
          const cartItemsDiv = document.getElementById('cart-items');
          const cartTotalDiv = document.getElementById('cart-total');
- 
+         const buyButton = document.getElementById('buy-button'); // Obtém a referência ao botão
+
          if (!token) {
              cartItemsDiv.innerHTML = "<p class='error'>Por favor, faça login para ver o seu carrinho.</p>";
              cartTotalDiv.innerHTML = "";
+             buyButton.style.display = 'none'; // Esconde o botão se não estiver logado
              return;
          }
  
@@ -68,6 +70,7 @@
                  }
                  cartItemsDiv.innerHTML = `<p class='error'>${errorMessage}</p>`;
                  cartTotalDiv.innerHTML = "";
+                 buyButton.style.display = 'none'; // Esconde o botão em caso de erro ao carregar
                  return;
              }
  
@@ -84,9 +87,11 @@
                      cartItemsDiv.appendChild(itemDiv);
                  });
                  cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
+                 buyButton.style.display = 'block'; // Mostra o botão se houver itens
              } else {
                  cartItemsDiv.innerHTML = "<p class='empty-cart'>O seu carrinho está vazio! 😢</p>";
                  cartTotalDiv.innerHTML = "";
+                 buyButton.style.display = 'none'; // Esconde o botão se o carrinho estiver vazio
              }
  
          } catch (error) {
