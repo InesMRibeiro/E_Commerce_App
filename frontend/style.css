@@ -560,9 +560,8 @@
         border-radius: 30px; /* Rounded corners */
         font-weight: bold; /* Bold text */
         position: absolute; /* Make the button absolute too */
-        z-index: 2; /* Ensure it's above the rectangle if needed */
-        right: 20px; /* Distance from the right edge */
-        top: 20px; 
+        transform: translate(-50%, -50%);
+
     }
 
     .remove-button:hover {
