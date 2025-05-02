@@ -149,75 +149,75 @@ const backendUrl = "http://13.48.195.33:5000";
             });
 
             fetchProducts();
-        }); 
 
-        //     const logoutButton = document.getElementById('logout-button');
-        //     const adminBackofficeButton = document.getElementById('backoffice-button'); // Novo botão
-        //     const token = localStorage.getItem('token');
-        //     const cartButton = document.querySelector('.cart-button'); // Obtém o botão do carrinho
-        //     const rectangle1 = document.querySelector('.rectangle-1'); // Obtém o container dos botões
+
+            const logoutButton = document.getElementById('logout-button');
+            const adminBackofficeButton = document.getElementById('backoffice-button'); // Novo botão
+            const token = localStorage.getItem('token');
+            const cartButton = document.querySelector('.cart-button'); // Obtém o botão do carrinho
+            const rectangle1 = document.querySelector('.rectangle-1'); // Obtém o container dos botões
             
-        //     function checkAdminStatus() {
-        //         if (token) {
-        //             // Envie uma requisição para o backend para verificar a role do usuário
-        //             fetch(`${backendUrl}/admin/check_admin`, {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'Authorization': 'Bearer ' + token
-        //                 }
-        //             })
-        //             .then(response => response.json())
-        //             .then(data => {
-        //                 if (data.is_admin) {
-        //                     adminBackofficeButton.style.display = 'block';
-        //                     if (cartButton && cartButton.parentNode === rectangle1) {
-        //                         rectangle1.removeChild(cartButton); // Remove o botão do carrinho
-        //                     }
-        //                     logoutButton.style.display = 'block';
-        //                     const loginButton = document.querySelector('.login-button');
-        //                     if (loginButton) {
-        //                         loginButton.style.display = 'none';
-        //                     }
-        //                 } else {
-        //                     adminBackofficeButton.style.display = 'none';
-        //                     cartButton.style.display = 'block'; // Mostra o botão do carrinho
-        //                     logoutButton.style.display = 'block';
-        //                     const loginButton = document.querySelector('.login-button');
-        //                     if (loginButton) {
-        //                         loginButton.style.display = 'none';
-        //                     }
-        //                 }
-        //             })
-        //             .catch(error => {
-        //                 console.error('Erro ao verificar status de admin:', error);
-        //                 adminBackofficeButton.style.display = 'none';
-        //                 logoutButton.style.display = 'block';
-        //                 const loginButton = document.querySelector('.login-button');
-        //                 if (loginButton) {
-        //                     loginButton.style.display = 'none';
-        //                 }
-        //             });
-        //         } else {
-        //             adminBackofficeButton.style.display = 'none';
-        //             cartButton.style.display = 'block'; // Mostra o carrinho para usuários não logados
-        //             logoutButton.style.display = 'none';
-        //             const loginButton = document.querySelector('.login-button');
-        //             if (loginButton) {
-        //                 loginButton.style.display = 'block';
-        //             }
-        //         }
-        //     }
+            function checkAdminStatus() {
+                if (token) {
+                    // Envie uma requisição para o backend para verificar a role do usuário
+                    fetch(`${backendUrl}/admin/check_admin`, {
+                        method: 'GET',
+                        headers: {
+                            'Authorization': 'Bearer ' + token
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.is_admin) {
+                            adminBackofficeButton.style.display = 'block';
+                            if (cartButton && cartButton.parentNode === rectangle1) {
+                                rectangle1.removeChild(cartButton); // Remove o botão do carrinho
+                            }
+                            logoutButton.style.display = 'block';
+                            const loginButton = document.querySelector('.login-button');
+                            if (loginButton) {
+                                loginButton.style.display = 'none';
+                            }
+                        } else {
+                            adminBackofficeButton.style.display = 'none';
+                            cartButton.style.display = 'block'; // Mostra o botão do carrinho
+                            logoutButton.style.display = 'block';
+                            const loginButton = document.querySelector('.login-button');
+                            if (loginButton) {
+                                loginButton.style.display = 'none';
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao verificar status de admin:', error);
+                        adminBackofficeButton.style.display = 'none';
+                        logoutButton.style.display = 'block';
+                        const loginButton = document.querySelector('.login-button');
+                        if (loginButton) {
+                            loginButton.style.display = 'none';
+                        }
+                    });
+                } else {
+                    adminBackofficeButton.style.display = 'none';
+                    cartButton.style.display = 'block'; // Mostra o carrinho para usuários não logados
+                    logoutButton.style.display = 'none';
+                    const loginButton = document.querySelector('.login-button');
+                    if (loginButton) {
+                        loginButton.style.display = 'block';
+                    }
+                }
+            }
 
-        //     checkAdminStatus(); // Chama a função na inicialização
+            checkAdminStatus(); // Chama a função na inicialização
 
-        //     logoutButton.addEventListener('click', () => {
-        //         // Remove o token do localStorage
-        //         localStorage.removeItem('token');
-        //         alert('Logged out successfully!');
-        //         // Redireciona para a página inicial
-        //         window.location.href = 'index.html';
-        //     });
-        // });
+            logoutButton.addEventListener('click', () => {
+                // Remove o token do localStorage
+                localStorage.removeItem('token');
+                alert('Logged out successfully!');
+                // Redireciona para a página inicial
+                window.location.href = 'index.html';
+            });
+        });
 
     </script>
 
