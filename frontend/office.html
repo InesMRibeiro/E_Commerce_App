@@ -134,6 +134,7 @@
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -143,6 +144,7 @@
                                     <td>${product.name}</td>
                                     <td>$${product.price.toFixed(2)}</td>
                                     <td>${product.qty}</td>
+                                    <td><button class="delete-button" data-product-id="${product.id}">Delete</button></td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -151,6 +153,17 @@
                 seeProductsButton.style.display = 'none'; // Oculta o botão "See Products"
                 hideProductsButton.style.display = 'block'; // Mostra o botão "Hide Products"
                 productsListDiv.style.display = 'block'; // Garante que a lista seja visível
+            
+                 // Adiciona event listeners para os botões de delete dinamicamente
+                const deleteButtons = productsListDiv.querySelectorAll('.delete-button');
+                deleteButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const productId = this.dataset.productId;
+                        if (confirm(`Are you sure you want to delete product ID ${productId}?`)) {
+                            deleteProduct(productId);
+                        }
+                    });
+                });
             })
             .catch(error => {
                 console.error('Error fetching products:', error);
@@ -211,6 +224,34 @@
                     addProductMessage.style.color = 'red';
                 }
             });
+
+            async function deleteProduct(productId) {
+                const token = localStorage.getItem('token');
+                try {
+                    const response = await fetch(`<span class="math-inline">\{backendUrl\}/admin/products/</span>{productId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                        },
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        messageArea.textContent = data.message || `Product ID ${productId} deleted successfully!`;
+                        messageArea.style.color = 'green';
+                        // Refresh the product list
+                        seeProductsButton.click();
+                    } else {
+                        messageArea.textContent = data.error || `Failed to delete product ID ${productId}.`;
+                        messageArea.style.color = 'red';
+                    }
+                } catch (error) {
+                    console.error('Error deleting product:', error);
+                    messageArea.textContent = `An error occurred while deleting product ID ${productId}.`;
+                    messageArea.style.color = 'red';
+                }
+            }
         });
         
     </script>

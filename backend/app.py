@@ -252,6 +252,17 @@ def check_admin():
     else:
         return jsonify({"is_admin": False}), 200
     
+#neww
+@app.route('/admin/products/<int:product_id>', methods=['DELETE'])
+@admin_required()
+def delete_product(admin_user, product_id):
+    product = Product.query.get(product_id)
+    if product:
+        db.session.delete(product)
+        db.session.commit()
+        return jsonify({"message": f"Product ID {product_id} deleted successfully!"}), 200
+    else:
+        return jsonify({"error": f"Product with ID {product_id} not found!"}), 404
 
 @app.route('/admin/add_product', methods=['POST'])
 @admin_required()
