@@ -308,5 +308,28 @@ def add_new_product(admin_user):
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
 
+@app.route('/removeFromCart', methods=['POST'])
+def remove_from_cart():
+    user_id = get_user_id_from_request()
+    if not user_id:
+        return jsonify({"message": "Unauthorized"}), 401
+
+    data = request.get_json()
+    cart_item_id = data.get('cart_item_id')
+
+    if not cart_item_id:
+        return jsonify({"message": "Cart item ID is required"}), 400
+
+    # Encontre o item do carrinho e remova
+    cart_item = Cart.query.get(cart_item_id)
+    if not cart_item or cart_item.user_id != user_id:
+        return jsonify({"message": "Cart item not found or doesn't belong to the user"}), 404
+
+    db.session.delete(cart_item)
+    db.session.commit()
+
+    return jsonify({"message": "Item removed from cart successfully!"}), 200
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -83,7 +83,9 @@
                      total += item.price * item.quantity;
                      const itemDiv = document.createElement('div');
                      itemDiv.classList.add('cart-item');
-                     itemDiv.innerHTML = `<p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>`;
+                     itemDiv.innerHTML = `
+                            <p>${item.name} (x${item.quantity}) - <strong>$${(item.price * item.quantity).toFixed(2)}</strong></p>
+                            <button class="remove-button" onclick="removeFromCart(${item.id})">Remover</button>`;
                      cartItemsDiv.appendChild(itemDiv);
                  });
                  cartTotalDiv.innerHTML = `Total: $${total.toFixed(2)}`;
@@ -100,6 +102,39 @@
              cartTotalDiv.innerHTML = "";
          }
      }
+
+     async function removeFromCart(cartItemId) {
+    const token = getToken();
+
+    if (!token) {
+        alert("Você precisa estar logado para remover um item do carrinho.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`${backendUrl}/removeFromCart`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ cart_item_id: cartItemId })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert(result.message);
+            get_cart();  // Atualiza o carrinho após a remoção
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+        console.error('Erro ao remover o item do carrinho:', error);
+        alert("Erro ao remover o item do carrinho.");
+        }   
+    }
+
  
      document.addEventListener('DOMContentLoaded', () => {
          const buyButton = document.getElementById('buy-button');
