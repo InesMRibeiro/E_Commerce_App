@@ -320,7 +320,7 @@ def remove_from_cart():
     if not cart_item_id:
         return jsonify({"message": "Cart item ID is required"}), 400
 
-    # Encontre o item do carrinho e remova
+    # Encontra o item do carrinho e remove
     cart_item = Cart.query.get(cart_item_id)
     if not cart_item or cart_item.user_id != user_id:
         return jsonify({"message": "Cart item not found or doesn't belong to the user"}), 404
