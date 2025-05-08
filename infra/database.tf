@@ -26,6 +26,10 @@ resource "aws_instance" "database" {
     sudo -u postgres psql -c "CREATE DATABASE inapp_db;"
     echo "Base de dados 'inapp_db' criada."
 
+    # Definir password para o usuário postgres
+    sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+    echo "Password para o usuário postgres definida."
+
     # Alterar listen_addresses no postgresql.conf
     sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" /etc/postgresql/16/main/postgresql.conf
     echo "listen_addresses configurado para '*'."
