@@ -85,8 +85,6 @@ class Cart(db.Model):
 
 db.init_app(app)
 
-with app.app_context():
-    db.create_all()
 
 @app.route('/', methods=['GET'])
 def health_check():
@@ -174,8 +172,6 @@ def addToCart():
         db.session.add(new_cart_item)
         db.session.commit()
         return jsonify({"message": f"{product.name} added to cart!"}), 201
-
-
 
 
 # Novo endpoint pra ver o carrinho
@@ -329,7 +325,6 @@ def remove_from_cart():
     db.session.commit()
 
     return jsonify({"message": "Item removed from cart successfully!"}), 200
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
