@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from functools import wraps
 
 app = Flask(__name__)
-CORS(app, resources={"/*": {"origins": "http://56.228.42.104"}})  # Frontend IP without port
+CORS(app, resources={"/*": {"origins": "http://16.170.173.6"}})  # Frontend IP without port
 app.config.from_object('config.Config')
 app.config['SECRET_KEY'] = 'insecure'  # VERY INSECURE: DO NOT USE IN PRODUCTION
 
