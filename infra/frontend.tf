@@ -35,5 +35,18 @@ resource "aws_instance" "frontend" {
                 sudo chown -R ubuntu:ubuntu /home/ubuntu/E_Commerce_App
 
                 EOF
-            
+
+ /** provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file(var.private_key_path)
+      host        = aws_instance.api_server[0].public_ip
+    }
+    inline = [
+      "sudo sed -i 's/CORS(app, resources={\"*\": {\"origins\": \"http:\\/\\/[0-9\\.]\\+\"\\}}})/CORS(app, resources={\"*\": {\"origins\": \"http:\\/\\/${self.public_ip}\"}})/' /home/ubuntu/E_Commerce_App/backend/app.py",
+      "echo \"Frontend IP updated in backend app.py to: ${self.public_ip}\"",
+    ]
+  }
+*/          
 }

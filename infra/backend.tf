@@ -47,4 +47,18 @@ resource "aws_instance" "api_server" {
                 echo "sudo chown terminated"
                 
                 EOF
+/**
+  provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = file(var.private_key_path)
+      host        = self.public_ip
+    }
+    inline = [
+      "sudo sed -i \"s/SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql:\\/\\/postgres:postgres@[0-9\\.]\\+:5432\\/inapp_db')/SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql:\\/\\/postgres:postgres@${aws_instance.database.public_ip}:5432\\/inapp_db')/\" /home/ubuntu/E_Commerce_App/backend/config.py",
+      "echo \"Database IP updated in backend config.py to: ${aws_instance.database.public_ip}\"",
+    ]
+  }
+  */
 }
