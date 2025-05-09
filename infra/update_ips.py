@@ -20,14 +20,16 @@ with open(app_path, "r") as f:
     content = f.read()
 
 # Expressão que captura a linha com CORS
-updated = re.sub(r'CORS\(app, resources=\{".*?"\}\)',
-                 f'CORS(app, resources={{"/*": {{"origins": "http://{frontend_ip}"}}}})',
-                 content)
+updated = re.sub(
+    r'http://[\d.]+',
+    f'http://{frontend_ip}',
+    content
+)
 
 with open(app_path, "w") as f:
     f.write(updated)
 
-print("✅ IP do frontend atualizado no app.py")
+print(" IP do frontend atualizado no app.py")
 
 # 4. Substituir no backend/config.py
 config_path = "backend/config.py"
@@ -41,4 +43,4 @@ updated = re.sub(r'postgresql://postgres:postgres@[\d.]+:5432/inapp_db',
 with open(config_path, "w") as f:
     f.write(updated)
 
-print("✅ IP da base de dados atualizado no config.py")
+print(" IP da base de dados atualizado no config.py")
