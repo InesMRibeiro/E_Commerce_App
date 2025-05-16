@@ -1,6 +1,6 @@
 # Create instance
 resource "openstack_compute_instance_v2" "EC2_Frontend" {
-  name          = "terraform demo"
+  name          = "EC_Frontend"
   flavor_name   = "t1.small"
   image_name    = "Debian-Bullseye-Latest"
   key_pair      = openstack_compute_keypair_v2.keypair1.name
