@@ -1,8 +1,8 @@
 resource "openstack_compute_instance_v2" "api_server" {
-    name            = "E-Commerce - Backend"
+    name            = "E-Commerce-Backend-${count.index}"
     flavor_name   = "t1.small" 
     image_name    = "Debian-Bullseye-Latest"
-#   count           = var.instance_count
+    count           = 3
     security_groups = [openstack_networking_secgroup_v2.ServerEC_Backend.name] 
     key_pair        = openstack_compute_keypair_v2.keypair1.name 
 
