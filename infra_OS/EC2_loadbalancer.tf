@@ -20,7 +20,7 @@ sudo apt update -y
 sudo apt install -y nginx
 
 # Configurar o Nginx como load balancer (substituir pelos IPs reais das backends)
-cat <<EOF > /etc/nginx/conf.d/loadbalancer.conf
+cat <<NGINX_CONF > /etc/nginx/conf.d/loadbalancer.conf
 upstream backend {
     least_conn; 
 
@@ -36,6 +36,8 @@ server {
         proxy_pass http://backend;
     }
 }
+NGINX_CONF
+
 sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl enable nginx
 sudo systemctl restart nginx
