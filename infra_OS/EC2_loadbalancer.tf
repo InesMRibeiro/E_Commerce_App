@@ -11,7 +11,7 @@ resource "openstack_compute_instance_v2" "manual_lb" {
   key_pair        = openstack_compute_keypair_v2.keypair1.name
   security_groups = [openstack_networking_secgroup_v2.manual_lb_sg.name]
 
-  user_data = <<-EOF
+   user_data = <<-EOF
 #!/bin/bash
 exec > /var/log/user-data.log 2>&1
 set -x
@@ -19,10 +19,10 @@ set -x
 sudo apt update -y
 sudo apt install -y nginx
 
-# Configurar o Nginx como load balancer (substituir pelos IPs reais das backends)
-cat <<NGINX_CONF > /etc/nginx/conf.d/loadbalancer.conf
+# Configurar o Nginx como load balancer
+cat <<EOF_NGINX > /etc/nginx/conf.d/loadbalancer.conf
 upstream backend {
-    least_conn; 
+    least_conn;
 
     server ${openstack_compute_instance_v2.api_server[0].network[0].fixed_ip_v4}:5000;
     server ${openstack_compute_instance_v2.api_server[1].network[0].fixed_ip_v4}:5000;
@@ -32,15 +32,15 @@ upstream backend {
 server {
     listen 80;
 
-    location / {
+     location / {
         proxy_pass http://backend;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
     }
 }
-NGINX_CONF
+EOF_NGINX
 
 sudo rm /etc/nginx/sites-enabled/default
 sudo systemctl enable nginx
