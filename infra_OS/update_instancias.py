@@ -21,15 +21,17 @@ instances = {
     "backend_3": data["backend_ips"]["value"][2],
 }
 
-# 2. Função para SSH com comando genérico
-def ssh_execute(ip, label, command):
-    print(f"\n🔄 [{label}] Atualizando instância {ip}...")
+# 2. Função para executar git pull via SSH
+def ssh_git_pull(ip, label):
+    print(f"\n🔄 [{label}] Atualizando repositório em {ip}...")
 
+    # Remove entrada antiga do known_hosts
     subprocess.run(["ssh-keygen", "-f", "/home/ines/.ssh/known_hosts", "-R", ip], check=False)
 
     try:
         result = subprocess.run(
-            f'ssh -o StrictHostKeyChecking=no -i {SSH_KEY} debian@{ip} "{command}"',
+            f'ssh -o StrictHostKeyChecking=no -i {SSH_KEY} debian@{ip} '
+            f'"cd ~/E_Commerce_App && git pull origin master"',
             shell=True,
             capture_output=True,
             text=True
@@ -38,30 +40,12 @@ def ssh_execute(ip, label, command):
         print(result.stderr)
 
         if result.returncode == 0:
-            print(f"✅ [{label}] Atualização concluída.")
+            print(f"✅ [{label}] Git pull concluído.")
         else:
             print(f"❌ [{label}] Erro ao atualizar {ip}.")
     except Exception as e:
-        print(f"❌ [{label}] Falha: {e}")
+        print(f"❌ [{label}] Falha inesperada: {e}")
 
-# 3. Comandos por tipo de instância
+# 3. Executar para todas as instâncias
 for label, ip in instances.items():
-    if "backend" in label:
-        backend_cmd = (
-            "bash -c '"
-            "cd ~/E_Commerce_App && "
-            "source ~/venv/bin/activate && "
-            "cd backend && "
-            "git pull origin master"
-            "'"
-        )
-        ssh_execute(ip, label, backend_cmd.strip())
-
-    else:
-        common_cmd = (
-            "bash -c '"
-            "cd ~/E_Commerce_App && "
-            "git pull origin master"
-            "'"
-        )
-        ssh_execute(ip, label, common_cmd.strip())
+    ssh_git_pull(ip, label)
