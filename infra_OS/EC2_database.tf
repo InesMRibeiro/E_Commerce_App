@@ -43,29 +43,36 @@ sudo systemctl restart postgresql
 echo "PostgreSQL reiniciado."
 
 # Conectar à base de dados e criar as tabelas
-sudo -u postgres psql -d inapp_db -c "
-  CREATE TABLE IF NOT EXISTS public.\"user\" (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(100) NOT NULL,
-    password VARCHAR(128) NOT NULL,
-    role VARCHAR(20) DEFAULT 'user'
-  );
+# Conectar à base de dados, criar tabelas e utilizador admin
+sudo -u postgres psql -d inapp_db <<SQL
+CREATE TABLE IF NOT EXISTS public."user" (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(128) NOT NULL,
+  role VARCHAR(20) DEFAULT 'user'
+);
 
-  CREATE TABLE IF NOT EXISTS public.products (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    price FLOAT NOT NULL,
-    qty INTEGER,
-    image_url VARCHAR(255)
-  );
+CREATE TABLE IF NOT EXISTS public.products (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  price FLOAT NOT NULL,
+  qty INTEGER,
+  image_url VARCHAR(255)
+);
 
-  CREATE TABLE IF NOT EXISTS public.cart (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL REFERENCES public.\"user\"(id),
-    product_id INTEGER NOT NULL REFERENCES public.products(id),
-    quantity INTEGER DEFAULT 1
-  );
-"
+CREATE TABLE IF NOT EXISTS public.cart (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES public."user"(id),
+  product_id INTEGER NOT NULL REFERENCES public.products(id),
+  quantity INTEGER DEFAULT 1
+);
+
+-- Criar utilizador admin se não existir
+INSERT INTO public."user" (username, password, role)
+VALUES ('admin', 'admin', 'admin')
+ON CONFLICT DO NOTHING;
+SQL
+
 echo "Tabelas 'user', 'products' e 'cart' criadas."
 
 # Reiniciar o PostgreSQL
