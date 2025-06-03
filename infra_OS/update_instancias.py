@@ -46,10 +46,22 @@ def ssh_execute(ip, label, command):
 
 # 3. Comandos por tipo de instância
 for label, ip in instances.items():
-    command = """
-    bash -c '
-    cd ~/E_Commerce_App &&
-    git pull origin master
-    '
-    """
-    ssh_execute(ip, label, command.strip())
+    if "backend" in label:
+        backend_cmd = """
+        bash -c '
+        cd ~/E_Commerce_App &&
+        source ~/venv/bin/activate &&
+        cd backend &&
+        git pull origin master &&
+        '
+        """
+        ssh_execute(ip, label, backend_cmd.strip())
+
+    else:
+        common_cmd = """
+        bash -c '
+        cd ~/E_Commerce_App &&
+        git pull origin master
+        '
+        """
+        ssh_execute(ip, label, common_cmd.strip())
