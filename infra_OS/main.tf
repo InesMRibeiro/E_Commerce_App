@@ -35,10 +35,9 @@ locals {
 # }
 
 resource "openstack_compute_keypair_v2" "keypair1" {
-  name       = "nellkey"
-  public_key = file("/home/nelminha/.ssh/id_rsa.pub")
+  name       = "ines-key1"
+  public_key = file("/home/ines/.ssh/id_rsa.pub")
 }
-
 # Configure the OpenStack Provider
 provider "openstack" {
   auth_url          = var.auth_url

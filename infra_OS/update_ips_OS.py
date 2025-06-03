@@ -7,8 +7,13 @@ import os
 base_dir = os.path.abspath("..")
 
 # 1. Obter os outputs do Terraform em JSON
-print("Lendo IPs com Terraform...")
+print("🔍 Lendo IPs com Terraform...")
 output = subprocess.run(["terraform", "output", "-json"], cwd=".", capture_output=True, text=True)
+if output.returncode != 0:
+    print("❌ Erro ao executar 'terraform output -json'")
+    print(output.stderr)
+    exit(1)
+
 data = json.loads(output.stdout)
 
 # 2. Extrair IPs
@@ -16,9 +21,9 @@ frontend_ip = data["frontend_ip"]["value"]
 database_ip = data["database_ip"]["value"]
 load_balancer_ip = data["loadbalancer_ip"]["value"]
 
-print(f"Frontend IP: {frontend_ip}")
-print(f"Database IP: {database_ip}")
-print(f"Load Balancer IP: {load_balancer_ip}")
+print(f"✅ Frontend IP: {frontend_ip}")
+print(f"✅ Database IP: {database_ip}")
+print(f"✅ Load Balancer IP: {load_balancer_ip}")
 
 # 3. Atualizar backend/app.py
 app_path = os.path.join(base_dir, "backend/app.py")
@@ -31,9 +36,9 @@ if os.path.exists(app_path):
     with open(app_path, "w") as f:
         f.write(updated)
 
-    print("IP do frontend atualizado no app.py")
+    print("✅ IP do frontend atualizado no app.py")
 else:
-    print("backend/app.py não encontrado.")
+    print("❌ backend/app.py não encontrado.")
 
 # 4. Atualizar backend/config.py
 config_path = os.path.join(base_dir, "backend/config.py")
@@ -50,9 +55,9 @@ if os.path.exists(config_path):
     with open(config_path, "w") as f:
         f.write(updated)
 
-    print("IP da base de dados atualizado no config.py")
+    print("✅ IP da base de dados atualizado no config.py")
 else:
-    print("backend/config.py não encontrado.")
+    print("❌ backend/config.py não encontrado.")
 
 # 5. Atualizar HTMLs
 html_files = [
@@ -74,8 +79,20 @@ for html_file in html_files:
         with open(full_path, "w") as f:
             f.write(updated_content)
 
-        print(f"IP do backend atualizado em {html_file}")
+        print(f"✅ IP do backend atualizado em {html_file}")
     else:
-        print(f"{html_file} não encontrado.")
+        print(f"❌ {html_file} não encontrado.")
 
-print("Atualização de IPs concluída.")
+print("✅ Atualização de IPs concluída.")
+
+# 6. Fazer git add, commit e push
+print("🔁 Enviando alterações para o repositório remoto...")
+
+try:
+    subprocess.run(["git", "add", "."], cwd=base_dir, check=True)
+    subprocess.run(["git", "commit", "-m", "Atualizar IPs com Terraform"], cwd=base_dir, check=True)
+    subprocess.run(["git", "push", "origin", "master"], cwd=base_dir, check=True)
+    print("✅ Push para o Git concluído.")
+except subprocess.CalledProcessError as e:
+    print("❌ Erro ao fazer git push:")
+    print(e)
