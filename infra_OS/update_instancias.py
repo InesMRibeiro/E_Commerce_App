@@ -21,18 +21,23 @@ instances = {
     "backend_3": data["backend_ips"]["value"][2],
 }
 
-# 2. Função para executar git pull via SSH
-def ssh_git_pull(ip, label):
-    print(f"\n🔄 [{label}] Atualizando repositório em {ip}...")
+# 2. SSH com git pull
+def ssh_git_pull(ip, label, subdir=""):
+    print(f"\n🔄 [{label}] Atualizando código em {ip}...")
 
-    # Remove entrada antiga do known_hosts
     subprocess.run(["ssh-keygen", "-f", "/home/ines/.ssh/known_hosts", "-R", ip], check=False)
+
+    remote_command = f"cd ~/E_Commerce_App{subdir} && git pull origin master"
 
     try:
         result = subprocess.run(
-            f'ssh -o StrictHostKeyChecking=no -i {SSH_KEY} debian@{ip} '
-            f'"cd ~/E_Commerce_App && git pull origin master"',
-            shell=True,
+            [
+                "ssh",
+                "-o", "StrictHostKeyChecking=no",
+                "-i", SSH_KEY,
+                f"debian@{ip}",
+                remote_command
+            ],
             capture_output=True,
             text=True
         )
@@ -40,12 +45,15 @@ def ssh_git_pull(ip, label):
         print(result.stderr)
 
         if result.returncode == 0:
-            print(f"✅ [{label}] Git pull concluído.")
+            print(f"✅ [{label}] Código atualizado.")
         else:
-            print(f"❌ [{label}] Erro ao atualizar {ip}.")
+            print(f"❌ [{label}] Falha ao atualizar código.")
     except Exception as e:
-        print(f"❌ [{label}] Falha inesperada: {e}")
+        print(f"❌ [{label}] Erro inesperado: {e}")
 
-# 3. Executar para todas as instâncias
+# 3. Executar para cada instância
 for label, ip in instances.items():
-    ssh_git_pull(ip, label)
+    if "backend" in label:
+        ssh_git_pull(ip, label, "/backend")
+    else:
+        ssh_git_pull(ip, label)
