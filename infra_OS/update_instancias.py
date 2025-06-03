@@ -21,13 +21,20 @@ instances = {
     "backend_3": data["backend_ips"]["value"][2],
 }
 
-# 2. SSH com git pull
+# 2. SSH com git pull e cópia no frontend
 def ssh_git_pull(ip, label, subdir=""):
     print(f"\n🔄 [{label}] Atualizando código em {ip}...")
 
     subprocess.run(["ssh-keygen", "-f", "/home/ines/.ssh/known_hosts", "-R", ip], check=False)
 
-    remote_command = f"cd ~/E_Commerce_App{subdir} && git pull origin master"
+    if label == "frontend":
+        remote_command = (
+            "cd ~/E_Commerce_App && "
+            "git pull origin master && "
+            "sudo cp -r ~/E_Commerce_App/frontend/* /var/www/html/"
+        )
+    else:
+        remote_command = f"cd ~/E_Commerce_App{subdir} && git pull origin master"
 
     try:
         result = subprocess.run(
