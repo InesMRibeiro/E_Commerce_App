@@ -89,7 +89,7 @@ print("✅ Atualização de IPs concluída.")
 print("🔁 Enviando alterações para o repositório remoto...")
 
 try:
-    subprocess.run(["git", "add", "."], cwd=base_dir, check=True)
+    subprocess.run(["git", "add", "backend", "frontend"], cwd=base_dir, check=True)
     subprocess.run(["git", "commit", "-m", "Atualizar IPs com Terraform"], cwd=base_dir, check=True)
     subprocess.run(["git", "push", "origin", "master"], cwd=base_dir, check=True)
     print("✅ Push para o Git concluído.")
