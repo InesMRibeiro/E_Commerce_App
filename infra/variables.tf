@@ -3,7 +3,7 @@
 variable "ami_id" {
     description = "ID da ami do Ubuntu"
     type = string
-    default = "ami-084568db4383264d4" 
+    default = "ami-042b4708b1d05f512" 
 }
 
 #tipo de instância
@@ -24,7 +24,7 @@ variable "instance_count" {
 variable "key_name" {
     description = "Nome da chave SSH"
     type = string
-    default = "rsa_aws"
+    default = "RSA_key"
 }
 /**
 variable "private_key_path" {
